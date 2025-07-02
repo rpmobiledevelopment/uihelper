@@ -12,4 +12,5 @@ public class IsLog {
 ////            Log.e(className,print+print);
 //        }
     }
+
 }
