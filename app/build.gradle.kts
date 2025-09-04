@@ -1,16 +1,15 @@
 plugins {
-
     id("com.android.library")
     id ("org.jetbrains.kotlin.android")
 }
 
 android {
     namespace = "com.rp.uihelpher"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 19
-        targetSdk = 35
+        targetSdk = 36
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,7 +37,9 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.paperdb)
+    implementation(libs.glide)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.exoplayer)
 }

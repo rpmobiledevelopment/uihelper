@@ -1,20 +1,23 @@
 [versions]
-agp = "8.10.0"
-kotlin = "2.0.21"
-coreKtx = "1.16.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
+agp = "8.13.0"
+exoplayer = "2.19.1"
+glide = "5.0.4"
+kotlin = "2.2.10"
+coreKtx = "1.17.0"
 appcompat = "1.7.1"
-material = "1.12.0"
+material = "1.13.0"
+paperdb = "2.7.2"
+retrofit = "3.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+exoplayer = { module = "com.google.android.exoplayer:exoplayer", version.ref = "exoplayer" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+paperdb = { module = "io.github.pilgr:paperdb", version.ref = "paperdb" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
