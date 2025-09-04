@@ -34,7 +34,7 @@ class PermissionsFragment : Fragment() {
         }
     }
 
-    fun requestPermissions(activity: Activity, opt: String) {
+    fun requestPermissions(activity: Activity?, opt: String) {
         when (opt) {
             "DOWNLOAD_ACCESS_", "DOWNLOAD_ACCESS" -> {
                 when {
@@ -83,7 +83,7 @@ class PermissionsFragment : Fragment() {
             }
 
             "LOCATION" -> {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission.ACCESS_FINE_LOCATION)) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), permission.ACCESS_FINE_LOCATION)) {
                     buildAlertMessageNoGps(activity)
                 } else {
                     multiplePermissionLauncher.launch(
@@ -213,15 +213,15 @@ class PermissionsFragment : Fragment() {
         }
     }
 
-    private fun buildAlertMessageNoGps(activity: Activity) {
+    private fun buildAlertMessageNoGps(activity: Activity?) {
         AlertDialog.Builder(activity)
             .setMessage("Your GPS seems to be disabled, do you want to enable it?")
             .setCancelable(false)
             .setPositiveButton("Yes") { _, _ ->
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                    data = Uri.fromParts("package", activity.packageName, null)
+                    data = Uri.fromParts("package", activity?.packageName, null)
                 }
-                activity.startActivity(intent)
+                activity?.startActivity(intent)
             }
             .setNegativeButton("No") { dialog, _ -> dialog.cancel() }
             .create()

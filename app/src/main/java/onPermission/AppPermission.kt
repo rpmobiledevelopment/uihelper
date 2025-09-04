@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 
 class AppPermission {
-    private val TAG: String = OnPermission::class.java.getSimpleName()
+    private val TAG: String = OnPermission::class.java.simpleName
 
     constructor()
 
