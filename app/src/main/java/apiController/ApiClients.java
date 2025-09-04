@@ -5,6 +5,7 @@ import android.util.JsonReader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.google.gson.internal.Streams;
 
 import java.io.StringReader;
@@ -37,20 +38,7 @@ public class ApiClients {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(getUnsafeOkHttpClient()
-                        .addInterceptor(chain -> {
-                            Response response = chain.proceed(chain.request());
-                            assert response.body() != null;
-                            MediaType contentType = response.body().contentType();
-                            String content = response.body().string();
-
-                            JsonReader reader = new JsonReader(new StringReader(content));
-                            reader.setLenient(true); // 👈 per-request lenient
-                            JsonElement jsonElement = Streams.parse(reader);
-
-                            ResponseBody body = ResponseBody.create(contentType, gson.toJson(jsonElement));
-                            return response.newBuilder().body(body).build();
-                        }).build())
+                .client(getUnsafeOkHttpClient().build())
                 .build();
     }
 
