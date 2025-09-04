@@ -14,7 +14,7 @@ object LocaleHelper {
         return LocaleHelper.setLocale(context, lang!!)
     }
 
-    fun onAttach(context: Context, defaultLanguage: String?): Context? {
+    fun onAttach(context: Context?, defaultLanguage: String?): Context? {
         val lang = getPersistedData(context, defaultLanguage)
         return LocaleHelper.setLocale(context, lang!!)
     }
