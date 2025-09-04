@@ -19,7 +19,8 @@ import onInteface.OnInterface
 import java.io.File
 
 class OnShare {
-    var TAG: String = OnShare::class.java.getSimpleName()
+
+    var TAG: String = OnShare::class.java.simpleName
 
     constructor(mActivity: Activity, bitmap: Bitmap?, onShare: OnInterface.OnShared) {
         val saveFile = ScreenshotUtils.getMainDirectoryName(mActivity)
@@ -60,10 +61,10 @@ class OnShare {
                     packageName.contains("com.microsoft") || packageName.contains("mail")
                 ) {
                     val intent = Intent(Intent.ACTION_SEND)
-                    intent.setType("image/*")
+                    intent.type = "image/*"
                     intent.putExtra(
                         Intent.EXTRA_SUBJECT,
-                        mActivity.getResources().getString(R.string.app_name)
+                        mActivity.resources.getString(R.string.app_name)
                     )
                     intent.putExtra(Intent.EXTRA_STREAM, outputFileUri)
                     intent.setPackage(packageName)
@@ -186,8 +187,8 @@ class OnShare {
 
         when (packageName) {
             "com.linkedin.android" -> {
-                intent.setAction(Intent.ACTION_SEND_MULTIPLE)
-                intent.setType("image/*")
+                intent.action = Intent.ACTION_SEND_MULTIPLE
+                intent.type = "image/*"
                 intent.putExtra(Intent.EXTRA_STREAM, outputFileUri)
                 intent.putExtra(Intent.EXTRA_TEXT, description)
 
@@ -198,30 +199,30 @@ class OnShare {
             }
 
             "com.instagram.android" -> {
-                intent.setType("image/*")
-                intent.setAction("com.instagram.share.ADD_TO_FEED")
+                intent.type = "image/*"
+                intent.action = "com.instagram.share.ADD_TO_FEED"
                 intent.setDataAndType(outputFileUri, "image/*")
                 intent.putExtra(Intent.EXTRA_TEXT, description)
                 intent.putExtra(Intent.EXTRA_STREAM, outputFileUri)
             }
 
             "com.twitter.android" -> {
-                intent.setType("image/*")
-                intent.setAction(Intent.ACTION_SEND_MULTIPLE)
+                intent.type = "image/*"
+                intent.action = Intent.ACTION_SEND_MULTIPLE
                 intent.putExtra(Intent.EXTRA_TEXT, description)
                 intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uriList)
             }
 
             "com.zhiliaoapp.musically" -> {
-                intent.setType("image/*")
-                intent.setAction(Intent.ACTION_SEND)
+                intent.type = "image/*"
+                intent.action = Intent.ACTION_SEND
                 intent.putExtra(Intent.EXTRA_TEXT, description)
                 intent.putExtra(Intent.EXTRA_STREAM, outputFileUri)
             }
 
             else -> {
-                intent.setType("image/*")
-                intent.setAction(Intent.ACTION_SEND)
+                intent.type = "image/*"
+                intent.action = Intent.ACTION_SEND
                 intent.putExtra(Intent.EXTRA_STREAM, outputFileUri)
             }
         }
@@ -248,7 +249,7 @@ class OnShare {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             outputFileUri = FileProvider.getUriForFile(
                 mActivity,
-                mActivity.getPackageName() + ".provider", shareBitmap
+                mActivity.packageName + ".provider", shareBitmap
             )
         } else {
             outputFileUri = Uri.fromFile(shareBitmap)
@@ -269,8 +270,8 @@ class OnShare {
 
         when (packageName) {
             "com.linkedin.android" -> {
-                intent.setAction(Intent.ACTION_SEND)
-                intent.setType("video/*")
+                intent.action = Intent.ACTION_SEND
+                intent.type = "video/*"
                 intent.putExtra(Intent.EXTRA_STREAM, outputFileUri)
                 intent.putExtra(Intent.EXTRA_TEXT, description)
 
@@ -281,31 +282,31 @@ class OnShare {
             }
 
             "com.instagram.android" -> {
-                intent.setType("video/*")
-                intent.setAction(Intent.ACTION_SEND)
+                intent.type = "video/*"
+                intent.action = Intent.ACTION_SEND
                 //                intent.setAction("com.instagram.share.ADD_TO_FEED");
                 intent.setDataAndType(outputFileUri, "video/*")
                 intent.putExtra(Intent.EXTRA_STREAM, outputFileUri)
             }
 
             "com.twitter.android" -> {
-                intent.setType("video/*")
-                intent.setAction(Intent.ACTION_SEND)
+                intent.type = "video/*"
+                intent.action = Intent.ACTION_SEND
                 intent.setDataAndType(outputFileUri, "video/*")
                 intent.putExtra(Intent.EXTRA_TEXT, description)
                 intent.putExtra(Intent.EXTRA_STREAM, outputFileUri)
             }
 
             "com.zhiliaoapp.musically" -> {
-                intent.setAction(Intent.ACTION_SEND)
-                intent.setType("video/*")
+                intent.action = Intent.ACTION_SEND
+                intent.type = "video/*"
                 intent.putExtra(Intent.EXTRA_TEXT, description)
                 intent.putExtra(Intent.EXTRA_STREAM, outputFileUri)
             }
 
             else -> {
-                intent.setType("video/*")
-                intent.setAction(Intent.ACTION_SEND)
+                intent.type = "video/*"
+                intent.action = Intent.ACTION_SEND
                 intent.putExtra(Intent.EXTRA_TEXT, description)
                 intent.putExtra(Intent.EXTRA_STREAM, outputFileUri)
             }
@@ -401,7 +402,7 @@ class OnShare {
                     packageName.contains("com.twitter.android")
                 ) {
                     val targeted = Intent(Intent.ACTION_SEND)
-                    targeted.setType("text/plain")
+                    targeted.type = "text/plain"
                     targeted.putExtra(
                         Intent.EXTRA_TEXT,
                         "Check out my app: https://play.google.com/store/apps/details?id=" + mActivity.getPackageName()

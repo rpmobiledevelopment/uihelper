@@ -50,13 +50,13 @@ class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(
         mErrorXInAnim = loadAnimation(context, R.anim.error_x_in) as AnimationSet?
         mModalInAnim = loadAnimation(context, R.anim.modal_in) as AnimationSet?
         mModalOutAnim = loadAnimation(context, R.anim.modal_out) as AnimationSet?
-        mModalOutAnim!!.setAnimationListener(object : Animation.AnimationListener {
+        mModalOutAnim?.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation?) {
             }
 
             override fun onAnimationEnd(animation: Animation?) {
-                mDialogView!!.visibility = View.GONE
-                mDialogView!!.post {
+                mDialogView?.visibility = View.GONE
+                mDialogView?.post {
                     if (mCloseFromCancel) {
                         super@SmartDlg.cancel()
                     } else {
@@ -71,9 +71,9 @@ class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(
         // dialog overlay fade out
         mOverlayOutAnim = object : Animation() {
             override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-                val wlp = window!!.attributes
-                wlp.alpha = 1 - interpolatedTime
-                window!!.attributes = wlp
+                val wlp = window?.attributes
+                wlp?.alpha = 1 - interpolatedTime
+                window?.attributes = wlp
             }
         }
         mOverlayOutAnim.duration = 120
@@ -84,12 +84,12 @@ class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(
         setContentView(R.layout.progressbar)
 
         mDialogView = Objects.requireNonNull<Window?>(getWindow()).getDecorView()
-            .findViewById<View?>(android.R.id.content)
-        mProgressFrame = findViewById<FrameLayout>(R.id.progress_dialog)
-        graduallyTextView = findViewById<TextView?>(R.id.tv_title)
-        iv_logo = findViewById<ImageView>(R.id.iv_logo)
+            .findViewById(android.R.id.content)
+        mProgressFrame = findViewById(R.id.progress_dialog)
+        graduallyTextView = findViewById(R.id.tv_title)
+        iv_logo = findViewById(R.id.iv_logo)
 
-        iv_logo!!.setColorFilter(
+        iv_logo?.setColorFilter(
             ContextCompat.getColor(
                 mContext,
                 R.color.snack_bar_color
@@ -104,7 +104,7 @@ class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(
     }
 
     private fun restore() {
-        mProgressFrame!!.visibility = View.GONE
+        mProgressFrame?.visibility = View.GONE
     }
 
     private fun playAnimation() {}
@@ -122,7 +122,7 @@ class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(
                 SUCCESS_TYPE -> {}
                 WARNING_TYPE -> {}
                 CUSTOM_IMAGE_TYPE -> setCustomImage(mCustomImgDrawable)
-                PROGRESS_TYPE -> mProgressFrame!!.visibility = View.VISIBLE
+                PROGRESS_TYPE -> mProgressFrame?.visibility = View.VISIBLE
             }
             if (!fromCreate) {
                 playAnimation()
@@ -164,7 +164,7 @@ class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(
     }
 
     override fun onStart() {
-        mDialogView!!.startAnimation(mModalInAnim)
+        mDialogView?.startAnimation(mModalInAnim)
         playAnimation()
     }
 
@@ -174,7 +174,7 @@ class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(
 
     private fun dismissWithAnimation(fromCancel: Boolean) {
         mCloseFromCancel = fromCancel
-        mDialogView!!.startAnimation(mModalOutAnim)
+        mDialogView?.startAnimation(mModalOutAnim)
     }
 
     companion object {
