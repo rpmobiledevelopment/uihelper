@@ -130,7 +130,12 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
                             baseY = motionEvent.y
                         }
 
-                        MotionEvent.ACTION_MOVE -> {
+
+
+
+
+
+                            MotionEvent.ACTION_MOVE -> {
                             swipe_move = true
                             diffX = ceil((motionEvent.x - baseX).toDouble()).toLong()
                             diffY = ceil((motionEvent.y - baseY).toDouble()).toLong()
