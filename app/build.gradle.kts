@@ -42,7 +42,4 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.exoplayer)
-
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
 }
