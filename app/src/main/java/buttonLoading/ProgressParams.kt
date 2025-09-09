@@ -5,7 +5,7 @@ import com.google.android.material.button.MaterialButton.IconGravity
 
 class ProgressParams(
     var isEnabled: Boolean,
-    var textResourceId: Int?, // nullable string resource ID
+    var textResourceId: String?, // nullable string resource ID
     var showProgress: Boolean,
     eId: Int? = null,
     @IconGravity

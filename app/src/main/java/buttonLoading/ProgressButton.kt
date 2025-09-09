@@ -15,7 +15,7 @@ class ProgressButton @JvmOverloads constructor(
 
     fun showProgress(params: ProgressParams.() -> Unit = {}) {
         val progressParams = ProgressParams(
-            isEnabled = false, 0,
+            isEnabled = false, "",
             showProgress = true
         )
         progressParams.params()
@@ -24,7 +24,7 @@ class ProgressButton @JvmOverloads constructor(
 
     fun hideProgress(params: ProgressParams.() -> Unit = {}) {
         val progressParams = ProgressParams(
-            isEnabled = true, 0,
+            isEnabled = true, "",
             showProgress = false
         )
         progressParams.params()
@@ -33,7 +33,7 @@ class ProgressButton @JvmOverloads constructor(
 
     private fun updateState(params: ProgressParams) {
         isEnabled = params.isEnabled
-        text = params.textResourceId?.let { context.getText(it) }
+        text = params.textResourceId
         icon = if (params.showProgress) createProgressDrawable() else null
         iconGravity = params.iconGravity
     }
