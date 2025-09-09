@@ -1,5 +1,7 @@
 package com.rp.uihelpher.helpher
 
+import android.app.Activity
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
@@ -14,143 +16,115 @@ import androidx.core.graphics.ColorUtils
 import com.rp.uihelpher.R
 
 class OnDrawableXmlClrChg {
-    constructor(mActivity: android.app.Activity, mView: View, mColor: Int, opt: String, width: Int) {
+
+    constructor(mActivity: Activity, mView: View, mColor: Int, opt: String, width: Int) {
         when (opt) {
             "BACKGROUND_XML_COLOR" -> {
-                val backgroundGradient = mView.background.mutate() as GradientDrawable
-                val strokeColor = ContextCompat.getColor(mActivity, mColor) // safe way
-                backgroundGradient.setStroke(width, strokeColor)
-            }
-            "CHG_XML_IMAGE_COLOR" -> {
-                val imageView = mView as ImageView
-                onBgMutate(imageView,mColor)
+                (mView.background as? GradientDrawable)?.let { bg ->
+                    val strokeColor = ContextCompat.getColor(mActivity, mColor)
+                    bg.setStroke(width, strokeColor)
+                }
             }
 
-            "BACKGROUND_XML_TEXT_COLOR" -> {
-                val textView = mView as TextView
-                onBgMutate(textView,mColor)
-            }
+            "CHG_XML_IMAGE_COLOR" -> onImageTint(mActivity, mView as? ImageView, mColor)
 
-            "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mView,mColor)
+            "BACKGROUND_XML_TEXT_COLOR" -> onTextTint(mActivity, mView as? TextView, mColor)
 
-            "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView,mColor,25)
+            "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mActivity, mView, mColor)
+
+            "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView, mColor, 25)
         }
     }
 
-    constructor(mActivity: android.content.Context, mView: View, mColor: Int, opt: String) {
+    constructor(mActivity: Context, mView: View, mColor: Int, opt: String) {
         try {
             when (opt) {
-                "CHG_XML_IMAGE_COLOR" -> {
-                    val imageView = mView as ImageView
-                    onBgMutate(imageView,mColor)
-                }
-                "BACKGROUND_XML_TEXT_COLOR" -> {
-                    val textView = mView as TextView
-                    onBgMutate(textView,mColor)
-                }
-                "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mView,mColor)
+                "CHG_XML_IMAGE_COLOR" -> onImageTint(mActivity, mView as? ImageView, mColor)
 
-                "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView,mColor,25)
+                "BACKGROUND_XML_TEXT_COLOR" -> onTextTint(mActivity, mView as? TextView, mColor)
+
+                "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mActivity, mView, mColor)
+
+                "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView, mColor, 25)
             }
-        } catch (e: Resources.NotFoundException) {
+        } catch (_: Exception) {
+            // fallback default (gray tint)
             when (opt) {
-                "CHG_XML_IMAGE_COLOR" -> {
-                    val imageView = mView as ImageView
-                    onBgMutate(mActivity,imageView)
-                }
+                "CHG_XML_IMAGE_COLOR" -> onImageTint(mActivity, mView as? ImageView)
 
-                "BACKGROUND_XML_TEXT_COLOR" -> {
-                    val textView = mView as TextView
-                    onBgMutate(mActivity,textView)
-                }
+                "BACKGROUND_XML_TEXT_COLOR" -> onTextTint(mActivity, mView as? TextView)
 
-                "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mActivity,mView)
-            }
-        } catch (e: java.lang.NullPointerException) {
-            when (opt) {
-                "CHG_XML_IMAGE_COLOR" -> {
-                    val imageView = mView as ImageView
-                    onBgMutate(mActivity,imageView)
-                }
-                "BACKGROUND_XML_TEXT_COLOR" -> {
-                    val textView = mView as TextView
-                    onBgMutate(mActivity,textView)
-                }
-                "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mActivity,mView)
-            }
-        } catch (e: java.lang.NumberFormatException) {
-            when (opt) {
-                "CHG_XML_IMAGE_COLOR" -> {
-                    val imageView = mView as ImageView
-                    onBgMutate(mActivity,imageView)
-                }
-                "BACKGROUND_XML_TEXT_COLOR" -> {
-                    val textView = mView as TextView
-                    onBgMutate(mActivity,textView)
-                }
-                "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mActivity,mView)
-            }
-        } catch (e: java.lang.Exception) {
-            when (opt) {
-                "CHG_XML_IMAGE_COLOR" -> {
-                    val imageView = mView as ImageView
-                    onBgMutate(mActivity,imageView)
-                }
-
-                "BACKGROUND_XML_TEXT_COLOR" -> {
-                    val textView = mView as TextView
-                    onBgMutate(mActivity,textView)
-                }
-
-                "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mActivity,mView)
+                "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mActivity, mView)
             }
         }
     }
 
-    constructor(mActivity: android.content.Context, mView: android.view.View, mColor: kotlin.Int) {
+    constructor(mActivity: Context, mView: View, mColor: Int) {
         try {
-            onBgMutate(mView,mColor)
-        } catch (e: Resources.NotFoundException) {
-            onBgMutate(mActivity,mView)
-        } catch (e: java.lang.NullPointerException) {
-            onBgMutate(mActivity,mView)
-        } catch (e: java.lang.NumberFormatException) {
-            onBgMutate(mActivity,mView)
-        } catch (e: java.lang.Exception) {
-            onBgMutate(mActivity,mView)
+            onBgMutate(mActivity, mView, mColor)
+        } catch (_: Exception) {
+            onBgMutate(mActivity, mView)
         }
     }
 
-    fun onBgMutate(mActivity: android.content.Context, mView: View) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            mView.background.mutate().colorFilter = BlendModeColorFilter(
-                ContextCompat.getColor(mActivity, R.color.gray_color),
-                BlendMode.SRC_IN)
-        } else {
-            @Suppress("DEPRECATION")
-            mView.background.mutate().setColorFilter(
-                ContextCompat.getColor(mActivity, R.color.gray_color),
-                PorterDuff.Mode.SRC_IN)
+    // ----------------------
+    // IMAGE COLOR CHANGE
+    // ----------------------
+    private fun onImageTint(mActivity: Context, imageView: ImageView?, color: Int? = null) {
+        imageView?.setColorFilter(
+            color ?: ContextCompat.getColor(mActivity, R.color.gray_color),
+            PorterDuff.Mode.SRC_IN
+        )
+    }
+
+    // ----------------------
+    // TEXT COLOR CHANGE
+    // ----------------------
+    private fun onTextTint(mActivity: Context, textView: TextView?, color: Int? = null) {
+        textView?.setTextColor(
+            color ?: ContextCompat.getColor(mActivity, R.color.gray_color)
+        )
+    }
+
+    // ----------------------
+    // BACKGROUND COLOR CHANGE
+    // ----------------------
+    fun onBgMutate(mActivity: Context, mView: View) {
+        val color = ContextCompat.getColor(mActivity, R.color.gray_color)
+        mView.background?.mutate()?.let { drawable ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+            } else {
+                @Suppress("DEPRECATION")
+                drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+            }
+            mView.background = drawable
         }
     }
-    fun onBgMutate(mView: View, customColor: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            mView.background.mutate().colorFilter = BlendModeColorFilter(customColor, BlendMode.SRC_IN)
-        } else {
-            @Suppress("DEPRECATION")
-            mView.background.mutate().setColorFilter(customColor, PorterDuff.Mode.SRC_IN)
+
+    fun onBgMutate(mActivity: Context, mView: View, customColor: Int) {
+        mView.background?.mutate()?.let { drawable ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                drawable.colorFilter = BlendModeColorFilter(customColor, BlendMode.SRC_IN)
+            } else {
+                @Suppress("DEPRECATION")
+                drawable.setColorFilter(customColor, PorterDuff.Mode.SRC_IN)
+            }
+            mView.background = drawable
         }
     }
+
     fun onBgMutate(mView: View, customColor: Int, opacity: Int) {
-        val tintedColor = ColorUtils.setAlphaComponent(customColor, 25) // 10% opacity
-
-        val drawable = mView.background.mutate()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            drawable.colorFilter = BlendModeColorFilter(tintedColor, BlendMode.SRC_IN)
-        } else {
-            @Suppress("DEPRECATION")
-            drawable.setColorFilter(tintedColor, PorterDuff.Mode.SRC_IN)
+        val tintedColor = ColorUtils.setAlphaComponent(customColor, opacity)
+        mView.background?.mutate()?.let { drawable ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                drawable.colorFilter = BlendModeColorFilter(tintedColor, BlendMode.SRC_IN)
+            } else {
+                @Suppress("DEPRECATION")
+                drawable.setColorFilter(tintedColor, PorterDuff.Mode.SRC_IN)
+            }
+            mView.background = drawable
         }
-        mView.background = drawable
     }
 }
+
