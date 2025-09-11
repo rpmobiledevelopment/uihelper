@@ -6,7 +6,7 @@ class OnInterface {
     }
 
     interface CallbackListener {
-        fun onFetchProgress(response: String?, apiNameRef: String?)
+        fun onFetchProgress(responseCode: Int?,response: String?, apiNameRef: String?)
         fun onFetchComplete(opt: String?, apiNameRef: String?)
     }
 }

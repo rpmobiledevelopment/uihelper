@@ -26,9 +26,9 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
         dbResCall.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
-                if (response.code() == 200) {
+                if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
                     if (response.isSuccessful) {
-                        listener.onFetchProgress(ApiClients.getResponseString(), apiNamePageRef)
+                        listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
                         listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
                     } else {
                         listener.onFetchComplete("SERVER_ERROR", apiNamePageRef)
@@ -52,9 +52,9 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
         dbResCall.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
-                if (response.code() == 200) {
+                if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
                     if (response.isSuccessful) {
-                        listener.onFetchProgress(ApiClients.getResponseString(), apiNamePageRef)
+                        listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
                         listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
                     } else {
                         listener.onFetchComplete("SERVER_ERROR", apiNamePageRef)
@@ -95,7 +95,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 if (response.isSuccessful) {
                     mActivity.runOnUiThread {
                         try {
-                            listener.onFetchProgress(ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
                             listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
@@ -158,7 +158,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 if (response.isSuccessful) {
                     mActivity.runOnUiThread {
                         try {
-                            listener.onFetchProgress(ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
                             listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
@@ -221,7 +221,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     val responseBody = response.body?.string()
                     mActivity.runOnUiThread {
                         try {
-                            listener.onFetchProgress(responseBody, apiNamePageRef)
+                            listener.onFetchProgress(response.code,responseBody, apiNamePageRef)
                             listener.onFetchComplete("SUCCESS", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
@@ -232,7 +232,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 } else {
                     mActivity.runOnUiThread {
                         try {
-                            listener.onFetchProgress("", apiNamePageRef)
+                            listener.onFetchProgress(response.code,"", apiNamePageRef)
                             listener.onFetchComplete("FAILURE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
