@@ -71,7 +71,6 @@ open class GPSTracker(private val context: Activity, var onLoc: OnLoc) : Service
         getLocation()
     }
 
-    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     fun getLocation(): Location? {
         try {
             locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager?
@@ -88,7 +87,17 @@ open class GPSTracker(private val context: Activity, var onLoc: OnLoc) : Service
                 IsLog(TAG, "IF==qr4342=")
 
                 if (isNetworkEnabled) {
-                    locationManager!!.requestLocationUpdates(
+                    if (ActivityCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        return null
+                    }
+                    locationManager?.requestLocationUpdates(
                         LocationManager.NETWORK_PROVIDER,
                         MIN_TIME_BW_UPDATES,
                         MIN_DISTANCE_CHANGE_FOR_UPDATES.toFloat(), this
