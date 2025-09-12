@@ -50,8 +50,12 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         val dbResCall = returnApiCommon(mActivity).doPostApi(
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), passParaMap, apiName)
 
+        IsLog(TAG,"dbResCall=================${dbResCall.request().url}")
+
         dbResCall.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
+                IsLog(TAG,"response=================${response.code()}")
+                IsLog(TAG,"response========body=========${response.body()}")
                 if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
                     if (response.isSuccessful) {
                         listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
