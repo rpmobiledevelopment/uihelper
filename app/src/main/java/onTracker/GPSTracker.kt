@@ -15,6 +15,7 @@ import android.location.LocationManager
 import android.os.Build
 import android.os.IBinder
 import android.provider.Settings
+import androidx.annotation.RequiresPermission
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResultCallback
@@ -70,7 +71,7 @@ open class GPSTracker(private val context: Activity, var onLoc: OnLoc) : Service
         getLocation()
     }
 
-    @SuppressLint("MissingPermission")
+    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     fun getLocation(): Location? {
         try {
             locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager?
