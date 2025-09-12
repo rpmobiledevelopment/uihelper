@@ -7,4 +7,6 @@ public interface GlobalData {
     String TAG_VIDEO_PATH = "TAG_VIDEO_PATH";
     String SHARED_PREF = "SHARED_PREF";
     String TAG_FCM_KEY = "TAG_FCM_KEY";
+    String TAG_CURR_LAT = "TAG_CURR_LAT";
+    String TAG_CURR_LNG = "TAG_CURR_LNG";
 }

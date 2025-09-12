@@ -43,4 +43,6 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.exoplayer)
     implementation(libs.firebase.messaging)
+    // Location
+    implementation(libs.places)
 }
