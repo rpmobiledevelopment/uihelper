@@ -42,4 +42,5 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.exoplayer)
+    implementation(libs.firebase.messaging)
 }

@@ -20,7 +20,6 @@ public class ApiClients {
 
     private static String TAG = ApiClients.class.getSimpleName();
     private static ResponseInterceptor responseInterceptor;
-
     public static Retrofit getClient(String BASE_URL) {
 
         Gson gson = new GsonBuilder().create();
