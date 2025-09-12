@@ -2,7 +2,9 @@ package apiController;
 
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -23,5 +25,10 @@ public interface ApiInterface {
     Call<Void> doPostApi(@Header("Authorization") String headers,
                          @FieldMap Map<String, String> fieldMap,
                          @Path("ATNDB") String apiName);
+    @Headers({"Accept: application/json",
+            "Content-Type: application/json"})
+    @POST("{ATNDB}")
+    Call<Void> doPostApi(@Header("Authorization") String headers,
+                         @Body RequestBody body, @Path("ATNDB") String apiName);
 
 }
