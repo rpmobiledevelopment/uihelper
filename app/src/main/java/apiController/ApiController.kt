@@ -27,7 +27,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         val dbResCall = returnApiCommon(mActivity).doGetApi(
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), apiName)
 
-        dbResCall.enqueue(object : Callback<Void?> {
+        dbResCall?.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
                 if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
                     listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
@@ -45,13 +45,13 @@ class ApiController(private val mActivity: Activity) : GlobalData {
     }
 
     fun doPostMethod(listener: OnInterface.CallbackListener,
-        passParaMap: MutableMap<String?, String?>?, apiName: String?, apiNamePageRef: String?) {
+        passParaMap: MutableMap<String?, Any?>?, apiName: String?, apiNamePageRef: String?) {
         val dbResCall = returnApiCommon(mActivity).doPostApi(
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), passParaMap, apiName)
 
-        IsLog(TAG,"dbResCall=================${dbResCall.request().url}")
+        IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
 
-        dbResCall.enqueue(object : Callback<Void?> {
+        dbResCall?.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
                 IsLog(TAG,"response=================${response.code()}")
                 IsLog(TAG,"response========body=========${response.body()}")
@@ -70,13 +70,13 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         })
     }
 
-    fun inPostBackground(listener: OnInterface.CallbackListener, passParaMap: MutableMap<String?, String?>,
+    fun inPostBackground(listener: OnInterface.CallbackListener, passParaMap: MutableMap<String?, Any?>,
         apiName: String?, apiNamePageRef: String?) {
         val dbResCall = returnApiLocalCommon(mActivity).doPostApi(
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), passParaMap, apiName
         )
 
-        IsLog(TAG, "dbResCall==========" + dbResCall.request().url)
+        IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
         IsLog(TAG, "passParaMap=====passParaMap=====$passParaMap")
         IsLog(
             TAG,
@@ -90,8 +90,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
         executorService.submit {
             try {
-                val response = dbResCall.execute() // Synchronous execution
-                if (response.isSuccessful) {
+                val response = dbResCall?.execute() // Synchronous execution
+                if (response?.isSuccessful == true) {
                     mActivity.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
@@ -103,12 +103,12 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     }
                 } else {
                     mActivity.runOnUiThread {
-                        listener.onFetchComplete(response.code(),
+                        listener.onFetchComplete(response?.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
                         )
                     }
-                    IsLog(TAG, "Image deletion failed: " + response.message())
+                    IsLog(TAG, "Image deletion failed: " + response?.message())
                 }
             } catch (e: NullPointerException) {
                 mActivity.runOnUiThread {
@@ -135,13 +135,13 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         executorService.shutdown()
     }
 
-    fun inPostDownload(listener: OnInterface.CallbackListener, passParaMap: MutableMap<String?, String?>,
+    fun inPostDownload(listener: OnInterface.CallbackListener, passParaMap: MutableMap<String?, Any?>,
         apiName: String?, apiNamePageRef: String?) {
         val dbResCall = returnApiLocalCommon(mActivity).doPostApi(
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), passParaMap, apiName
         )
 
-        IsLog(TAG, "dbResCall==========" + dbResCall.request().url)
+        IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
         IsLog(TAG, "passParaMap=====passParaMap=====$passParaMap")
         IsLog(
             TAG,
@@ -155,8 +155,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
         executorService.submit {
             try {
-                val response = dbResCall.execute() // Synchronous execution
-                if (response.isSuccessful) {
+                val response = dbResCall?.execute() // Synchronous execution
+                if (response?.isSuccessful == true) {
                     mActivity.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
@@ -168,12 +168,12 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     }
                 } else {
                     mActivity.runOnUiThread {
-                        listener.onFetchComplete(response.code(),
+                        listener.onFetchComplete(response?.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
                         )
                     }
-                    IsLog(TAG, "Image deletion failed: " + response.message())
+                    IsLog(TAG, "Image deletion failed: " + response?.message())
                 }
             } catch (e: NullPointerException) {
                 mActivity.runOnUiThread {
@@ -209,9 +209,9 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         val dbResCall = returnApiCommon(mActivity).doPostApi(
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), requestBody, apiName)
 
-        IsLog(TAG,"dbResCall=================${dbResCall.request().url}")
+        IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
 
-        dbResCall.enqueue(object : Callback<Void?> {
+        dbResCall?.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
                 IsLog(TAG,"response=================${response.code()}")
                 IsLog(TAG,"response========body=========${response.body()}")
@@ -241,7 +241,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), requestBody, apiName
         )
 
-        IsLog(TAG, "dbResCall==========" + dbResCall.request().url)
+        IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
         IsLog(TAG, "passParaMap=====passParaMap=====$passParaMap")
         IsLog(
             TAG,
@@ -255,8 +255,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
         executorService.submit {
             try {
-                val response = dbResCall.execute() // Synchronous execution
-                if (response.isSuccessful) {
+                val response = dbResCall?.execute() // Synchronous execution
+                if (response?.isSuccessful == true) {
                     mActivity.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
@@ -268,12 +268,12 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     }
                 } else {
                     mActivity.runOnUiThread {
-                        listener.onFetchComplete(response.code(),
+                        listener.onFetchComplete(response?.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
                         )
                     }
-                    IsLog(TAG, "Image deletion failed: " + response.message())
+                    IsLog(TAG, "Image deletion failed: " + response?.message())
                 }
             } catch (e: NullPointerException) {
                 mActivity.runOnUiThread {
@@ -311,7 +311,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), requestBody, apiName
         )
 
-        IsLog(TAG, "dbResCall==========" + dbResCall.request().url)
+        IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
         IsLog(TAG, "passParaMap=====passParaMap=====$passParaMap")
         IsLog(
             TAG,
@@ -325,8 +325,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
         executorService.submit {
             try {
-                val response = dbResCall.execute() // Synchronous execution
-                if (response.isSuccessful) {
+                val response = dbResCall?.execute() // Synchronous execution
+                if (response?.isSuccessful == true) {
                     mActivity.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
@@ -338,12 +338,12 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     }
                 } else {
                     mActivity.runOnUiThread {
-                        listener.onFetchComplete(response.code(),
+                        listener.onFetchComplete(response?.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
                         )
                     }
-                    IsLog(TAG, "Image deletion failed: " + response.message())
+                    IsLog(TAG, "Image deletion failed: " + response?.message())
                 }
             } catch (e: NullPointerException) {
                 mActivity.runOnUiThread {
