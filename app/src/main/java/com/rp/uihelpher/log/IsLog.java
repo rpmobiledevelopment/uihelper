@@ -11,7 +11,7 @@ public class IsLog {
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
             Log.e(className,print);
         } else {
-//            Log.e(className,print+print);
+            Log.e(className,print+print);
         }
     }
 

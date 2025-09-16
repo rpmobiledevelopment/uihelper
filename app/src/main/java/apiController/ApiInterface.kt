@@ -25,9 +25,7 @@ interface ApiInterface {
                   @FieldMap fieldMap: MutableMap<String?, Any?>?,
                   @Path("ATNDB") apiName: String?): Call<Void?>?
 
-    @Headers(
-        "Accept: application/json", "Content-Type: application/json"
-    )
+    @Headers("Accept: application/json", "Content-Type: application/json")
     @POST("{ATNDB}")
     fun doPostApi(
         @Header("Authorization") headers: String?,
