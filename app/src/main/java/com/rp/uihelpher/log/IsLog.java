@@ -2,7 +2,7 @@ package com.rp.uihelpher.log;
 
 import android.util.Log;
 
-import io.paperdb.BuildConfig;
+import com.rp.uihelpher.BuildConfig;
 
 public class IsLog {
 
