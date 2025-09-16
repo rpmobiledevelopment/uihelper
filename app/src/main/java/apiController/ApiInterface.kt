@@ -15,7 +15,7 @@ interface ApiInterface {
     @GET("{ATNDB}")
     fun doGetApi(
         @Header("Authorization") headers: String?,
-        @Path("ATNDB") apiName: String?
+        @Path("ATNDB", encoded = true) apiName: String?
     ): Call<Void?>?
 
     @Headers("Accept: application/json")
@@ -23,12 +23,12 @@ interface ApiInterface {
     @POST("{ATNDB}")
     fun doPostApi(@Header("Authorization") headers: String?,
                   @FieldMap fieldMap: MutableMap<String?, Any?>?,
-                  @Path("ATNDB") apiName: String?): Call<Void?>?
+                  @Path("ATNDB", encoded = true) apiName: String?): Call<Void?>?
 
     @Headers("Accept: application/json", "Content-Type: application/json")
     @POST("{ATNDB}")
     fun doPostApi(
         @Header("Authorization") headers: String?,
-        @Body body: RequestBody?, @Path("ATNDB") apiName: String?
+        @Body body: RequestBody?, @Path("ATNDB", encoded = true) apiName: String?
     ): Call<Void?>?
 }

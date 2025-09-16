@@ -46,6 +46,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
     fun doPostMethod(listener: OnInterface.CallbackListener,
         passParaMap: MutableMap<String?, Any?>?, apiName: String?, apiNamePageRef: String?) {
+
         val dbResCall = returnApiCommon(mActivity).doPostApi(
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), passParaMap, apiName)
 
