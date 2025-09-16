@@ -32,18 +32,18 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
                     if (response.isSuccessful) {
                         listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                        listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
+                        listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                     } else {
-                        listener.onFetchComplete("SERVER_ERROR", apiNamePageRef)
+                        listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                     }
                 } else {
-                    listener.onFetchComplete("SERVER_ERROR", apiNamePageRef)
+                    listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                 }
             }
 
             override fun onFailure(call: Call<Void?>, t: Throwable) {
                 IsLog(TAG, "Throwable: " + t.message)
-                listener.onFetchComplete("ERROR", apiNamePageRef)
+                listener.onFetchComplete(700,"ERROR", apiNamePageRef)
             }
         })
     }
@@ -62,18 +62,18 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
                     if (response.isSuccessful) {
                         listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                        listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
+                        listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                     } else {
-                        listener.onFetchComplete("SERVER_ERROR", apiNamePageRef)
+                        listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                     }
                 } else {
-                    listener.onFetchComplete("SERVER_ERROR", apiNamePageRef)
+                    listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                 }
             }
 
             override fun onFailure(call: Call<Void?>, t: Throwable) {
                 IsLog(TAG, "Throwable: " + t.message)
-                listener.onFetchComplete("ERROR", apiNamePageRef)
+                listener.onFetchComplete(700,"ERROR", apiNamePageRef)
             }
         })
     }
@@ -103,7 +103,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     mActivity.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                            listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
                             e.printStackTrace()
@@ -111,7 +111,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     }
                 } else {
                     mActivity.runOnUiThread {
-                        listener.onFetchComplete(
+                        listener.onFetchComplete(response.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
                         )
@@ -121,6 +121,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             } catch (e: NullPointerException) {
                 mActivity.runOnUiThread {
                     listener.onFetchComplete(
+                        700,
                         "SERVER_ERROR",
                         apiNamePageRef
                     )
@@ -130,6 +131,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             } catch (e: IOException) {
                 mActivity.runOnUiThread {
                     listener.onFetchComplete(
+                        700,
                         "SERVER_ERROR",
                         apiNamePageRef
                     )
@@ -166,7 +168,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     mActivity.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                            listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
                             e.printStackTrace()
@@ -174,7 +176,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     }
                 } else {
                     mActivity.runOnUiThread {
-                        listener.onFetchComplete(
+                        listener.onFetchComplete(response.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
                         )
@@ -183,7 +185,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 }
             } catch (e: NullPointerException) {
                 mActivity.runOnUiThread {
-                    listener.onFetchComplete(
+                    listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
                     )
@@ -192,7 +194,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 e.printStackTrace()
             } catch (e: IOException) {
                 mActivity.runOnUiThread {
-                    listener.onFetchComplete(
+                    listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
                     )
@@ -224,18 +226,18 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
                     if (response.isSuccessful) {
                         listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                        listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
+                        listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                     } else {
-                        listener.onFetchComplete("SERVER_ERROR", apiNamePageRef)
+                        listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                     }
                 } else {
-                    listener.onFetchComplete("SERVER_ERROR", apiNamePageRef)
+                    listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                 }
             }
 
             override fun onFailure(call: Call<Void?>, t: Throwable) {
                 IsLog(TAG, "Throwable: " + t.message)
-                listener.onFetchComplete("ERROR", apiNamePageRef)
+                listener.onFetchComplete(700,"ERROR", apiNamePageRef)
             }
         })
     }
@@ -270,7 +272,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     mActivity.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                            listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
                             e.printStackTrace()
@@ -278,7 +280,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     }
                 } else {
                     mActivity.runOnUiThread {
-                        listener.onFetchComplete(
+                        listener.onFetchComplete(response.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
                         )
@@ -287,7 +289,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 }
             } catch (e: NullPointerException) {
                 mActivity.runOnUiThread {
-                    listener.onFetchComplete(
+                    listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
                     )
@@ -296,7 +298,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 e.printStackTrace()
             } catch (e: IOException) {
                 mActivity.runOnUiThread {
-                    listener.onFetchComplete(
+                    listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
                     )
@@ -340,7 +342,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     mActivity.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                            listener.onFetchComplete("API_RESPONSE", apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
                             e.printStackTrace()
@@ -348,7 +350,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     }
                 } else {
                     mActivity.runOnUiThread {
-                        listener.onFetchComplete(
+                        listener.onFetchComplete(response.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
                         )
@@ -357,7 +359,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 }
             } catch (e: NullPointerException) {
                 mActivity.runOnUiThread {
-                    listener.onFetchComplete(
+                    listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
                     )
@@ -366,7 +368,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 e.printStackTrace()
             } catch (e: IOException) {
                 mActivity.runOnUiThread {
-                    listener.onFetchComplete(
+                    listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
                     )
@@ -403,7 +405,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     mActivity.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code,responseBody, apiNamePageRef)
-                            listener.onFetchComplete("SUCCESS", apiNamePageRef)
+                            listener.onFetchComplete(response.code,"SUCCESS", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
                             e.printStackTrace()
@@ -414,7 +416,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     mActivity.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code,"", apiNamePageRef)
-                            listener.onFetchComplete("FAILURE", apiNamePageRef)
+                            listener.onFetchComplete(response.code,"FAILURE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
                             e.printStackTrace()
