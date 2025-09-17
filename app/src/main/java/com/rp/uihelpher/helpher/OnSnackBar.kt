@@ -2,16 +2,21 @@ package com.rp.uihelpher.helpher
 
 import android.app.Activity
 import android.graphics.Color
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.google.android.material.R
 import com.google.android.material.snackbar.Snackbar
+import com.rp.uihelpher.R
 import com.rp.uihelpher.log.IsLog
 
 class OnSnackBar {
 
-    private val TAG: String = OnSnackBar::class.java.getSimpleName()
+    private val TAG: String = OnSnackBar::class.java.simpleName
 
     constructor(view: View, msg: String?) {
         val snackBar = Snackbar.make(view, "" + msg, Snackbar.LENGTH_LONG)
@@ -93,6 +98,64 @@ class OnSnackBar {
             IsLog(TAG, "NullPointerException " + e.message)
         } catch (e: Exception) {
             IsLog(TAG, "Exception " + e.message)
+        }
+    }
+
+    fun customSnackBar(mActivity: Activity, view: View, msg: String, showMsgLog: String) {
+        try {
+            val snackBar = Snackbar.make(view, "", Snackbar.LENGTH_LONG)
+
+            // Get Snackbar parent layout (it's a ViewGroup)
+            val layout = snackBar.view as ViewGroup
+            layout.setBackgroundColor(ContextCompat.getColor(mActivity, R.color.snack_bar_color))
+
+            if (layout.childCount > 0) {
+                layout.removeAllViews()
+            }
+
+            // Inflate your custom view
+            val customView = LayoutInflater.from(mActivity).inflate(
+                R.layout.custom_snackbar, layout, false
+            )
+
+            val ll_custom = customView.findViewById<LinearLayout>(R.id.ll_custom)
+            val iv_msg_icon = customView.findViewById<ImageView>(R.id.iv_msg_icon)
+            val iv_close_icon = customView.findViewById<ImageView>(R.id.iv_close_icon)
+            // Set text
+            val tvMessage = customView.findViewById<TextView>(R.id.tv_message)
+
+            if (showMsgLog == "WARNING") {
+                OnDrawableXmlClrChg(mActivity,ll_custom,R.color.warning_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                OnDrawableXmlClrChg(mActivity,iv_msg_icon,R.color.warning_color,25,"CHG_XML_IMAGE_COLOR")
+                OnDrawableXmlClrChg(mActivity,iv_close_icon,R.color.warning_color,25,"CHG_XML_IMAGE_COLOR")
+                tvMessage.setTextColor(ContextCompat.getColor(mActivity, R.color.warning_color))
+            }else if (showMsgLog == "INFO") {
+                OnDrawableXmlClrChg(mActivity,ll_custom,R.color.info_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                OnDrawableXmlClrChg(mActivity,iv_msg_icon,R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                OnDrawableXmlClrChg(mActivity,iv_close_icon,R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                tvMessage.setTextColor(ContextCompat.getColor(mActivity, R.color.info_color))
+            }else if (showMsgLog == "ERROR") {
+                OnDrawableXmlClrChg(mActivity,ll_custom,R.color.error_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                OnDrawableXmlClrChg(mActivity,iv_msg_icon,R.color.error_color,25,"CHG_XML_IMAGE_COLOR")
+                OnDrawableXmlClrChg(mActivity,iv_close_icon,R.color.error_color,25,"CHG_XML_IMAGE_COLOR")
+                tvMessage.setTextColor(ContextCompat.getColor(mActivity, R.color.error_color))
+            }else if (showMsgLog == "SUCCESS") {
+                OnDrawableXmlClrChg(mActivity,ll_custom,R.color.success_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                OnDrawableXmlClrChg(mActivity,iv_msg_icon,R.color.success_color,25,"CHG_XML_IMAGE_COLOR")
+                OnDrawableXmlClrChg(mActivity,iv_close_icon,R.color.success_color,25,"CHG_XML_IMAGE_COLOR")
+                tvMessage.setTextColor(ContextCompat.getColor(mActivity, R.color.success_color))
+            }else {
+                OnDrawableXmlClrChg(mActivity,ll_custom,R.color.info_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                OnDrawableXmlClrChg(mActivity,iv_msg_icon,R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                OnDrawableXmlClrChg(mActivity,iv_close_icon,R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                tvMessage.setTextColor(ContextCompat.getColor(mActivity, R.color.info_color))
+            }
+            tvMessage.text = msg
+            layout.addView(customView)
+
+            snackBar.show()
+        } catch (e: Exception) {
+            IsLog("SnackbarError", "Error: ${e.message}")
         }
     }
 }

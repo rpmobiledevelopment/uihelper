@@ -11,4 +11,10 @@
     <color name="gray_color">#666666</color>
     <color name="light_dark">#74000000</color>
     <color name="green_clr">#18A781</color>
+
+    //
+    <color name="warning_color">#f99200</color>
+    <color name="info_color">#0d6673</color>
+    <color name="error_color">#f9392f</color>
+    <color name="success_color">#33c257</color>
 </resources>

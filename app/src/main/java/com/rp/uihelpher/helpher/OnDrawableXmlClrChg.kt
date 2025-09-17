@@ -34,6 +34,17 @@ class OnDrawableXmlClrChg {
             "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView, mColor, 25)
         }
     }
+    constructor(mActivity: Activity, mView: View, mColor: Int, alpha: Int, opt: String) {
+        when (opt) {
+            "CHG_XML_IMAGE_COLOR" -> onImageTint(mActivity, mView as? ImageView, mColor)
+
+            "BACKGROUND_XML_TEXT_COLOR" -> onTextTint(mActivity, mView as? TextView, mColor)
+
+            "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mActivity, mView, mColor)
+
+            "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView, mColor, alpha)
+        }
+    }
 
     constructor(mActivity: Context, mView: View, mColor: Int, opt: String) {
         try {
@@ -84,11 +95,9 @@ class OnDrawableXmlClrChg {
 //            color ?: ContextCompat.getColor(mActivity, R.color.gray_color)
 //        )
 
-        textView!!.background.mutate().setColorFilter(
-            ContextCompat.getColor(
-                mActivity,
-                R.color.gray_color
-            ), PorterDuff.Mode.SRC_IN
+        textView?.background?.mutate()?.setColorFilter(
+            color ?: ContextCompat.getColor(mActivity, R.color.gray_color),
+            PorterDuff.Mode.SRC_IN
         )
     }
 
