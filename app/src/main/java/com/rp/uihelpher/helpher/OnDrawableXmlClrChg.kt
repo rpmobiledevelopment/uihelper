@@ -95,10 +95,15 @@ class OnDrawableXmlClrChg {
 //            color ?: ContextCompat.getColor(mActivity, R.color.gray_color)
 //        )
 
-        textView?.background?.mutate()?.setColorFilter(
-            color ?: ContextCompat.getColor(mActivity, R.color.gray_color),
-            PorterDuff.Mode.SRC_IN
-        )
+        val drawable = textView?.background?.mutate()
+        val finalColor = color ?: ContextCompat.getColor(mActivity, R.color.gray_color)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            drawable?.colorFilter = BlendModeColorFilter(finalColor, BlendMode.SRC_IN)
+        } else {
+            @Suppress("DEPRECATION")
+            drawable?.setColorFilter(finalColor, PorterDuff.Mode.SRC_IN)
+        }
     }
 
     // ----------------------
