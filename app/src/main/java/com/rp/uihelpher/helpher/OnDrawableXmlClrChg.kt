@@ -82,7 +82,7 @@ class OnDrawableXmlClrChg {
     // ----------------------
     private fun onImageTint(mActivity: Context, imageView: ImageView?, color: Int? = null) {
         imageView?.setColorFilter(
-            color ?: ContextCompat.getColor(mActivity, R.color.gray_color),
+            ContextCompat.getColor(mActivity, color ?: R.color.gray_color),
             PorterDuff.Mode.SRC_IN
         )
     }
@@ -91,12 +91,8 @@ class OnDrawableXmlClrChg {
     // TEXT COLOR CHANGE
     // ----------------------
     private fun onTextTint(mActivity: Context, textView: TextView?, color: Int? = null) {
-//        textView?.setTextColor(
-//            color ?: ContextCompat.getColor(mActivity, R.color.gray_color)
-//        )
-
         val drawable = textView?.background?.mutate()
-        val finalColor = color ?: ContextCompat.getColor(mActivity, R.color.gray_color)
+        val finalColor = ContextCompat.getColor(mActivity, color ?: R.color.gray_color)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             drawable?.colorFilter = BlendModeColorFilter(finalColor, BlendMode.SRC_IN)
@@ -104,6 +100,7 @@ class OnDrawableXmlClrChg {
             @Suppress("DEPRECATION")
             drawable?.setColorFilter(finalColor, PorterDuff.Mode.SRC_IN)
         }
+
     }
 
     // ----------------------
