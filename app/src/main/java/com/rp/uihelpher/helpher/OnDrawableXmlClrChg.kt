@@ -2,7 +2,6 @@ package com.rp.uihelpher.helpher
 
 import android.app.Activity
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
@@ -81,8 +80,15 @@ class OnDrawableXmlClrChg {
     // TEXT COLOR CHANGE
     // ----------------------
     private fun onTextTint(mActivity: Context, textView: TextView?, color: Int? = null) {
-        textView?.setTextColor(
-            color ?: ContextCompat.getColor(mActivity, R.color.gray_color)
+//        textView?.setTextColor(
+//            color ?: ContextCompat.getColor(mActivity, R.color.gray_color)
+//        )
+
+        textView!!.background.mutate().setColorFilter(
+            ContextCompat.getColor(
+                mActivity,
+                R.color.gray_color
+            ), PorterDuff.Mode.SRC_IN
         )
     }
 
