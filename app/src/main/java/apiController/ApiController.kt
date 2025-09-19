@@ -4,7 +4,6 @@ import android.app.Activity
 import apiController.ReferApi.returnApiCommon
 import apiController.ReferApi.returnApiLocalCommon
 import apiController.ReferApi.returnApiName
-import com.google.gson.JsonObject
 import com.rp.uihelpher.helpher.GlobalData
 import com.rp.uihelpher.localStorage.SharedPre
 import com.rp.uihelpher.log.IsLog
@@ -13,6 +12,7 @@ import okhttp3.MultipartBody
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import onInteface.OnInterface
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -201,7 +201,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
     // Body
     fun doPostMethod(listener: OnInterface.CallbackListener,
-        passParaMap: JsonObject, apiName: String?, apiNamePageRef: String?) {
+        passParaMap: JSONObject, apiName: String?, apiNamePageRef: String?) {
 
         val requestBody = passParaMap
             .toString()
@@ -231,7 +231,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         })
     }
 
-    fun inPostBackground(listener: OnInterface.CallbackListener, passParaMap: JsonObject,
+    fun inPostBackground(listener: OnInterface.CallbackListener, passParaMap: JSONObject,
         apiName: String?, apiNamePageRef: String?) {
 
         val requestBody = passParaMap
@@ -299,7 +299,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         executorService.shutdown()
     }
 
-    fun inPostDownload(listener: OnInterface.CallbackListener, passParaMap: JsonObject,
+    fun inPostDownload(listener: OnInterface.CallbackListener, passParaMap: JSONObject,
         apiName: String?, apiNamePageRef: String?) {
 
 

@@ -6,7 +6,7 @@ import android.widget.TextView
 
 class OnReturn {
 
-    // Return empty to ifene
+    // Return empty
     fun onTextReturned(msg: String?, textView: TextView, opt: String) {
         if (msg != null && !msg.isEmpty()) {
             if (msg == "NON") {
@@ -28,25 +28,25 @@ class OnReturn {
     fun onTextReturned(msg: Int, textView: TextView, opt: String?) {
         try {
             if (msg > 0) {
-                textView.setVisibility(View.VISIBLE)
+                textView.visibility = View.VISIBLE
                 if (msg > 99) {
-                    textView.setText("99+")
+                    textView.text = "99+"
                 } else {
-                    textView.setText(msg.toString() + "")
+                    textView.text = msg.toString() + ""
                 }
             } else {
-                textView.setText("")
-                textView.setVisibility(View.GONE)
+                textView.text = ""
+                textView.visibility = View.GONE
             }
-        } catch (e: NullPointerException) {
-            textView.setText("")
-            textView.setVisibility(View.GONE)
-        } catch (e: NumberFormatException) {
-            textView.setText("")
-            textView.setVisibility(View.GONE)
-        } catch (e: Exception) {
-            textView.setText("")
-            textView.setVisibility(View.GONE)
+        } catch (_: NullPointerException) {
+            textView.text = ""
+            textView.visibility = View.GONE
+        } catch (_: NumberFormatException) {
+            textView.text = ""
+            textView.visibility = View.GONE
+        } catch (_: Exception) {
+            textView.text = ""
+            textView.visibility = View.GONE
         }
     }
 
