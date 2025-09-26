@@ -10,6 +10,7 @@ import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import com.rp.uihelpher.R
@@ -156,13 +157,14 @@ class OnDrawableXmlClrChg {
         }
     }
 
-    fun onBgMutate(mActivity: Context, mView: View, customColor: Int) {
+    fun onBgMutate(mActivity: Context, mView: View, @ColorRes customColor: Int) {
+        val color = ContextCompat.getColor(mActivity, customColor) // 🔹 resolve resource to real color
         mView.background?.mutate()?.let { drawable ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                drawable.colorFilter = BlendModeColorFilter(customColor, BlendMode.SRC_IN)
+                drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
             } else {
                 @Suppress("DEPRECATION")
-                drawable.setColorFilter(customColor, PorterDuff.Mode.SRC_IN)
+                drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
             }
             mView.background = drawable
         }
