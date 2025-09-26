@@ -47,6 +47,41 @@ class OnDrawableXmlClrChg {
             "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView, mColor, 25)
         }
     }
+    constructor(mActivity: Activity, mView: View, mColor: Int,borderColor: Int, opt: String, width: Int) {
+        when (opt) {
+            "BACKGROUND_XML_COLOR" -> {
+                (mView.background.mutate() as? GradientDrawable)?.let { bg ->
+                    val strokeColor = ContextCompat.getColor(mActivity, mColor)
+                    bg.setStroke(width, strokeColor)
+                }
+            }
+            "BACKGROUND_XML_COLOR_FULL_TWO_COLOR" -> {
+                (mView.background.mutate() as? GradientDrawable)?.let { bg ->
+                    val strokeColor = ContextCompat.getColor(mActivity, mColor)
+                    val strokeBorderColor = ContextCompat.getColor(mActivity, borderColor)
+                    bg.setColor(strokeColor)          // changes <solid> fill
+                    bg.setStroke(width, strokeBorderColor)  // changes <stroke> width & color
+                }
+            }
+            "BACKGROUND_XML_COLOR_FULL" -> {
+                (mView.background.mutate() as? GradientDrawable)?.let { bg ->
+                    val strokeColor = ContextCompat.getColor(mActivity, mColor)
+                    bg.setColor(strokeColor)          // changes <solid> fill
+                    bg.setStroke(width, strokeColor)  // changes <stroke> width & color
+                }
+            }
+
+            "CHG_XML_IMAGE_COLOR" -> onImageTint(mActivity, mView as? ImageView, mColor)
+
+            "BACKGROUND_XML_TEXT_COLOR" -> onTextTint(mActivity, mView as? TextView, mColor)
+
+            "BACKGROUND_XML_FULL_COLOR" -> onBgMutate(mActivity, mView, mColor)
+
+            "BACKGROUND_DRAWABLE_XML_COLOR" -> onTextTint(mActivity, mView as? TextView, mColor, mColor)
+
+            "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView, mColor, 25)
+        }
+    }
     constructor(mActivity: Activity, mView: View, mColor: Int, alpha: Int, opt: String) {
         when (opt) {
             "CHG_XML_IMAGE_COLOR" -> onImageTint(mActivity, mView as? ImageView, mColor)
