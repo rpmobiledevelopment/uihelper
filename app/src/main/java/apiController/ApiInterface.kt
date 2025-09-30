@@ -1,6 +1,7 @@
 package apiController
 
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.FieldMap
@@ -38,5 +39,14 @@ interface ApiInterface {
         @Header("Authorization") headers: String,
         @Body body: RequestBody,
         @Path("ATNDB", encoded = true) apiName: String
+    ): retrofit2.Response<ResponseBody>
+
+    @Headers("Accept: application/json", "Content-Type: application/json")
+    @POST("{ATNDB}")
+    suspend fun doPostApi(
+        @Header("Authorization") headers: String,
+        @Body body: RequestBody,
+        @Path("ATNDB", encoded = true) apiName: String,
+        paiRefName: String
     ): retrofit2.Response<String>
 }
