@@ -38,5 +38,5 @@ interface ApiInterface {
         @Header("Authorization") headers: String,
         @Body body: RequestBody,
         @Path("ATNDB", encoded = true) apiName: String
-    ): retrofit2.Response<Void>
+    ): retrofit2.Response<String?>
 }
