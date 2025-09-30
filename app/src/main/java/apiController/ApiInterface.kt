@@ -31,4 +31,12 @@ interface ApiInterface {
         @Header("Authorization") headers: String?,
         @Body body: RequestBody?, @Path("ATNDB", encoded = true) apiName: String?
     ): Call<Void?>?
+
+    @Headers("Accept: application/json", "Content-Type: application/json")
+    @POST("{ATNDB}")
+    suspend fun doPostApi(
+        @Header("Authorization") headers: String,
+        @Body body: RequestBody,
+        @Path("ATNDB", encoded = true) apiName: String
+    ): retrofit2.Response<Void>
 }
