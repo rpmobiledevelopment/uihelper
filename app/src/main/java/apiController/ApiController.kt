@@ -231,6 +231,45 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         })
     }
 
+    private var currentCall: Call<Void?>? = null
+
+
+    // Body
+    fun doPostMethod(listener: OnInterface.CallbackListener,
+        passParaMap: JSONObject, apiName: String?, apiNamePageRef: String?, previousCancelled: String?) {
+
+        val requestBody = passParaMap
+            .toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaType())
+
+        if (previousCancelled == "CANCELLED") {
+            currentCall?.cancel()
+        }
+
+        currentCall = returnApiCommon(mActivity).doPostApi(
+            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), requestBody, apiName)
+
+        IsLog(TAG,"dbResCall=================${currentCall?.request()?.url}")
+
+        currentCall?.enqueue(object : Callback<Void?> {
+            override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
+                IsLog(TAG,"response=================${response.code()}")
+                IsLog(TAG,"response========body=========${response.body()}")
+                if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                    listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
+                    listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                } else {
+                    listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                }
+            }
+
+            override fun onFailure(call: Call<Void?>, t: Throwable) {
+                IsLog(TAG, "Throwable: " + t.message)
+                listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+            }
+        })
+    }
+
     fun inPostBackground(listener: OnInterface.CallbackListener, passParaMap: JSONObject,
         apiName: String?, apiNamePageRef: String?) {
 
