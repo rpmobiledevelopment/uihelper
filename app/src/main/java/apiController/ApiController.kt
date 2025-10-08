@@ -231,7 +231,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         })
     }
 
-    private var currentCall: Call<Void?>? = null
+    var currentCall: Call<Void?>? = null
 
 
     // Body
