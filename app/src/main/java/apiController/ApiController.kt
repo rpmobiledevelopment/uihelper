@@ -265,9 +265,21 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
             override fun onFailure(call: Call<Void?>, t: Throwable) {
                 IsLog(TAG, "Throwable: " + t.message)
+
+                if (call.isCanceled) {
+                    IsLog(TAG, "Call canceled")
+                    return
+                }
+
                 listener.onFetchComplete(700,"ERROR", apiNamePageRef)
             }
         })
+    }
+
+
+    // 🔹 Add a public function to cancel current call
+    fun cancelCurrentCall() {
+        currentCall?.cancel()
     }
 
     fun inPostBackground(listener: OnInterface.CallbackListener, passParaMap: JSONObject,
