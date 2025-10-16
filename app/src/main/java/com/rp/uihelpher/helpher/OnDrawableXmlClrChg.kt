@@ -115,7 +115,7 @@ class OnDrawableXmlClrChg {
         } catch (e: Exception) {
             // fallback default (gray tint)
 
-            IsLog(TAG,"==========================${e.message}")
+//            IsLog(TAG,"==========================${e.message}")
             when (opt) {
                 "CHG_XML_IMAGE_COLOR" -> onImageTint(mActivity, mView as? ImageView)
 
@@ -149,7 +149,7 @@ class OnDrawableXmlClrChg {
     // ----------------------
     private fun onTextTint(mActivity: Context, textView: TextView?, color: Int? = null) {
 
-        IsLog(TAG,"color=============$color")
+//        IsLog(TAG,"color=============$color")
         val drawable = textView?.background?.mutate()
         val finalColor = ContextCompat.getColor(mActivity, color ?: R.color.gray_color)
 
