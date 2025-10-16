@@ -233,7 +233,6 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
     var currentCall: Call<Void?>? = null
 
-
     // Body
     fun doPostMethod(listener: OnInterface.CallbackListener,
         passParaMap: JSONObject, apiName: String?, apiNamePageRef: String?, previousCancelled: String?) {
@@ -243,6 +242,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             .toRequestBody("application/json; charset=utf-8".toMediaType())
 
         if (previousCancelled == "CANCELLED") {
+            // Cancel previous
+            currentCall?.takeIf { it.isExecuted && !it.isCanceled }?.cancel()
             currentCall?.cancel()
         }
 
