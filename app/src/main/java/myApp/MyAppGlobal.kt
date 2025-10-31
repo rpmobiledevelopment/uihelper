@@ -15,6 +15,7 @@ class MyAppGlobal : Application() {
     }
 
     companion object {
+        @JvmStatic
         var lng: String? = "EN"
     }
 }
