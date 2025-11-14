@@ -25,7 +25,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
     fun doGet(apiName: String?, listener: OnInterface.CallbackListener, apiNamePageRef: String?) {
 
         val dbResCall = returnApiCommon(mActivity).doGetApi(
-            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), apiName)
+            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
+            SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE), apiName)
 
         dbResCall?.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
@@ -48,7 +49,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         passParaMap: MutableMap<String?, Any?>?, apiName: String?, apiNamePageRef: String?) {
 
         val dbResCall = returnApiCommon(mActivity).doPostApi(
-            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), passParaMap, apiName)
+            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
+            SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE),passParaMap, apiName)
 
         IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
 
@@ -74,7 +76,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
     fun inPostBackground(listener: OnInterface.CallbackListener, passParaMap: MutableMap<String?, Any?>,
         apiName: String?, apiNamePageRef: String?) {
         val dbResCall = returnApiLocalCommon(mActivity).doPostApi(
-            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), passParaMap, apiName
+            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
+            SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE),passParaMap, apiName
         )
 
         IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
@@ -139,7 +142,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
     fun inPostDownload(listener: OnInterface.CallbackListener, passParaMap: MutableMap<String?, Any?>,
         apiName: String?, apiNamePageRef: String?) {
         val dbResCall = returnApiLocalCommon(mActivity).doPostApi(
-            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), passParaMap, apiName
+            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
+            SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE), passParaMap, apiName
         )
 
         IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
@@ -208,7 +212,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             .toRequestBody("application/json; charset=utf-8".toMediaType())
 
         val dbResCall = returnApiCommon(mActivity).doPostApi(
-            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), requestBody, apiName)
+            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
+            SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE), requestBody, apiName)
 
         IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
 
@@ -248,7 +253,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
         }
 
         currentCall = returnApiCommon(mActivity).doPostApi(
-            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), requestBody, apiName)
+            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
+            SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE), requestBody, apiName)
 
         IsLog(TAG,"dbResCall=================${currentCall?.request()?.url}")
 
@@ -291,7 +297,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             .toRequestBody("application/json; charset=utf-8".toMediaType())
 
         val dbResCall = returnApiLocalCommon(mActivity).doPostApi(
-            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), requestBody, apiName
+            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
+            SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE), requestBody, apiName
         )
 
         IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
@@ -361,7 +368,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
 
 
         val dbResCall = returnApiLocalCommon(mActivity).doPostApi(
-            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN), requestBody, apiName
+            "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
+            SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE), requestBody, apiName
         )
 
         IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
