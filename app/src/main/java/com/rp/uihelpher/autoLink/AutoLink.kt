@@ -10,23 +10,29 @@ import android.widget.TextView
 
 class AutoLink {
 
-    constructor(tv_auto_link: TextView) {
-        tv_auto_link.linksClickable = true
-        tv_auto_link.autoLinkMask = Linkify.ALL
-        tv_auto_link.movementMethod = LinkMovementMethod.getInstance()
-        tv_auto_link.movementMethod = ArrowKeyMovementMethod.getInstance()
-        Linkify.addLinks(tv_auto_link, Linkify.ALL)
+    constructor(tv_auto_link: TextView?) {
+        tv_auto_link?.linksClickable = true
+        tv_auto_link?.autoLinkMask = Linkify.ALL
+        tv_auto_link?.movementMethod = LinkMovementMethod.getInstance()
+        tv_auto_link?.movementMethod = ArrowKeyMovementMethod.getInstance()
+
+        tv_auto_link?.let {
+            Linkify.addLinks(it, Linkify.ALL)
+        }
+
     }
 
-    constructor(et_auto_link: EditText, addTextChangedListener: String) {
-        et_auto_link.linksClickable = true
-        et_auto_link.autoLinkMask = Linkify.ALL
-        et_auto_link.movementMethod = LinkMovementMethod.getInstance()
-        et_auto_link.movementMethod = ArrowKeyMovementMethod.getInstance()
-        Linkify.addLinks(et_auto_link, Linkify.ALL)
+    constructor(et_auto_link: EditText?, addTextChangedListener: String?) {
+        et_auto_link?.linksClickable = true
+        et_auto_link?.autoLinkMask = Linkify.ALL
+        et_auto_link?.movementMethod = LinkMovementMethod.getInstance()
+        et_auto_link?.movementMethod = ArrowKeyMovementMethod.getInstance()
 
+        et_auto_link?.let {
+            Linkify.addLinks(it, Linkify.ALL)
+        }
         if (addTextChangedListener == "YES") {
-            et_auto_link.addTextChangedListener(object : TextWatcher {
+            et_auto_link?.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,

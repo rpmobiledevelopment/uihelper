@@ -16,10 +16,10 @@ public class OnLoadImage  implements GlobalData {
 
     public OnLoadImage(Activity mActivity, ImageView iv_logo,String images) {
         if (images!=null && images.length()>5) {
-            Glide.with(mActivity).load(images).placeholder(R.drawable.ph_loading_small)
+            Glide.with(iv_logo).load(images).placeholder(R.drawable.ph_loading_small)
                     .error(R.drawable.ph_small).into(iv_logo);
         }else {
-            Glide.with(mActivity).load(R.drawable.ph_small)
+            Glide.with(iv_logo).load(R.drawable.ph_small)
                     .placeholder(R.drawable.ph_small).error(R.drawable.ph_small).into(iv_logo);
         }
     }

@@ -20,19 +20,24 @@ class OnDrawableXmlClrChg {
 
     var TAG: String = OnDrawableXmlClrChg::class.java.simpleName
 
-    constructor(mActivity: Activity, mView: View, mColor: Int, opt: String, width: Int) {
+    constructor(mActivity: Activity?, mView: View?, mColor: Int, opt: String, width: Int) {
         when (opt) {
             "BACKGROUND_XML_COLOR" -> {
-                (mView.background.mutate() as? GradientDrawable)?.let { bg ->
-                    val strokeColor = ContextCompat.getColor(mActivity, mColor)
-                    bg.setStroke(width, strokeColor)
+                (mView?.background?.mutate() as? GradientDrawable)?.let { bg ->
+                    mActivity?.let {
+                        val strokeColor = ContextCompat.getColor(it, mColor)
+                        bg.setStroke(width, strokeColor)
+                    }
                 }
             }
             "BACKGROUND_XML_COLOR_FULL" -> {
-                (mView.background.mutate() as? GradientDrawable)?.let { bg ->
-                    val strokeColor = ContextCompat.getColor(mActivity, mColor)
-                    bg.setColor(strokeColor)          // changes <solid> fill
-                    bg.setStroke(width, strokeColor)  // changes <stroke> width & color
+                (mView?.background?.mutate() as? GradientDrawable)?.let { bg ->
+                    mActivity?.let {
+                        val strokeColor = ContextCompat.getColor(it, mColor)
+                        bg.setColor(strokeColor)          // changes <solid> fill
+                        bg.setStroke(width, strokeColor)  // changes <stroke> width & color
+                    }
+
                 }
             }
 
@@ -113,9 +118,6 @@ class OnDrawableXmlClrChg {
                 "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView, mColor, 25)
             }
         } catch (e: Exception) {
-            // fallback default (gray tint)
-
-//            IsLog(TAG,"==========================${e.message}")
             when (opt) {
                 "CHG_XML_IMAGE_COLOR" -> onImageTint(mActivity, mView as? ImageView)
 
@@ -134,40 +136,47 @@ class OnDrawableXmlClrChg {
         }
     }
 
-    // ----------------------
-    // IMAGE COLOR CHANGE
-    // ----------------------
-    private fun onImageTint(mActivity: Context, imageView: ImageView?, color: Int? = null) {
-        imageView?.setColorFilter(
-            ContextCompat.getColor(mActivity, color ?: R.color.gray_color),
-            PorterDuff.Mode.SRC_IN
-        )
+    private fun onImageTint(mActivity: Context?, imageView: ImageView?, color: Int? = null) {
+        mActivity?.let {
+            imageView?.setColorFilter(
+                ContextCompat.getColor(it, color ?: R.color.gray_color),
+                PorterDuff.Mode.SRC_IN
+            )
+        }
+
     }
 
     // ----------------------
     // TEXT COLOR CHANGE
     // ----------------------
-    private fun onTextTint(mActivity: Context, textView: TextView?, color: Int? = null) {
+    private fun onTextTint(mActivity: Context?, textView: TextView?, color: Int? = null) {
 
 //        IsLog(TAG,"color=============$color")
         val drawable = textView?.background?.mutate()
-        val finalColor = ContextCompat.getColor(mActivity, color ?: R.color.gray_color)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            drawable?.colorFilter = BlendModeColorFilter(finalColor, BlendMode.SRC_IN)
-        } else {
-            @Suppress("DEPRECATION")
-            drawable?.setColorFilter(finalColor, PorterDuff.Mode.SRC_IN)
+        mActivity?.let {
+            val finalColor = ContextCompat.getColor(it, color ?: R.color.gray_color)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                drawable?.colorFilter = BlendModeColorFilter(finalColor, BlendMode.SRC_IN)
+            } else {
+                @Suppress("DEPRECATION")
+                drawable?.setColorFilter(finalColor, PorterDuff.Mode.SRC_IN)
+            }
         }
 
-    }
-    private fun onTextTint(mActivity: Context, textView: TextView?, color: Int?,color1: Int?,) {
 
-        val gradient = textView?.background?.mutate() as GradientDrawable
-        gradient.colors = intArrayOf(
-            ContextCompat.getColor(mActivity, color ?: R.color.gray_color), // start color
-            ContextCompat.getColor(mActivity, color ?: R.color.gray_color)  // end color
-        )
+    }
+    private fun onTextTint(mActivity: Context?, textView: TextView?, color: Int?,color1: Int?,) {
+
+        mActivity?.let {
+            val gradient = textView?.background?.mutate() as GradientDrawable
+            gradient.colors = intArrayOf(
+                ContextCompat.getColor(it, color ?: R.color.gray_color), // start color
+                ContextCompat.getColor(it, color ?: R.color.gray_color)  // end color
+            )
+        }
+
 
     }
     private fun onTextWithAlpha(textView: TextView?, color: Int?,opacity: Int?) {
@@ -176,45 +185,47 @@ class OnDrawableXmlClrChg {
         background.setColor(colorWithAlpha)
     }
 
-    // ----------------------
-    // BACKGROUND COLOR CHANGE
-    // ----------------------
-    fun onBgMutate(mActivity: Context, mView: View) {
-        val color = ContextCompat.getColor(mActivity, R.color.gray_color)
-        mView.background?.mutate()?.let { drawable ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
-            } else {
-                @Suppress("DEPRECATION")
-                drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+    fun onBgMutate(mActivity: Context?, mView: View) {
+        mActivity?.let {
+            val color = ContextCompat.getColor(it, R.color.gray_color)
+            mView.background?.mutate()?.let { drawable ->
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+                } else {
+                    @Suppress("DEPRECATION")
+                    drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+                }
+                mView.background = drawable
             }
-            mView.background = drawable
         }
     }
 
-    fun onBgMutate(mActivity: Context, mView: View, @ColorRes customColor: Int) {
-        val color = ContextCompat.getColor(mActivity, customColor) // 🔹 resolve resource to real color
-        mView.background?.mutate()?.let { drawable ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
-            } else {
-                @Suppress("DEPRECATION")
-                drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+    fun onBgMutate(mActivity: Context?, mView: View?, @ColorRes customColor: Int) {
+        mActivity?.let {
+            val color = ContextCompat.getColor(mActivity, customColor) // 🔹 resolve resource to real color
+            mView?.background?.mutate()?.let { drawable ->
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+                } else {
+                    @Suppress("DEPRECATION")
+                    drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+                }
+                mView.background = drawable
             }
-            mView.background = drawable
         }
+
     }
 
-    fun onBgMutate(mView: View, customColor: Int, opacity: Int) {
+    fun onBgMutate(mView: View?, customColor: Int, opacity: Int) {
         val tintedColor = ColorUtils.setAlphaComponent(customColor, opacity)
-        mView.background?.mutate()?.let { drawable ->
+        mView?.background?.mutate()?.let { drawable ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 drawable.colorFilter = BlendModeColorFilter(tintedColor, BlendMode.SRC_IN)
             } else {
                 @Suppress("DEPRECATION")
                 drawable.setColorFilter(tintedColor, PorterDuff.Mode.SRC_IN)
             }
-            mView.background = drawable
+            mView?.background = drawable
         }
     }
 }

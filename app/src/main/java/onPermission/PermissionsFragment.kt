@@ -130,7 +130,7 @@ class PermissionsFragment : Fragment() {
         }
     }
 
-    fun requestPermissions(opt: String) {
+    fun requestPermissions(opt: String?) {
         when (opt) {
             "DOWNLOAD_ACCESS_", "DOWNLOAD_ACCESS" -> {
                 when {

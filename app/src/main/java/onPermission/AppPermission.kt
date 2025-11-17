@@ -13,31 +13,31 @@ class AppPermission {
 
     constructor()
 
-    constructor(mActivity: Activity?, supportFragmentManager: FragmentManager, permission: String) {
+    constructor(mActivity: Activity?, supportFragmentManager: FragmentManager?, permission: String) {
         // Add PermissionsFragment dynamically if it's not already added
-        if (supportFragmentManager.findFragmentByTag("PermissionsFragment") == null) {
-            supportFragmentManager.beginTransaction()
-                .add(PermissionsFragment(), "PermissionsFragment")
-                .commitNow()
+        if (supportFragmentManager?.findFragmentByTag("PermissionsFragment") == null) {
+            supportFragmentManager?.beginTransaction()
+                ?.add(PermissionsFragment(), "PermissionsFragment")
+                ?.commitNow()
         }
 
         // Request permissions using the fragment
         val fragment =
-            supportFragmentManager.findFragmentByTag("PermissionsFragment") as PermissionsFragment?
+            supportFragmentManager?.findFragmentByTag("PermissionsFragment") as PermissionsFragment?
         fragment?.requestPermissions(mActivity, permission)
     }
 
-    constructor(supportFragmentManager: FragmentManager, permission: String) {
+    constructor(supportFragmentManager: FragmentManager?, permission: String?) {
         // Add PermissionsFragment dynamically if it's not already added
-        if (supportFragmentManager.findFragmentByTag("PermissionsFragment") == null) {
-            supportFragmentManager.beginTransaction()
-                .add(PermissionsFragment(), "PermissionsFragment")
-                .commitNow()
+        if (supportFragmentManager?.findFragmentByTag("PermissionsFragment") == null) {
+            supportFragmentManager?.beginTransaction()
+                ?.add(PermissionsFragment(), "PermissionsFragment")
+                ?.commitNow()
         }
 
         // Request permissions using the fragment
         val fragment =
-            supportFragmentManager.findFragmentByTag("PermissionsFragment") as PermissionsFragment?
+            supportFragmentManager?.findFragmentByTag("PermissionsFragment") as PermissionsFragment?
         if (fragment != null) {
             fragment.requestPermissions(permission)
         }

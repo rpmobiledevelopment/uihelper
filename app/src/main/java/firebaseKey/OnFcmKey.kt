@@ -11,7 +11,7 @@ class OnFcmKey : GlobalData {
     private val TAG: String = OnFcmKey::class.java.simpleName
     private var firebaseToken: String? = "Nextpeak"
 
-    fun getKey(mActivity: Activity): String? {
+    fun getKey(mActivity: Activity?): String? {
         val token = arrayOf<String?>("")
 
         FirebaseMessaging.getInstance().getToken()
@@ -19,13 +19,13 @@ class OnFcmKey : GlobalData {
                 if (task?.isComplete == true) {
                     try {
                         token[0] = task.getResult()
-                        val pref = mActivity.applicationContext.getSharedPreferences(
+                        val pref = mActivity?.applicationContext?.getSharedPreferences(
                             GlobalData.SHARED_PREF,
                             0
                         )
-                        val editor = pref.edit()
-                        editor.putString("regId ", token[0])
-                        editor.apply()
+                        val editor = pref?.edit()
+                        editor?.putString("regId ", token[0])
+                        editor?.apply()
 
                         firebaseToken = try {
                             token[0]
