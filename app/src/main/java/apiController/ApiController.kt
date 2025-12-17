@@ -19,7 +19,7 @@ import retrofit2.Response
 import java.io.IOException
 import java.util.concurrent.Executors
 
-class ApiController(private val mActivity: Activity) : GlobalData {
+class ApiController(private val mActivity: Activity?) : GlobalData {
     private val TAG: String = ApiController::class.java.simpleName
 
     fun doGet(apiName: String?, listener: OnInterface.CallbackListener, apiNamePageRef: String?) {
@@ -96,7 +96,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             try {
                 val response = dbResCall?.execute() // Synchronous execution
                 if (response?.isSuccessful == true) {
-                    mActivity.runOnUiThread {
+                    mActivity?.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
@@ -106,7 +106,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                         }
                     }
                 } else {
-                    mActivity.runOnUiThread {
+                    mActivity?.runOnUiThread {
                         listener.onFetchComplete(response?.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
@@ -115,7 +115,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     IsLog(TAG, "Image deletion failed: " + response?.message())
                 }
             } catch (e: NullPointerException) {
-                mActivity.runOnUiThread {
+                mActivity?.runOnUiThread {
                     listener.onFetchComplete(
                         700,
                         "SERVER_ERROR",
@@ -125,12 +125,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 IsLog(TAG, "IOException: " + e.message)
                 e.printStackTrace()
             } catch (e: IOException) {
-                mActivity.runOnUiThread {
-                    listener.onFetchComplete(
-                        700,
-                        "SERVER_ERROR",
-                        apiNamePageRef
-                    )
+                mActivity?.runOnUiThread {
+                    listener.onFetchComplete(700, "SERVER_ERROR", apiNamePageRef)
                 }
                 IsLog(TAG, "IOException: " + e.message)
                 e.printStackTrace()
@@ -162,7 +158,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             try {
                 val response = dbResCall?.execute() // Synchronous execution
                 if (response?.isSuccessful == true) {
-                    mActivity.runOnUiThread {
+                    mActivity?.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
@@ -172,7 +168,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                         }
                     }
                 } else {
-                    mActivity.runOnUiThread {
+                    mActivity?.runOnUiThread {
                         listener.onFetchComplete(response?.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
@@ -181,7 +177,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     IsLog(TAG, "Image deletion failed: " + response?.message())
                 }
             } catch (e: NullPointerException) {
-                mActivity.runOnUiThread {
+                mActivity?.runOnUiThread {
                     listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
@@ -190,11 +186,8 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 IsLog(TAG, "IOException: " + e.message)
                 e.printStackTrace()
             } catch (e: IOException) {
-                mActivity.runOnUiThread {
-                    listener.onFetchComplete(700,
-                        "SERVER_ERROR",
-                        apiNamePageRef
-                    )
+                mActivity?.runOnUiThread {
+                    listener.onFetchComplete(700, "SERVER_ERROR", apiNamePageRef)
                 }
                 IsLog(TAG, "IOException: " + e.message)
                 e.printStackTrace()
@@ -317,7 +310,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             try {
                 val response = dbResCall?.execute() // Synchronous execution
                 if (response?.isSuccessful == true) {
-                    mActivity.runOnUiThread {
+                    mActivity?.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
@@ -327,7 +320,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                         }
                     }
                 } else {
-                    mActivity.runOnUiThread {
+                    mActivity?.runOnUiThread {
                         listener.onFetchComplete(response?.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
@@ -336,7 +329,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     IsLog(TAG, "Image deletion failed: " + response?.message())
                 }
             } catch (e: NullPointerException) {
-                mActivity.runOnUiThread {
+                mActivity?.runOnUiThread {
                     listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
@@ -345,7 +338,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 IsLog(TAG, "IOException: " + e.message)
                 e.printStackTrace()
             } catch (e: IOException) {
-                mActivity.runOnUiThread {
+                mActivity?.runOnUiThread {
                     listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
@@ -388,7 +381,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
             try {
                 val response = dbResCall?.execute() // Synchronous execution
                 if (response?.isSuccessful == true) {
-                    mActivity.runOnUiThread {
+                    mActivity?.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
@@ -398,7 +391,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                         }
                     }
                 } else {
-                    mActivity.runOnUiThread {
+                    mActivity?.runOnUiThread {
                         listener.onFetchComplete(response?.code(),
                             "SERVER_ERROR",
                             apiNamePageRef
@@ -407,7 +400,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     IsLog(TAG, "Image deletion failed: " + response?.message())
                 }
             } catch (e: NullPointerException) {
-                mActivity.runOnUiThread {
+                mActivity?.runOnUiThread {
                     listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
@@ -416,7 +409,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 IsLog(TAG, "IOException: " + e.message)
                 e.printStackTrace()
             } catch (e: IOException) {
-                mActivity.runOnUiThread {
+                mActivity?.runOnUiThread {
                     listener.onFetchComplete(700,
                         "SERVER_ERROR",
                         apiNamePageRef
@@ -451,7 +444,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                 if (response.isSuccessful) {
                     checkNotNull(response.body)
                     val responseBody = response.body?.string()
-                    mActivity.runOnUiThread {
+                    mActivity?.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code,responseBody, apiNamePageRef)
                             listener.onFetchComplete(response.code,"SUCCESS", apiNamePageRef)
@@ -462,7 +455,7 @@ class ApiController(private val mActivity: Activity) : GlobalData {
                     }
                     IsLog(TAG, "Image deleted successfully====l;jkl;kl;jkl;=====$responseBody")
                 } else {
-                    mActivity.runOnUiThread {
+                    mActivity?.runOnUiThread {
                         try {
                             listener.onFetchProgress(response.code,"", apiNamePageRef)
                             listener.onFetchComplete(response.code,"FAILURE", apiNamePageRef)

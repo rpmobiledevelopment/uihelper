@@ -80,10 +80,10 @@ class OnReturn {
     }
 
     fun text(msg: String?): String {
-        if (msg != null && !msg.isEmpty()) {
-            return msg
+        return if (msg != null && !msg.isEmpty()) {
+            msg
         } else {
-            return ""
+            ""
         }
     }
 

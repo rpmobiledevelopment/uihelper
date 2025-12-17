@@ -63,7 +63,7 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
     private var device_height = 0
     private var device_width = 0
     private var brightness = 0
-    private var media_volume = 0
+    private var media_volume: Int? = 0
     var start: Boolean = false
     var left: Boolean = false
     var right: Boolean = false
@@ -112,12 +112,12 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
         device_width = displayMetrics.widthPixels
         device_height = displayMetrics.heightPixels
 
-        playerView!!.setOnTouchListener(object : OnSwipeTouchListener(this) {
+        playerView?.setOnTouchListener(object : OnSwipeTouchListener(this) {
             override fun onTouch(view: View?, motionEvent: MotionEvent): Boolean {
                 if (!isLock) {
                     when (motionEvent.action) {
                         MotionEvent.ACTION_DOWN -> {
-                            playerView!!.showController()
+                            playerView?.showController()
                             start = true
                             if (motionEvent.x < (device_width / 2)) {
                                 left = true
@@ -172,48 +172,47 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
                                                 }
                                                 val brt_percentage =
                                                     ceil(((new_brightness.toDouble() / 250.0) * 100.0))
-                                                brt_progress_container!!.visibility = View.VISIBLE
-                                                brt_text_container!!.visibility = View.VISIBLE
-                                                brt_progress!!.progress = brt_percentage.toInt()
+                                                brt_progress_container?.visibility = View.VISIBLE
+                                                brt_text_container?.visibility = View.VISIBLE
+                                                brt_progress?.progress = brt_percentage.toInt()
 
                                                 if (brt_percentage < 30) {
-                                                    brt_icon!!.setImageResource(R.drawable.ic_brightness_low)
+                                                    brt_icon?.setImageResource(R.drawable.ic_brightness_low)
                                                 } else if (brt_percentage > 30 && brt_percentage < 80) {
-                                                    brt_icon!!.setImageResource(R.drawable.ic_brightness_moderate)
+                                                    brt_icon?.setImageResource(R.drawable.ic_brightness_moderate)
                                                 } else if (brt_percentage > 80) {
-                                                    brt_icon!!.setImageResource(R.drawable.ic_brightness)
+                                                    brt_icon?.setImageResource(R.drawable.ic_brightness)
                                                 }
 
-                                                brt_text!!.text = " " + brt_percentage.toInt() + "%"
+                                                brt_text?.text = " " + brt_percentage.toInt() + "%"
                                                 Settings.System.putInt(
                                                     contentResolver,
                                                     Settings.System.SCREEN_BRIGHTNESS,
                                                     (new_brightness)
                                                 )
-                                                val layoutParams = window!!.attributes
-                                                layoutParams.screenBrightness = brightness / 255f
-                                                window!!.attributes = layoutParams
+                                                val layoutParams = window?.attributes
+                                                layoutParams?.screenBrightness = brightness / 255f
+                                                window?.attributes = layoutParams
                                             } else if (right) {
-                                                vol_text_container!!.visibility = View.VISIBLE
-                                                media_volume =
-                                                    audioManager!!.getStreamVolume(AudioManager.STREAM_MUSIC)
+                                                vol_text_container?.visibility = View.VISIBLE
+                                                media_volume = audioManager?.getStreamVolume(AudioManager.STREAM_MUSIC)
                                                 val maxVol =
-                                                    audioManager!!.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+                                                    audioManager?.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
                                                 val cal =
-                                                    diffY.toDouble() * (maxVol.toDouble() / ((device_height * 2).toDouble() - brightnessSpeed))
-                                                var newMediaVolume = media_volume - cal.toInt()
-                                                if (newMediaVolume > maxVol) {
-                                                    newMediaVolume = maxVol
+                                                    diffY.toDouble() * ((maxVol ?: 0).toDouble() / ((device_height * 2).toDouble() - brightnessSpeed))
+                                                var newMediaVolume = (media_volume?:0) - cal.toInt()
+                                                if (newMediaVolume > (maxVol ?: 0)) {
+                                                    newMediaVolume = (maxVol ?: 0)
                                                 } else if (newMediaVolume < 1) {
                                                     newMediaVolume = 0
                                                 }
-                                                audioManager!!.setStreamVolume(
+                                                audioManager?.setStreamVolume(
                                                     AudioManager.STREAM_MUSIC,
                                                     newMediaVolume,
                                                     AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE
                                                 )
                                                 val volPer =
-                                                    ceil(((newMediaVolume.toDouble() / maxVol.toDouble()) * 100.0))
+                                                    ceil(((newMediaVolume.toDouble() / (maxVol ?: 0).toDouble()) * 100.0))
                                                 vol_text?.text = " " + volPer.toInt() + "%"
                                                 if (volPer < 1) {
                                                     vol_icon?.setImageResource(R.drawable.ic_volume_off)
@@ -246,13 +245,13 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
                         MotionEvent.ACTION_UP -> {
                             swipe_move = false
                             start = false
-                            vol_progress_container!!.visibility = View.GONE
-                            brt_progress_container!!.visibility = View.GONE
-                            vol_text_container!!.visibility = View.GONE
-                            brt_text_container!!.visibility = View.GONE
+                            vol_progress_container?.visibility = View.GONE
+                            brt_progress_container?.visibility = View.GONE
+                            vol_text_container?.visibility = View.GONE
+                            brt_text_container?.visibility = View.GONE
                         }
                     }
-                    scaleGestureDetector!!.onTouchEvent(motionEvent)
+                    scaleGestureDetector?.onTouchEvent(motionEvent)
                 }
                 return super.onTouch(view, motionEvent)
             }
@@ -261,11 +260,11 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
                 super.onDoubleTouch()
                 if (double_tap) {
                     player?.playWhenReady = true
-                    double_tap_playpause!!.visibility = View.GONE
+                    double_tap_playpause?.visibility = View.GONE
                     double_tap = false
                 } else {
                     player?.playWhenReady = false
-                    double_tap_playpause!!.visibility = View.VISIBLE
+                    double_tap_playpause?.visibility = View.VISIBLE
                     double_tap = true
                 }
             }
@@ -273,10 +272,10 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
             public override fun onSingleTouch() {
                 super.onSingleTouch()
                 if (singleTap) {
-                    playerView!!.showController()
+                    playerView?.showController()
                     singleTap = false
                 } else {
-                    playerView!!.hideController()
+                    playerView?.hideController()
                     singleTap = true
                 }
                 if (double_tap_playpause?.isVisible == true) {
@@ -319,21 +318,21 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
                 GlobalData.TAG_VIDEO_PATH
             ) != ""
         ) {
-            title!!.text = SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH)
+            title?.text = SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH)
         } else {
-            title!!.text = "Video Player"
+            title?.text = "Video Player"
         }
 
-        videoBack!!.setOnClickListener(this)
-        lock!!.setOnClickListener(this)
-        unlock!!.setOnClickListener(this)
-        scaling!!.setOnClickListener(this)
+        videoBack?.setOnClickListener(this)
+        lock?.setOnClickListener(this)
+        unlock?.setOnClickListener(this)
+        scaling?.setOnClickListener(this)
     }
 
     private fun playVideo() {
         player = ExoPlayer.Builder(this).build()
-        playerView!!.player = player
-        playerView!!.keepScreenOn = true
+        playerView?.player = player
+        playerView?.keepScreenOn = true
 
         val httpDataSourceFactory = DefaultHttpDataSource.Factory()
             .setUserAgent("app")
@@ -348,9 +347,9 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
         val mediaSource: MediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(mediaItem)
 
-        player!!.setMediaSource(mediaSource)
-        player!!.prepare()
-        player!!.playWhenReady = true
+        player?.setMediaSource(mediaSource)
+        player?.prepare()
+        player?.playWhenReady = true
     }
 
     @Deprecated("Deprecated in Java")
@@ -359,8 +358,8 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
         if (eqContainer?.isGone == true) {
             super.onBackPressed()
         } else {
-            if (fragment!!.isVisible && eqContainer?.isVisible == true) {
-                eqContainer!!.visibility = View.GONE
+            if (fragment?.isVisible == true && eqContainer?.isVisible == true) {
+                eqContainer?.visibility = View.GONE
             } else {
                 player?.release()
                 super.onBackPressed()
@@ -451,16 +450,16 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
         isCrossChecked = isInPictureInPictureMode
         if (isInPictureInPictureMode) {
-            playerView!!.hideController()
+            playerView?.hideController()
         } else {
-            playerView!!.showController()
+            playerView?.showController()
         }
     }
 
     override fun onStop() {
         super.onStop()
         if (isCrossChecked) {
-            player!!.release()
+            player?.release()
             finish()
         }
     }
@@ -488,19 +487,19 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
             zoomLayout?.scaleX = scale_factor
             zoomLayout?.scaleY = scale_factor
             val percentage = (scale_factor * 100).toInt()
-            zoom_perc!!.text = " $percentage%"
-            zoomContainer!!.visibility = View.VISIBLE
+            zoom_perc?.text = " $percentage%"
+            zoomContainer?.visibility = View.VISIBLE
 
-            brt_text_container!!.visibility = View.GONE
-            vol_text_container!!.visibility = View.GONE
-            brt_progress_container!!.visibility = View.GONE
-            vol_progress_container!!.visibility = View.GONE
+            brt_text_container?.visibility = View.GONE
+            vol_text_container?.visibility = View.GONE
+            brt_progress_container?.visibility = View.GONE
+            vol_progress_container?.visibility = View.GONE
 
             return true
         }
 
         override fun onScaleEnd(detector: ScaleGestureDetector) {
-            zoomContainer!!.visibility = View.GONE
+            zoomContainer?.visibility = View.GONE
             super.onScaleEnd(detector)
         }
     }

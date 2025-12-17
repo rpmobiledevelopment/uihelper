@@ -8,8 +8,7 @@ import javax.crypto.spec.SecretKeySpec
 object EncryptionUtil {
     private val TAG: String = EncryptionUtil::class.java.getSimpleName()
     private const val ALGORITHM = "AES/CBC/PKCS5Padding"
-    private const val SECRET_KEY =
-        "7r7gQf25gDkDwPawFqA4EM+uU7AcVN77agrLRftErLA=" // 256-bit key (Base64-encoded)
+    private const val SECRET_KEY = "7r7gQf25gDkDwPawFqA4EM+uU7AcVN77agrLRftErLA=" // 256-bit key (Base64-encoded)
     private const val IV = "wqgipUY5t+vqJnTjdNu0NQ==" // Initialization vector (Base64-encoded)
 
     // Encrypt the username / password

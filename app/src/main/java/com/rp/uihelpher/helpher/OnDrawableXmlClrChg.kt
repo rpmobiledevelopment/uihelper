@@ -52,27 +52,41 @@ class OnDrawableXmlClrChg {
             "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView, mColor, 25)
         }
     }
-    constructor(mActivity: Activity, mView: View, mColor: Int,borderColor: Int, opt: String, width: Int) {
+    constructor(mActivity: Activity?, mView: View?, mColor: Int?,borderColor: Int?, opt: String?, width: Int?) {
         when (opt) {
             "BACKGROUND_XML_COLOR" -> {
-                (mView.background.mutate() as? GradientDrawable)?.let { bg ->
-                    val strokeColor = ContextCompat.getColor(mActivity, mColor)
-                    bg.setStroke(width, strokeColor)
+                (mView?.background?.mutate() as? GradientDrawable)?.let { bg ->
+                    mActivity?.let { activity ->
+                        if (mColor != null && width != null) {
+                            bg.setStroke(width, ContextCompat.getColor(activity, mColor))
+                        }
+                    }
                 }
             }
             "BACKGROUND_XML_COLOR_FULL_TWO_COLOR" -> {
-                (mView.background.mutate() as? GradientDrawable)?.let { bg ->
-                    val strokeColor = ContextCompat.getColor(mActivity, mColor)
-                    val strokeBorderColor = ContextCompat.getColor(mActivity, borderColor)
-                    bg.setColor(strokeColor)          // changes <solid> fill
-                    bg.setStroke(width, strokeBorderColor)  // changes <stroke> width & color
+                (mView?.background?.mutate() as? GradientDrawable)?.let { bg ->
+
+                    mActivity?.let { activity ->
+                        if (mColor!=null && borderColor!=null && width!=null) {
+                            val strokeColor = ContextCompat.getColor(activity, mColor)
+                            val strokeBorderColor = ContextCompat.getColor(activity, borderColor)
+                            bg.setColor(strokeColor)          // changes <solid> fill
+                            bg.setStroke(width, strokeBorderColor)  // changes <stroke> width & color
+                        }
+                    }
+
                 }
             }
             "BACKGROUND_XML_COLOR_FULL" -> {
-                (mView.background.mutate() as? GradientDrawable)?.let { bg ->
-                    val strokeColor = ContextCompat.getColor(mActivity, mColor)
-                    bg.setColor(strokeColor)          // changes <solid> fill
-                    bg.setStroke(width, strokeColor)  // changes <stroke> width & color
+                (mView?.background?.mutate() as? GradientDrawable)?.let { bg ->
+                    mActivity?.let { activity ->
+                        if (mColor != null && width != null) {
+                            val strokeColor = ContextCompat.getColor(activity, mColor)
+                            bg.setColor(strokeColor)          // changes <solid> fill
+                            bg.setStroke(width, strokeColor)  // changes <stroke> width & color
+                        }
+                    }
+
                 }
             }
 
@@ -87,7 +101,7 @@ class OnDrawableXmlClrChg {
             "BACKGROUND_XML_FULL_COLOR_ALPHA" -> onBgMutate(mView, mColor, 25)
         }
     }
-    constructor(mActivity: Activity, mView: View, mColor: Int, alpha: Int, opt: String) {
+    constructor(mActivity: Activity?, mView: View?, mColor: Int?, alpha: Int?, opt: String?) {
         when (opt) {
             "CHG_XML_IMAGE_COLOR" -> onImageTint(mActivity, mView as? ImageView, mColor)
 
@@ -200,33 +214,38 @@ class OnDrawableXmlClrChg {
         }
     }
 
-    fun onBgMutate(mActivity: Context?, mView: View?, @ColorRes customColor: Int) {
+    fun onBgMutate(mActivity: Context?, mView: View?, @ColorRes customColor: Int?) {
         mActivity?.let {
-            val color = ContextCompat.getColor(mActivity, customColor) // 🔹 resolve resource to real color
-            mView?.background?.mutate()?.let { drawable ->
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
-                } else {
-                    @Suppress("DEPRECATION")
-                    drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+            if (customColor!=null) {
+                val color = ContextCompat.getColor(mActivity, customColor) // 🔹 resolve resource to real color
+                mView?.background?.mutate()?.let { drawable ->
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+                    } else {
+                        @Suppress("DEPRECATION")
+                        drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+                    }
+                    mView.background = drawable
                 }
-                mView.background = drawable
             }
         }
 
     }
 
-    fun onBgMutate(mView: View?, customColor: Int, opacity: Int) {
-        val tintedColor = ColorUtils.setAlphaComponent(customColor, opacity)
-        mView?.background?.mutate()?.let { drawable ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                drawable.colorFilter = BlendModeColorFilter(tintedColor, BlendMode.SRC_IN)
-            } else {
-                @Suppress("DEPRECATION")
-                drawable.setColorFilter(tintedColor, PorterDuff.Mode.SRC_IN)
+    fun onBgMutate(mView: View?, customColor: Int?, opacity: Int?) {
+        if (customColor!=null && opacity!=null) {
+            val tintedColor = ColorUtils.setAlphaComponent(customColor, opacity)
+            mView?.background?.mutate()?.let { drawable ->
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    drawable.colorFilter = BlendModeColorFilter(tintedColor, BlendMode.SRC_IN)
+                } else {
+                    @Suppress("DEPRECATION")
+                    drawable.setColorFilter(tintedColor, PorterDuff.Mode.SRC_IN)
+                }
+                mView?.background = drawable
             }
-            mView?.background = drawable
         }
+
     }
 }
 

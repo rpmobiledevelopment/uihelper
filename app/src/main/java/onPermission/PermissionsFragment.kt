@@ -37,29 +37,7 @@ class PermissionsFragment : Fragment() {
     fun requestPermissions(activity: Activity?, opt: String) {
         when (opt) {
             "DOWNLOAD_ACCESS_", "DOWNLOAD_ACCESS" -> {
-                when {
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
-                        multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
-                    }
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
-                        multiplePermissionLauncher.launch(
-                            arrayOf(
-                                permission.WRITE_EXTERNAL_STORAGE,
-                                permission.READ_EXTERNAL_STORAGE,
-                                permission.CAMERA
-                            )
-                        )
-                    }
-                    else -> {
-                        multiplePermissionLauncher.launch(
-                            arrayOf(
-                                permission.WRITE_EXTERNAL_STORAGE,
-                                permission.READ_EXTERNAL_STORAGE,
-                                permission.CAMERA
-                            )
-                        )
-                    }
-                }
+                multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
             }
 
             "NOTIFICATION" -> {
@@ -69,63 +47,19 @@ class PermissionsFragment : Fragment() {
             }
 
             "RECORD_AUDIO" -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    multiplePermissionLauncher.launch(arrayOf(permission.RECORD_AUDIO))
-                } else {
-                    multiplePermissionLauncher.launch(
-                        arrayOf(
-                            permission.RECORD_AUDIO,
-                            permission.WRITE_EXTERNAL_STORAGE,
-                            permission.READ_EXTERNAL_STORAGE
-                        )
-                    )
-                }
+                multiplePermissionLauncher.launch(arrayOf(permission.RECORD_AUDIO))
             }
 
             "LOCATION" -> {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), permission.ACCESS_FINE_LOCATION)) {
                     buildAlertMessageNoGps(activity)
                 } else {
-                    multiplePermissionLauncher.launch(
-                        arrayOf(
-                            permission.ACCESS_FINE_LOCATION,
-                            permission.ACCESS_COARSE_LOCATION
-                        )
-                    )
+                    multiplePermissionLauncher.launch(arrayOf(permission.ACCESS_FINE_LOCATION, permission.ACCESS_COARSE_LOCATION))
                 }
             }
 
             else -> {
-                when {
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
-                        multiplePermissionLauncher.launch(
-                            arrayOf(
-                                permission.READ_MEDIA_IMAGES,
-                                permission.READ_MEDIA_AUDIO,
-                                permission.READ_MEDIA_VIDEO,
-                                permission.CAMERA
-                            )
-                        )
-                    }
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
-                        multiplePermissionLauncher.launch(
-                            arrayOf(
-                                permission.WRITE_EXTERNAL_STORAGE,
-                                permission.READ_EXTERNAL_STORAGE,
-                                permission.CAMERA
-                            )
-                        )
-                    }
-                    else -> {
-                        multiplePermissionLauncher.launch(
-                            arrayOf(
-                                permission.WRITE_EXTERNAL_STORAGE,
-                                permission.READ_EXTERNAL_STORAGE,
-                                permission.CAMERA
-                            )
-                        )
-                    }
-                }
+                multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
             }
         }
     }
@@ -133,29 +67,7 @@ class PermissionsFragment : Fragment() {
     fun requestPermissions(opt: String?) {
         when (opt) {
             "DOWNLOAD_ACCESS_", "DOWNLOAD_ACCESS" -> {
-                when {
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
-                        multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
-                    }
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
-                        multiplePermissionLauncher.launch(
-                            arrayOf(
-                                permission.WRITE_EXTERNAL_STORAGE,
-                                permission.READ_EXTERNAL_STORAGE,
-                                permission.CAMERA
-                            )
-                        )
-                    }
-                    else -> {
-                        multiplePermissionLauncher.launch(
-                            arrayOf(
-                                permission.WRITE_EXTERNAL_STORAGE,
-                                permission.READ_EXTERNAL_STORAGE,
-                                permission.CAMERA
-                            )
-                        )
-                    }
-                }
+                multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
             }
 
             "NOTIFICATION" -> {
@@ -165,50 +77,11 @@ class PermissionsFragment : Fragment() {
             }
 
             "RECORD_AUDIO" -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    multiplePermissionLauncher.launch(arrayOf(permission.RECORD_AUDIO))
-                } else {
-                    multiplePermissionLauncher.launch(
-                        arrayOf(
-                            permission.RECORD_AUDIO,
-                            permission.WRITE_EXTERNAL_STORAGE,
-                            permission.READ_EXTERNAL_STORAGE
-                        )
-                    )
-                }
+                multiplePermissionLauncher.launch(arrayOf(permission.RECORD_AUDIO))
             }
 
             else -> {
-                when {
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
-                        multiplePermissionLauncher.launch(
-                            arrayOf(
-                                permission.READ_MEDIA_IMAGES,
-                                permission.READ_MEDIA_AUDIO,
-                                permission.READ_MEDIA_VIDEO,
-                                permission.CAMERA
-                            )
-                        )
-                    }
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
-                        multiplePermissionLauncher.launch(
-                            arrayOf(
-                                permission.WRITE_EXTERNAL_STORAGE,
-                                permission.READ_EXTERNAL_STORAGE,
-                                permission.CAMERA
-                            )
-                        )
-                    }
-                    else -> {
-                        multiplePermissionLauncher.launch(
-                            arrayOf(
-                                permission.WRITE_EXTERNAL_STORAGE,
-                                permission.READ_EXTERNAL_STORAGE,
-                                permission.CAMERA
-                            )
-                        )
-                    }
-                }
+                multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
             }
         }
     }
