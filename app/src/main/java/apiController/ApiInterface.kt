@@ -16,8 +16,7 @@ interface ApiInterface {
     @GET("{ATNDB}")
     fun doGetApi(
         @Header("Authorization") headers: String?,@Header("Accept-Language") language: String?,
-        @Path("ATNDB", encoded = true) apiName: String?
-    ): Call<Void?>?
+        @Path("ATNDB", encoded = true) apiName: String?): Call<Void?>?
 
     @Headers("Accept: application/json")
     @FormUrlEncoded
@@ -30,16 +29,14 @@ interface ApiInterface {
     @POST("{ATNDB}")
     fun doPostApi(
         @Header("Authorization") headers: String?,@Header("Accept-Language") language: String?,
-        @Body body: RequestBody?, @Path("ATNDB", encoded = true) apiName: String?
-    ): Call<Void?>?
+        @Body body: RequestBody?, @Path("ATNDB", encoded = true) apiName: String?): Call<Void?>?
 
     @Headers("Accept: application/json", "Content-Type: application/json")
     @POST("{ATNDB}")
     suspend fun doPostApi(
         @Header("Authorization") headers: String,@Header("Accept-Language") language: String?,
         @Body body: RequestBody,
-        @Path("ATNDB", encoded = true) apiName: String
-    ): retrofit2.Response<ResponseBody>
+        @Path("ATNDB", encoded = true) apiName: String): retrofit2.Response<ResponseBody>
 
     @Headers("Accept: application/json", "Content-Type: application/json")
     @POST("{ATNDB}")
@@ -47,6 +44,5 @@ interface ApiInterface {
         @Header("Authorization") headers: String,@Header("Accept-Language") language: String?,
         @Body body: RequestBody,
         @Path("ATNDB", encoded = true) apiName: String,
-        paiRefName: String
-    ): retrofit2.Response<String>
+        paiRefName: String): retrofit2.Response<String>
 }

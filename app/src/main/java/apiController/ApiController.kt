@@ -31,34 +31,37 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         dbResCall?.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
-                try {
-                    if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                        listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                        listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
-                    } else {
-                        listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                mActivity?.runOnUiThread {
+                    try {
+                        if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                        } else {
+                            listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                        }
+                    } catch (e : SocketTimeoutException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e : NumberFormatException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e: NullPointerException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e: Exception) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
                     }
-                } catch (e : SocketTimeoutException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e : NumberFormatException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e: NullPointerException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e: Exception) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
                 }
-
             }
 
             override fun onFailure(call: Call<Void?>, t: Throwable) {
                 IsLog(TAG, "Throwable: " + t.message)
-                listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                mActivity?.runOnUiThread {
+                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                }
             }
         })
     }
 
     fun doPostMethod(listener: OnInterface.CallbackListener,
-        passParaMap: MutableMap<String?, Any?>?, apiName: String?, apiNamePageRef: String?) {
+                     passParaMap: MutableMap<String?, Any?>?, apiName: String?, apiNamePageRef: String?) {
 
         val dbResCall = returnApiCommon(mActivity).doPostApi(
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
@@ -68,21 +71,23 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         dbResCall?.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
-                try {
-                    if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                        listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                        listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
-                    } else {
-                        listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                mActivity?.runOnUiThread {
+                    try {
+                        if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                        } else {
+                            listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                        }
+                    } catch (e : SocketTimeoutException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e : NumberFormatException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e: NullPointerException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e: Exception) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
                     }
-                } catch (e : SocketTimeoutException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e : NumberFormatException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e: NullPointerException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e: Exception) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
                 }
 
             }
@@ -95,7 +100,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
     }
 
     fun inPostBackground(listener: OnInterface.CallbackListener, passParaMap: MutableMap<String?, Any?>,
-        apiName: String?, apiNamePageRef: String?) {
+                         apiName: String?, apiNamePageRef: String?) {
         val dbResCall = returnApiLocalCommon(mActivity).doPostApi(
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
             SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE),passParaMap, apiName
@@ -103,13 +108,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
         IsLog(TAG, "passParaMap=====passParaMap=====$passParaMap")
-        IsLog(
-            TAG,
-            "passParaMap=====TAG_ACC_KEY=====" + SharedPre.getDef(
-                mActivity,
-                GlobalData.TAG_BEAR_TOKEN
-            )
-        )
+        IsLog(TAG, "passParaMap=====TAG_ACC_KEY=====" + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN))
 
         val executorService = Executors.newSingleThreadExecutor()
 
@@ -128,10 +127,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                     }
                 } else {
                     mActivity?.runOnUiThread {
-                        listener.onFetchComplete(response?.code(),
-                            "SERVER_ERROR",
-                            apiNamePageRef
-                        )
+                        listener.onFetchComplete(response?.code(), "SERVER_ERROR", apiNamePageRef)
                     }
                     IsLog(TAG, "Image deletion failed: " + response?.message())
                 }
@@ -157,7 +153,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
     }
 
     fun inPostDownload(listener: OnInterface.CallbackListener, passParaMap: MutableMap<String?, Any?>,
-        apiName: String?, apiNamePageRef: String?) {
+                       apiName: String?, apiNamePageRef: String?) {
         val dbResCall = returnApiLocalCommon(mActivity).doPostApi(
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
             SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE), passParaMap, apiName
@@ -165,13 +161,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
         IsLog(TAG, "passParaMap=====passParaMap=====$passParaMap")
-        IsLog(
-            TAG,
-            "passParaMap=====TAG_ACC_KEY=====" + SharedPre.getDef(
-                mActivity,
-                GlobalData.TAG_BEAR_TOKEN
-            )
-        )
+        IsLog(TAG, "passParaMap=====TAG_ACC_KEY=====" + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN))
         //
         val executorService = Executors.newSingleThreadExecutor()
 
@@ -219,7 +209,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
     // Body
     fun doPostMethod(listener: OnInterface.CallbackListener,
-        passParaMap: JSONObject, apiName: String?, apiNamePageRef: String?) {
+                     passParaMap: JSONObject, apiName: String?, apiNamePageRef: String?) {
 
         val requestBody = passParaMap
             .toString()
@@ -235,21 +225,23 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
                 IsLog(TAG,"response=================${response.code()}")
                 IsLog(TAG,"response========body=========${response.body()}")
-                try {
-                    if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                        listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                        listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
-                    } else {
-                        listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                mActivity?.runOnUiThread {
+                    try {
+                        if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                        } else {
+                            listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                        }
+                    } catch (e : SocketTimeoutException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e : NumberFormatException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e: NullPointerException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e: Exception) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
                     }
-                } catch (e : SocketTimeoutException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e : NumberFormatException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e: NullPointerException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e: Exception) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
                 }
             }
 
@@ -264,7 +256,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
     // Body
     fun doPostMethod(listener: OnInterface.CallbackListener,
-        passParaMap: JSONObject, apiName: String?, apiNamePageRef: String?, previousCancelled: String?) {
+                     passParaMap: JSONObject, apiName: String?, apiNamePageRef: String?, previousCancelled: String?) {
 
         val requestBody = passParaMap
             .toString()
@@ -284,23 +276,25 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         currentCall?.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
-                IsLog(TAG,"response=================${response.code()}")
-                IsLog(TAG,"response========body=========${response.body()}")
-                try {
-                    if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                        listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                        listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
-                    } else {
-                        listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+//                IsLog(TAG,"response=================${response.code()}")
+//                IsLog(TAG,"response========body=========${response.body()}")
+                mActivity?.runOnUiThread {
+                    try {
+                        if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                        } else {
+                            listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                        }
+                    } catch (e : SocketTimeoutException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e : NumberFormatException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e: NullPointerException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e: Exception) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
                     }
-                } catch (e : SocketTimeoutException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e : NumberFormatException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e: NullPointerException) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
-                } catch (e: Exception) {
-                    listener.onFetchComplete(700,"ERROR", apiNamePageRef)
                 }
             }
 
@@ -324,7 +318,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
     }
 
     fun inPostBackground(listener: OnInterface.CallbackListener, passParaMap: JSONObject,
-        apiName: String?, apiNamePageRef: String?) {
+                         apiName: String?, apiNamePageRef: String?) {
 
         val requestBody = passParaMap
             .toString()
@@ -337,13 +331,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
         IsLog(TAG, "passParaMap=====passParaMap=====$passParaMap")
-        IsLog(
-            TAG,
-            "passParaMap=====TAG_ACC_KEY=====" + SharedPre.getDef(
-                mActivity,
-                GlobalData.TAG_BEAR_TOKEN
-            )
-        )
+        IsLog(TAG, "passParaMap=====TAG_ACC_KEY=====" + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN))
 
         val executorService = Executors.newSingleThreadExecutor()
 
@@ -393,7 +381,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
     }
 
     fun inPostDownload(listener: OnInterface.CallbackListener, passParaMap: JSONObject,
-        apiName: String?, apiNamePageRef: String?) {
+                       apiName: String?, apiNamePageRef: String?) {
 
 
         val requestBody = passParaMap
@@ -408,13 +396,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         IsLog(TAG, "dbResCall==========" + dbResCall?.request()?.url)
         IsLog(TAG, "passParaMap=====passParaMap=====$passParaMap")
-        IsLog(
-            TAG,
-            "passParaMap=====TAG_ACC_KEY=====" + SharedPre.getDef(
-                mActivity,
-                GlobalData.TAG_BEAR_TOKEN
-            )
-        )
+        IsLog(TAG, "passParaMap=====TAG_ACC_KEY=====" + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN))
         //
         val executorService = Executors.newSingleThreadExecutor()
 
@@ -465,7 +447,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
 
     fun inImgUpload(listener: OnInterface.CallbackListener, builder: MultipartBody.Builder,
-        apiName: String?, apiNamePageRef: String?) {
+                    apiName: String?, apiNamePageRef: String?) {
         val client = ApiClients.getUnsafeOkHttpClient().build()
         val executorService = Executors.newSingleThreadExecutor()
 
