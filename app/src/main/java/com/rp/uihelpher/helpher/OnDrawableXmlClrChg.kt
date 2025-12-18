@@ -117,7 +117,7 @@ class OnDrawableXmlClrChg {
         }
     }
 
-    constructor(mActivity: Context, mView: View, mColor: Int, opt: String) {
+    constructor(mActivity: Context?, mView: View?, mColor: Int?, opt: String?) {
         try {
             when (opt) {
                 "CHG_XML_IMAGE_COLOR" -> onImageTint(mActivity, mView as? ImageView, mColor)
@@ -142,7 +142,7 @@ class OnDrawableXmlClrChg {
         }
     }
 
-    constructor(mActivity: Context, mView: View, mColor: Int) {
+    constructor(mActivity: Context?, mView: View?, mColor: Int?) {
         try {
             onBgMutate(mActivity, mView, mColor)
         } catch (_: Exception) {
@@ -199,17 +199,17 @@ class OnDrawableXmlClrChg {
         background.setColor(colorWithAlpha)
     }
 
-    fun onBgMutate(mActivity: Context?, mView: View) {
+    fun onBgMutate(mActivity: Context?, mView: View?) {
         mActivity?.let {
             val color = ContextCompat.getColor(it, R.color.gray_color)
-            mView.background?.mutate()?.let { drawable ->
+            mView?.background?.mutate()?.let { drawable ->
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
                 } else {
                     @Suppress("DEPRECATION")
                     drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN)
                 }
-                mView.background = drawable
+                mView?.background = drawable
             }
         }
     }
