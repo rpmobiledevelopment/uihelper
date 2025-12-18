@@ -65,15 +65,13 @@ public class ApiClients {
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.readTimeout(60, TimeUnit.SECONDS);
-            builder.connectTimeout(60, TimeUnit.SECONDS);
+            builder.readTimeout(120, TimeUnit.SECONDS);
+            builder.connectTimeout(120, TimeUnit.SECONDS);
+            builder.writeTimeout(120, TimeUnit.SECONDS);
+            builder.retryOnConnectionFailure(true);
+
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
-            builder.hostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
+            builder.hostnameVerifier((hostname, session) -> true);
             return builder;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -104,8 +102,10 @@ public class ApiClients {
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.addInterceptor(responseInterceptor);
-            builder.readTimeout(60, TimeUnit.SECONDS);
-            builder.connectTimeout(60, TimeUnit.SECONDS);
+            builder.readTimeout(120, TimeUnit.SECONDS);
+            builder.connectTimeout(120, TimeUnit.SECONDS);
+            builder.writeTimeout(120, TimeUnit.SECONDS);
+            builder.retryOnConnectionFailure(true);
             builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
             builder.hostnameVerifier((hostname, session) -> true);
             return builder;

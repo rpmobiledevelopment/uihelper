@@ -56,8 +56,6 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         dbResCall?.enqueue(object : Callback<Void?> {
             override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
-                IsLog(TAG,"response=================${response.code()}")
-                IsLog(TAG,"response========body=========${response.body()}")
                 if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
                     listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
                     listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
