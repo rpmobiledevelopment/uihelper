@@ -8,6 +8,7 @@ import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.HeaderMap
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -22,6 +23,12 @@ interface ApiInterface {
     @FormUrlEncoded
     @POST("{ATNDB}")
     fun doPostApi(@Header("Authorization") headers: String?,@Header("Accept-Language") language: String?,
+                  @FieldMap fieldMap: MutableMap<String?, Any?>?,
+                  @Path("ATNDB", encoded = true) apiName: String?): Call<Void?>?
+    @Headers("Accept: application/json")
+    @FormUrlEncoded
+    @POST("{ATNDB}")
+    fun doPostApi(@HeaderMap headerMap: MutableMap<String?, Any?>?,
                   @FieldMap fieldMap: MutableMap<String?, Any?>?,
                   @Path("ATNDB", encoded = true) apiName: String?): Call<Void?>?
 

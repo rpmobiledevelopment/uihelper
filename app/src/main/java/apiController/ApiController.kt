@@ -99,6 +99,44 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
         })
     }
 
+    fun doPostMethod(listener: OnInterface.CallbackListener,headerParaMap: MutableMap<String?, Any?>?,
+                     passParaMap: MutableMap<String?, Any?>?, apiName: String?, apiNamePageRef: String?) {
+
+        val dbResCall = returnApiCommon(mActivity).doPostApi(
+            headerParaMap,passParaMap, apiName)
+
+        IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
+
+        dbResCall?.enqueue(object : Callback<Void?> {
+            override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
+                mActivity?.runOnUiThread {
+                    try {
+                        if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                        } else {
+                            listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                        }
+                    } catch (e : SocketTimeoutException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e : NumberFormatException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e: NullPointerException) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    } catch (e: Exception) {
+                        listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<Void?>, t: Throwable) {
+                IsLog(TAG, "Throwable: " + t.message)
+                listener.onFetchComplete(700,"ERROR", apiNamePageRef)
+            }
+        })
+    }
+
     fun inPostBackground(listener: OnInterface.CallbackListener, passParaMap: MutableMap<String?, Any?>,
                          apiName: String?, apiNamePageRef: String?) {
         val dbResCall = returnApiLocalCommon(mActivity).doPostApi(
