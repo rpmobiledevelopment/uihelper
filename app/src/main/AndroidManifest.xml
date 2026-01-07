@@ -12,9 +12,9 @@
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:label="@string/app_name"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/Theme.UIHelpher">
         <activity
-            android:theme="@style/Theme.UIHelpher"
             android:name="video.VideoPlayerActivity"
             android:configChanges="orientation|screenSize|layoutDirection|screenLayout|smallestScreenSize|keyboardHidden|uiMode"
             android:excludeFromRecents="true"
