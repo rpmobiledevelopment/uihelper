@@ -44,7 +44,6 @@ import kotlin.math.max
 import kotlin.math.min
 
 class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalData {
-
     private val TAG: String = VideoPlayerActivity::class.java.simpleName
     var playerView: PlayerView? = null
     var player: ExoPlayer? = null
