@@ -1,4 +1,4 @@
-package com.rp.uihelpher.appStatus
+package com.ui.helper.appStatus
 
 import android.content.Context
 import android.content.pm.PackageManager

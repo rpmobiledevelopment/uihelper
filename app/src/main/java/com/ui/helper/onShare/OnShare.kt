@@ -1,4 +1,4 @@
-package com.rp.uihelpher.onShare
+package com.ui.helper.onShare
 
 import android.app.Activity
 import android.content.ClipData
@@ -13,8 +13,8 @@ import android.os.Parcelable
 import android.text.Html
 import android.widget.Toast
 import androidx.core.content.FileProvider
-import com.rp.uihelpher.R
-import com.rp.uihelpher.log.IsLog
+import com.ui.helper.R
+import com.ui.helper.log.IsLog
 import onInteface.OnInterface
 import java.io.File
 

@@ -3,9 +3,9 @@ package firebaseKey
 import android.app.Activity
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
-import com.rp.uihelpher.helpher.GlobalData
-import com.rp.uihelpher.localStorage.SharedPre
-import com.rp.uihelpher.log.IsLog
+import com.ui.helper.constant.GlobalData
+import com.ui.helper.localStorage.SharedPre
+import com.ui.helper.log.IsLog
 
 class OnFcmKey : GlobalData {
     private val TAG: String = OnFcmKey::class.java.simpleName

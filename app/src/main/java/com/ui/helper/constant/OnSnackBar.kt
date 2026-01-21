@@ -1,4 +1,4 @@
-package com.rp.uihelpher.helpher
+package com.ui.helper.constant
 
 import android.app.Activity
 import android.graphics.Color
@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.google.android.material.R
 import com.google.android.material.snackbar.Snackbar
-import com.rp.uihelpher.log.IsLog
+import com.ui.helper.log.IsLog
 
 class OnSnackBar {
 
@@ -66,11 +66,11 @@ class OnSnackBar {
                         .setAction("") { view1: View? -> }
                     snackBar.setActionTextColor(Color.GREEN)
                     snackBar.setBackgroundTint(
-                        ContextCompat.getColor(activity, com.rp.uihelpher.R.color.snack_bar_color))
+                        ContextCompat.getColor(activity, com.ui.helper.R.color.snack_bar_color))
                     val sbView = snackBar.getView()
                     val textView = sbView.findViewById<TextView>(R.id.snackbar_text)
                     textView.setBackgroundColor(
-                        ContextCompat.getColor(activity, com.rp.uihelpher.R.color.snack_bar_color)
+                        ContextCompat.getColor(activity, com.ui.helper.R.color.snack_bar_color)
                     )
                     textView.setTextColor(Color.BLACK)
                     snackBar.show()
@@ -127,7 +127,7 @@ class OnSnackBar {
 
                     // Get Snackbar parent layout (it's a ViewGroup)
                     val layout = snackBar.view as ViewGroup
-                    layout.setBackgroundColor(ContextCompat.getColor(mActivity, com.rp.uihelpher.R.color.snack_bar_color))
+                    layout.setBackgroundColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.snack_bar_color))
 
                     if (layout.childCount > 0) {
                         layout.removeAllViews()
@@ -135,45 +135,45 @@ class OnSnackBar {
 
                     // Inflate your custom view
                     val customView = LayoutInflater.from(mActivity).inflate(
-                        com.rp.uihelpher.R.layout.custom_snackbar, layout, false
+                        com.ui.helper.R.layout.custom_snackbar, layout, false
                     )
 
-                    val ll_custom = customView.findViewById<LinearLayout>(com.rp.uihelpher.R.id.ll_custom)
-                    val iv_msg_icon = customView.findViewById<ImageView>(com.rp.uihelpher.R.id.iv_msg_icon)
-                    val iv_close_icon = customView.findViewById<ImageView>(com.rp.uihelpher.R.id.iv_close_icon)
+                    val ll_custom = customView.findViewById<LinearLayout>(com.ui.helper.R.id.ll_custom)
+                    val iv_msg_icon = customView.findViewById<ImageView>(com.ui.helper.R.id.iv_msg_icon)
+                    val iv_close_icon = customView.findViewById<ImageView>(com.ui.helper.R.id.iv_close_icon)
                     // Set text
-                    val tvMessage = customView.findViewById<TextView>(com.rp.uihelpher.R.id.tv_message)
+                    val tvMessage = customView.findViewById<TextView>(com.ui.helper.R.id.tv_message)
 
                     when (showMsgLog) {
                         "WARNING" -> {
-                            OnDrawableXmlClrChg(mActivity,ll_custom,com.rp.uihelpher.R.color.warning_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
-                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.rp.uihelpher.R.color.warning_color,25,"CHG_XML_IMAGE_COLOR")
-                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.rp.uihelpher.R.color.warning_color,25,"CHG_XML_IMAGE_COLOR")
-                            tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.rp.uihelpher.R.color.warning_color))
+                            OnDrawableXmlClrChg(mActivity,ll_custom,com.ui.helper.R.color.warning_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.ui.helper.R.color.warning_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.ui.helper.R.color.warning_color,25,"CHG_XML_IMAGE_COLOR")
+                            tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.warning_color))
                         }
                         "INFO" -> {
-                            OnDrawableXmlClrChg(mActivity,ll_custom,com.rp.uihelpher.R.color.info_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
-                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.rp.uihelpher.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
-                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.rp.uihelpher.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
-                            tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.rp.uihelpher.R.color.info_color))
+                            OnDrawableXmlClrChg(mActivity,ll_custom,com.ui.helper.R.color.info_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                            tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.info_color))
                         }
                         "ERROR" -> {
-                            OnDrawableXmlClrChg(mActivity,ll_custom,com.rp.uihelpher.R.color.error_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
-                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.rp.uihelpher.R.color.error_color,25,"CHG_XML_IMAGE_COLOR")
-                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.rp.uihelpher.R.color.error_color,25,"CHG_XML_IMAGE_COLOR")
-                            tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.rp.uihelpher.R.color.error_color))
+                            OnDrawableXmlClrChg(mActivity,ll_custom,com.ui.helper.R.color.error_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.ui.helper.R.color.error_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.ui.helper.R.color.error_color,25,"CHG_XML_IMAGE_COLOR")
+                            tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.error_color))
                         }
                         "SUCCESS" -> {
-                            OnDrawableXmlClrChg(mActivity,ll_custom,com.rp.uihelpher.R.color.success_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
-                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.rp.uihelpher.R.color.success_color,25,"CHG_XML_IMAGE_COLOR")
-                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.rp.uihelpher.R.color.success_color,25,"CHG_XML_IMAGE_COLOR")
-                            tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.rp.uihelpher.R.color.success_color))
+                            OnDrawableXmlClrChg(mActivity,ll_custom,com.ui.helper.R.color.success_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.ui.helper.R.color.success_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.ui.helper.R.color.success_color,25,"CHG_XML_IMAGE_COLOR")
+                            tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.success_color))
                         }
                         else -> {
-                            OnDrawableXmlClrChg(mActivity,ll_custom,com.rp.uihelpher.R.color.info_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
-                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.rp.uihelpher.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
-                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.rp.uihelpher.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
-                            tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.rp.uihelpher.R.color.info_color))
+                            OnDrawableXmlClrChg(mActivity,ll_custom,com.ui.helper.R.color.info_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                            tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.info_color))
                         }
                     }
                     tvMessage.text = msg

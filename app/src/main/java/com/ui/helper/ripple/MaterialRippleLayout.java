@@ -1,4 +1,4 @@
-package com.rp.uihelpher.ripple;
+package com.ui.helper.ripple;
 
 import static android.widget.ListPopupWindow.MATCH_PARENT;
 
@@ -34,7 +34,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 
-import com.rp.uihelpher.R;
+import com.ui.helper.R;
 
 public class MaterialRippleLayout extends FrameLayout {
 

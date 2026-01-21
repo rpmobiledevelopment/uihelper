@@ -5,6 +5,7 @@ import android.content.Context
 import io.paperdb.Paper
 
 class MyAppGlobal : Application() {
+
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(LocaleHelper.onAttach(base, "en"))
     }

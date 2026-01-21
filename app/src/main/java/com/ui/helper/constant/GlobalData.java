@@ -1,7 +1,8 @@
-package com.rp.uihelpher.helpher;
+package com.ui.helper.constant;
 
 public interface GlobalData {
     String TAG_SELECT_PROJ_NAME = "TAG_SELECT_PROJ_NAME";
+    String TAG_SELECTED_LANGUAGE = "TAG_SELECTED_LANGUAGE";
     String TAG_BASE_URL = "TAG_BASE_URL";
     String TAG_BEAR_TOKEN = "TAG_BEAR_TOKEN";
     String TAG_SELECT_LANGUAGE = "TAG_SELECT_LANGUAGE";

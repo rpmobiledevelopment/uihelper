@@ -15,7 +15,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.rp.uihelpher.R
+import com.ui.helper.R
 import java.util.Objects
 
 class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(

@@ -1,8 +1,8 @@
-package com.rp.uihelpher.log;
+package com.ui.helper.log;
 
 import android.util.Log;
 
-import com.rp.uihelpher.BuildConfig;
+import com.ui.helper.BuildConfig;
 
 public class IsLog {
 
@@ -11,7 +11,7 @@ public class IsLog {
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
             Log.e(className,print);
         } else {
-            Log.e(className,print);
+//            Log.e(className,print);
         }
     }
 

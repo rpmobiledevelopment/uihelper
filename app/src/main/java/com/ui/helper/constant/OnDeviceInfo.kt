@@ -1,4 +1,4 @@
-package com.rp.uihelpher.helpher
+package com.ui.helper.constant
 
 import android.content.Context
 import android.os.Build

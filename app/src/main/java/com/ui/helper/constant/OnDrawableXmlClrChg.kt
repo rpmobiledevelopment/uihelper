@@ -1,4 +1,4 @@
-package com.rp.uihelpher.helpher
+package com.ui.helper.constant
 
 import android.app.Activity
 import android.content.Context
@@ -13,8 +13,8 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
-import com.rp.uihelpher.R
-import com.rp.uihelpher.log.IsLog
+import com.ui.helper.R
+import com.ui.helper.log.IsLog
 
 class OnDrawableXmlClrChg {
 

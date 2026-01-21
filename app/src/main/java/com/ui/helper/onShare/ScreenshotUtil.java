@@ -1,4 +1,4 @@
-package com.rp.uihelpher.onShare;
+package com.ui.helper.onShare;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;

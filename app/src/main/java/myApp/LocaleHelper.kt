@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi
 import java.util.Locale
 
 object LocaleHelper {
+
     private const val SELECTED_LANGUAGE = "Locale.Helper.Selected.Language"
 
     fun onAttach(context: Context): Context? {

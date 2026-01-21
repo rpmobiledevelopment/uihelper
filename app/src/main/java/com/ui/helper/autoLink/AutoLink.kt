@@ -1,4 +1,4 @@
-package com.rp.uihelpher.autoLink
+package com.ui.helper.autoLink
 
 import android.text.Editable
 import android.text.TextWatcher

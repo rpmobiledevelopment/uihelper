@@ -1,4 +1,4 @@
-package com.rp.uihelpher.helpher
+package com.ui.helper.constant
 
 object OnArabicNumber {
     fun isArabicNumber(input: String?): Boolean {

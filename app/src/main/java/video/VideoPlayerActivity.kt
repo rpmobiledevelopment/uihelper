@@ -35,9 +35,9 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-import com.rp.uihelpher.R
-import com.rp.uihelpher.helpher.GlobalData
-import com.rp.uihelpher.localStorage.SharedPre
+import com.ui.helper.R
+import com.ui.helper.constant.GlobalData
+import com.ui.helper.localStorage.SharedPre
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.max
@@ -46,6 +46,7 @@ import kotlin.math.min
 class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalData {
 
     private val TAG: String = VideoPlayerActivity::class.java.simpleName
+
     var playerView: PlayerView? = null
     var player: ExoPlayer? = null
     var title: TextView? = null
@@ -307,14 +308,14 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
 
         audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
 
-        if (SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH) != null && SharedPre.getDef(
-                this,
-                GlobalData.TAG_VIDEO_PATH
-            ) != ""
-        ) {
+        if (SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH) != "") {
             title?.text = SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH)
         } else {
             title?.text = "Video Player"
+        }
+
+        if (SharedPre.getDef(this, GlobalData.TAG_SELECTED_LANGUAGE) == "AR") {
+            videoBack?.rotation = 180f
         }
 
         videoBack?.setOnClickListener(this)

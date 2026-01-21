@@ -1,9 +1,9 @@
-package com.rp.uihelpher.helpher
+package com.ui.helper.constant
 
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import com.rp.uihelpher.log.IsLog
+import com.ui.helper.log.IsLog
 import androidx.core.net.toUri
 
 class OnCall(mActivity: Activity?, phoneNumber: String?) {

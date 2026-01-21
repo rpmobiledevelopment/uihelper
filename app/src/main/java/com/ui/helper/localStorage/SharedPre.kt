@@ -1,8 +1,7 @@
-package com.rp.uihelpher.localStorage
+package com.ui.helper.localStorage
 
 import android.app.Activity
 import android.content.Context
-import android.preference.PreferenceManager
 import android.widget.TextView
 
 class SharedPre {
@@ -11,65 +10,48 @@ class SharedPre {
 
     // Set TextView
     constructor(mActivity: Activity?, TAG_VALUE: String?, textView: TextView) {
-        if (getDef(mActivity, TAG_VALUE) != null && (getDef(mActivity, TAG_VALUE) != "") && !getDef(
-                mActivity,
-                TAG_VALUE
-            ).isEmpty()
-        ) {
-            textView.setText(getDef(mActivity, TAG_VALUE))
+        if ((getDef(mActivity, TAG_VALUE) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()) {
+            textView.text = getDef(mActivity, TAG_VALUE)
         } else {
-            textView.setText("")
+            textView.text = ""
         }
     }
 
     // return Without Empty Text
     fun onReturnImg(mActivity: Activity?, TAG_VALUE: String?): String? {
-        if (getDef(mActivity, TAG_VALUE) != null &&
-            getDef(mActivity, TAG_VALUE).length > 5
-        ) {
-            return getDef(mActivity, TAG_VALUE)
+        return if (getDef(mActivity, TAG_VALUE).length > 5) {
+            getDef(mActivity, TAG_VALUE)
         } else {
-            return ""
+            ""
         }
     }
 
     companion object {
         // return Text
         fun onReturnText(mActivity: Activity?, TAG_VALUE: String?): String? {
-            if (getDef(mActivity, TAG_VALUE) != null && (getDef(
-                    mActivity,
-                    TAG_VALUE
-                ) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()
+            return if ((getDef(mActivity, TAG_VALUE) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()
             ) {
-                return getDef(mActivity, TAG_VALUE)
+                getDef(mActivity, TAG_VALUE)
             } else {
-                return ""
+                ""
             }
         }
 
         // return Text
         fun onReturnText(mActivity: Context?, TAG_VALUE: String?): String? {
-            if (getDef(mActivity, TAG_VALUE) != null && (getDef(
-                    mActivity,
-                    TAG_VALUE
-                ) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()
-            ) {
-                return getDef(mActivity, TAG_VALUE)
+            return if ((getDef(mActivity, TAG_VALUE) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()) {
+                getDef(mActivity, TAG_VALUE)
             } else {
-                return ""
+                ""
             }
         }
 
         // return Int
         fun onReturnInt(mActivity: Activity?, TAG_VALUE: String?): Int {
-            if (getDef(mActivity, TAG_VALUE) != null && (getDef(
-                    mActivity,
-                    TAG_VALUE
-                ) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()
-            ) {
-                return getDef(mActivity, TAG_VALUE).toInt()
+            return if ((getDef(mActivity, TAG_VALUE) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()) {
+                getDef(mActivity, TAG_VALUE).toInt()
             } else {
-                return 10000
+                10000
             }
         }
 

@@ -1,10 +1,10 @@
-package com.rp.uihelpher.onShare;
+package com.ui.helper.onShare;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 
-import com.rp.uihelpher.log.IsLog;
+import com.ui.helper.log.IsLog;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,7 +14,7 @@ public class ScreenshotUtils {
 
     public static File getMainDirectoryName(Context context) {
         File mainDir = new File(
-                context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), context.getResources().getString(com.rp.uihelpher.R.string.app_name));
+                context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), context.getResources().getString(com.ui.helper.R.string.app_name));
         //If File is not present create directory
         if (!mainDir.exists()) {
             if (mainDir.mkdir())

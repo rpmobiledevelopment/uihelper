@@ -4,9 +4,9 @@ import android.app.Activity
 import apiController.ReferApi.returnApiCommon
 import apiController.ReferApi.returnApiLocalCommon
 import apiController.ReferApi.returnApiName
-import com.rp.uihelpher.helpher.GlobalData
-import com.rp.uihelpher.localStorage.SharedPre
-import com.rp.uihelpher.log.IsLog
+import com.ui.helper.constant.GlobalData
+import com.ui.helper.localStorage.SharedPre
+import com.ui.helper.log.IsLog
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.Request

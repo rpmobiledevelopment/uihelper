@@ -1,8 +1,8 @@
 package apiController
 
 import android.app.Activity
-import com.rp.uihelpher.helpher.GlobalData
-import com.rp.uihelpher.localStorage.SharedPre
+import com.ui.helper.constant.GlobalData
+import com.ui.helper.localStorage.SharedPre
 
 object ReferApi : GlobalData {
 

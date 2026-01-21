@@ -4,8 +4,8 @@ import android.app.Activity
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.rp.uihelpher.R
-import com.rp.uihelpher.helpher.GlobalData
+import com.ui.helper.R
+import com.ui.helper.constant.GlobalData
 
 class OnLoadImage : GlobalData {
 
