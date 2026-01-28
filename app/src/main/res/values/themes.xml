@@ -26,4 +26,9 @@
         <item name="android:backgroundDimAmount">0.4</item>
     </style>
 
+
+    <style name="BottomDialogsAnimation">
+        <item name="android:windowEnterAnimation">@anim/sheet_show</item>
+        <item name="android:windowExitAnimation">@anim/sheet_hide</item>
+    </style>
 </resources>

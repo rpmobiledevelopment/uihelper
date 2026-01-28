@@ -10,19 +10,19 @@ object ReferApi : GlobalData {
 
     fun returnApi(mActivity: Activity?): ApiInterface {
         val apiUrl = SharedPre.onReturnText(mActivity, GlobalData.TAG_BASE_URL)
-        return ApiClients.getClient(apiUrl).create(ApiInterface::class.java)
+        return ApiClients.getClient(mActivity,apiUrl).create(ApiInterface::class.java)
     }
 
     @JvmStatic
     fun returnApiCommon(mActivity: Activity?): ApiInterface {
         val apiUrl = SharedPre.onReturnText(mActivity, GlobalData.TAG_BASE_URL)
-        return ApiClients.getClientCommon(apiUrl).create(ApiInterface::class.java)
+        return ApiClients.getClientCommon(mActivity,apiUrl).create(ApiInterface::class.java)
     }
 
     @JvmStatic
     fun returnApiLocalCommon(mActivity: Activity?): ApiInterface {
         val apiUrl = SharedPre.onReturnText(mActivity, GlobalData.TAG_BASE_URL)
-        return ApiClients.getClientCommon(apiUrl).create(ApiInterface::class.java)
+        return ApiClients.getClientCommon(mActivity,apiUrl).create(ApiInterface::class.java)
     }
 
     @JvmStatic

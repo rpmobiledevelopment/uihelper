@@ -3,13 +3,10 @@ package apiController
 import android.app.Activity
 import apiController.ReferApi.returnApiCommon
 import apiController.ReferApi.returnApiLocalCommon
-import apiController.ReferApi.returnApiName
 import com.ui.helper.constant.GlobalData
 import com.ui.helper.localStorage.SharedPre
 import com.ui.helper.log.IsLog
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MultipartBody
-import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import onInteface.OnInterface
 import org.json.JSONObject
@@ -29,15 +26,20 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
             "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN),
             SharedPre.getDef(mActivity, GlobalData.TAG_SELECT_LANGUAGE), apiName)
 
-        dbResCall?.enqueue(object : Callback<Void?> {
-            override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
+        dbResCall?.enqueue(object : Callback<String?> {
+            override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 mActivity?.runOnUiThread {
                     try {
-                        if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                        if (response.isSuccessful) {
+                            if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                                listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                            } else {
+                                listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                            }
                         } else {
-                            listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                            listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
                         }
                     } catch (e : SocketTimeoutException) {
                         listener.onFetchComplete(700,"ERROR", apiNamePageRef)
@@ -51,7 +53,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 }
             }
 
-            override fun onFailure(call: Call<Void?>, t: Throwable) {
+            override fun onFailure(call: Call<String?>, t: Throwable) {
                 IsLog(TAG, "Throwable: " + t.message)
                 mActivity?.runOnUiThread {
                     listener.onFetchComplete(700,"ERROR", apiNamePageRef)
@@ -69,15 +71,20 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
 
-        dbResCall?.enqueue(object : Callback<Void?> {
-            override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
+        dbResCall?.enqueue(object : Callback<String?> {
+            override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 mActivity?.runOnUiThread {
                     try {
-                        if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                        if (response.isSuccessful) {
+                            if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                                listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                            } else {
+                                listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                            }
                         } else {
-                            listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                            listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
                         }
                     } catch (e : SocketTimeoutException) {
                         listener.onFetchComplete(700,"ERROR", apiNamePageRef)
@@ -92,7 +99,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
             }
 
-            override fun onFailure(call: Call<Void?>, t: Throwable) {
+            override fun onFailure(call: Call<String?>, t: Throwable) {
                 IsLog(TAG, "Throwable: " + t.message)
                 listener.onFetchComplete(700,"ERROR", apiNamePageRef)
             }
@@ -107,15 +114,20 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
 
-        dbResCall?.enqueue(object : Callback<Void?> {
-            override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
+        dbResCall?.enqueue(object : Callback<String?> {
+            override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 mActivity?.runOnUiThread {
                     try {
-                        if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                        if (response.isSuccessful) {
+                            if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                                listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                            } else {
+                                listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                            }
                         } else {
-                            listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                            listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
                         }
                     } catch (e : SocketTimeoutException) {
                         listener.onFetchComplete(700,"ERROR", apiNamePageRef)
@@ -130,7 +142,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
             }
 
-            override fun onFailure(call: Call<Void?>, t: Throwable) {
+            override fun onFailure(call: Call<String?>, t: Throwable) {
                 IsLog(TAG, "Throwable: " + t.message)
                 listener.onFetchComplete(700,"ERROR", apiNamePageRef)
             }
@@ -156,7 +168,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 if (response?.isSuccessful == true) {
                     mActivity?.runOnUiThread {
                         try {
-                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
@@ -209,7 +221,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 if (response?.isSuccessful == true) {
                     mActivity?.runOnUiThread {
                         try {
-                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
@@ -259,17 +271,22 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
 
-        dbResCall?.enqueue(object : Callback<Void?> {
-            override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
+        dbResCall?.enqueue(object : Callback<String?> {
+            override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 IsLog(TAG,"response=================${response.code()}")
                 IsLog(TAG,"response========body=========${response.body()}")
                 mActivity?.runOnUiThread {
                     try {
-                        if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                        if (response.isSuccessful) {
+                            if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                                listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                            } else {
+                                listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                            }
                         } else {
-                            listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                            listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
                         }
                     } catch (e : SocketTimeoutException) {
                         listener.onFetchComplete(700,"ERROR", apiNamePageRef)
@@ -283,14 +300,14 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 }
             }
 
-            override fun onFailure(call: Call<Void?>, t: Throwable) {
+            override fun onFailure(call: Call<String?>, t: Throwable) {
                 IsLog(TAG, "Throwable: " + t.message)
                 listener.onFetchComplete(700,"ERROR", apiNamePageRef)
             }
         })
     }
 
-    var currentCall: Call<Void?>? = null
+    var currentCall: Call<String?>? = null
 
     // Body
     fun doPostMethod(listener: OnInterface.CallbackListener,
@@ -312,17 +329,22 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 
         IsLog(TAG,"dbResCall=================${currentCall?.request()?.url}")
 
-        currentCall?.enqueue(object : Callback<Void?> {
-            override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
+        currentCall?.enqueue(object : Callback<String?> {
+            override fun onResponse(call: Call<String?>, response: Response<String?>) {
 //                IsLog(TAG,"response=================${response.code()}")
 //                IsLog(TAG,"response========body=========${response.body()}")
                 mActivity?.runOnUiThread {
                     try {
-                        if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
-                            listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                        if (response.isSuccessful) {
+                            if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                                listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                            } else {
+                                listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                            }
                         } else {
-                            listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
+                            listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                            listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
                         }
                     } catch (e : SocketTimeoutException) {
                         listener.onFetchComplete(700,"ERROR", apiNamePageRef)
@@ -336,7 +358,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 }
             }
 
-            override fun onFailure(call: Call<Void?>, t: Throwable) {
+            override fun onFailure(call: Call<String?>, t: Throwable) {
                 IsLog(TAG, "Throwable: " + t.message)
 
                 if (call.isCanceled) {
@@ -379,7 +401,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 if (response?.isSuccessful == true) {
                     mActivity?.runOnUiThread {
                         try {
-                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
@@ -444,7 +466,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 if (response?.isSuccessful == true) {
                     mActivity?.runOnUiThread {
                         try {
-                            listener.onFetchProgress(response.code(),ApiClients.getResponseString(), apiNamePageRef)
+                            listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
@@ -483,58 +505,4 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
         executorService.shutdown()
     }
 
-
-    fun inImgUpload(listener: OnInterface.CallbackListener, builder: MultipartBody.Builder,
-                    apiName: String?, apiNamePageRef: String?) {
-        val client = ApiClients.getUnsafeOkHttpClient().build()
-        val executorService = Executors.newSingleThreadExecutor()
-
-        executorService.submit {
-            try {
-                val request = Request.Builder()
-                    .url(returnApiName(mActivity) + apiName)
-                    .post(builder.build())
-                    .addHeader("Authorization",
-                        "Bearer " + SharedPre.getDef(mActivity, GlobalData.TAG_BEAR_TOKEN))
-                    .build()
-
-                val response = client.newCall(request).execute()
-
-                IsLog(TAG, "response===================$response")
-
-                if (response.isSuccessful) {
-                    checkNotNull(response.body)
-                    val responseBody = response.body?.string()
-                    mActivity?.runOnUiThread {
-                        try {
-                            listener.onFetchProgress(response.code,responseBody, apiNamePageRef)
-                            listener.onFetchComplete(response.code,"SUCCESS", apiNamePageRef)
-                        } catch (e: NullPointerException) {
-                            IsLog(TAG, "IOException: " + e.message)
-                            e.printStackTrace()
-                        }
-                    }
-                    IsLog(TAG, "Image deleted successfully====l;jkl;kl;jkl;=====$responseBody")
-                } else {
-                    mActivity?.runOnUiThread {
-                        try {
-                            listener.onFetchProgress(response.code,"", apiNamePageRef)
-                            listener.onFetchComplete(response.code,"FAILURE", apiNamePageRef)
-                        } catch (e: NullPointerException) {
-                            IsLog(TAG, "IOException: " + e.message)
-                            e.printStackTrace()
-                        }
-                    }
-
-                    IsLog(TAG, "Image deletion failed:----jkl;jkl;---------" + response.message)
-                }
-                response.close()
-            } catch (e: IOException) {
-                IsLog(TAG, "IOException===================" + e.message)
-                e.printStackTrace()
-            }
-        }
-
-        executorService.shutdown()
-    }
 }

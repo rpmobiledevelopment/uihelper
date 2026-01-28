@@ -83,7 +83,7 @@ class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(
         super.onCreate(savedInstanceState)
         setContentView(R.layout.progressbar)
 
-        mDialogView = Objects.requireNonNull<Window?>(getWindow()).getDecorView()
+        mDialogView = Objects.requireNonNull<Window?>(getWindow()).decorView
             .findViewById(android.R.id.content)
         mProgressFrame = findViewById(R.id.progress_dialog)
         graduallyTextView = findViewById(R.id.tv_title)

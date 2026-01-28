@@ -1,27 +1,35 @@
 [versions]
 agp = "8.13.0"
 exoplayer = "2.19.1"
+expandablelayout = "2.9.2"
 firebaseMessaging = "25.0.0"
 glide = "5.0.4"
 kotlin = "2.2.10"
 coreKtx = "1.17.0"
 appcompat = "1.7.1"
 material = "1.13.0"
+moshiKotlin = "1.15.2"
 paperdb = "2.7.2"
 places = "4.4.1"
 retrofit = "3.0.0"
+photoview = "2.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit" }
 exoplayer = { module = "com.google.android.exoplayer:exoplayer", version.ref = "exoplayer" }
+expandablelayout = { module = "com.github.cachapa:ExpandableLayout", version.ref = "expandablelayout" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebaseMessaging" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
 paperdb = { module = "io.github.pilgr:paperdb", version.ref = "paperdb" }
 places = { module = "com.google.android.libraries.places:places", version.ref = "places" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+photoview = { module = "com.github.chrisbanes:PhotoView", version.ref = "photoview" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

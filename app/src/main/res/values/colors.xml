@@ -17,4 +17,12 @@
     <color name="info_color">#0d6673</color>
     <color name="error_color">#f9392f</color>
     <color name="success_color">#33c257</color>
+
+    <color name="bg_circle_close">#91DFDA</color>
+    <color name="icon_circle_close">#0D6976</color>
+    <color name="bg_light_dark">#262626</color>
+
+    <color name="color1">#006666</color>
+    <color name="bg_btm_dlg">#f6fffa</color>
+
 </resources>

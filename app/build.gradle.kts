@@ -37,10 +37,16 @@ dependencies {
     implementation(libs.material)
     implementation(libs.paperdb)
     implementation(libs.glide)
-    implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.exoplayer)
     implementation(libs.firebase.messaging)
     // Location
     implementation(libs.places)
+    implementation(libs.photoview)
+    implementation(libs.expandablelayout)
+    // api call
+    implementation(libs.retrofit)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.converter.moshi)
+    implementation(libs.converter.scalars)
 }
