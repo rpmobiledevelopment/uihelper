@@ -1,7 +1,5 @@
 package apiController
 
-import android.app.Activity
-import bottomDlg.ErrorPopupDialog
 import com.squareup.moshi.Moshi
 import com.ui.helper.constant.GlobalData
 import com.ui.helper.log.IsLog
@@ -10,21 +8,17 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.lang.ref.WeakReference
 import java.util.concurrent.TimeUnit
 
 object ApiClients : GlobalData {
 
     private val TAG: String = ApiClients::class.java.simpleName
-    private var activityRef: WeakReference<Activity?>? = null
 
     private val moshi: Moshi by lazy {
         Moshi.Builder().build()
     }
 
-    fun getClient(activity: Activity?, baseUrl: String?): Retrofit {
-        activityRef = WeakReference(activity)
-
+    fun getClient(baseUrl: String?): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl ?: "")
             .addConverterFactory(ScalarsConverterFactory.create())
@@ -33,9 +27,7 @@ object ApiClients : GlobalData {
             .build()
     }
 
-    fun getClientCommon(activity: Activity?, baseUrl: String?): Retrofit {
-        activityRef = WeakReference(activity)
-
+    fun getClientCommon(baseUrl: String?): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl ?: "")
             .addConverterFactory(ScalarsConverterFactory.create())
@@ -79,10 +71,6 @@ object ApiClients : GlobalData {
                 val key = request.url.toString()
                 RawStorage.map[key] = raw
 
-                val activity = activityRef?.get()
-                if (activity != null && !activity.isFinishing && GlobalData.isApiPopup) {
-                    ErrorPopupDialog(activity, raw, key, "")
-                }
                 response
             }
 

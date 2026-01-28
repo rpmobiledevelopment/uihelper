@@ -3,6 +3,7 @@ package apiController
 import android.app.Activity
 import apiController.ReferApi.returnApiCommon
 import apiController.ReferApi.returnApiLocalCommon
+import bottomDlg.ErrorPopupDialog
 import com.ui.helper.constant.GlobalData
 import com.ui.helper.localStorage.SharedPre
 import com.ui.helper.log.IsLog
@@ -75,6 +76,9 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 mActivity?.runOnUiThread {
                     try {
+                        if (mActivity != null && !mActivity.isFinishing && GlobalData.isApiPopup) {
+                            ErrorPopupDialog(mActivity, response.body().toString(), dbResCall.request().url.toString(), "")
+                        }
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
                                 listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
@@ -118,6 +122,9 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 mActivity?.runOnUiThread {
                     try {
+                        if (mActivity != null && !mActivity.isFinishing && GlobalData.isApiPopup) {
+                            ErrorPopupDialog(mActivity, response.body().toString(), dbResCall.request().url.toString(), "")
+                        }
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
                                 listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
