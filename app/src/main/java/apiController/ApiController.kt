@@ -32,7 +32,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                     try {
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
@@ -77,7 +77,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                     try {
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
@@ -120,7 +120,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                     try {
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
@@ -168,7 +168,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 if (response?.isSuccessful == true) {
                     mActivity?.runOnUiThread {
                         try {
-                            listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                            listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
@@ -221,7 +221,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 if (response?.isSuccessful == true) {
                     mActivity?.runOnUiThread {
                         try {
-                            listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                            listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
@@ -279,7 +279,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                     try {
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
@@ -337,7 +337,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                     try {
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
@@ -401,7 +401,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 if (response?.isSuccessful == true) {
                     mActivity?.runOnUiThread {
                         try {
-                            listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                            listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
@@ -466,7 +466,7 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 if (response?.isSuccessful == true) {
                     mActivity?.runOnUiThread {
                         try {
-                            listener.onFetchProgress(response.code(),response.message(), apiNamePageRef)
+                            listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
                             listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                         } catch (e: NullPointerException) {
                             IsLog(TAG, "IOException: " + e.message)
