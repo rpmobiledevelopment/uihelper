@@ -15,9 +15,11 @@ class OnLoadImage : GlobalData {
         iv_logo?.let {
             if (images != null && images.length > 5) {
                 Glide.with(it).load(images).placeholder(R.drawable.ph_loading_small)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .error(R.drawable.ph_small).into(it)
             } else {
                 Glide.with(it).load(R.drawable.ph_small)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .placeholder(R.drawable.ph_small).error(R.drawable.ph_small).into(it)
             }
         }
@@ -30,19 +32,23 @@ class OnLoadImage : GlobalData {
             when (opt) {
                 "USER_IMAGE" -> Glide.with(iv_logo)
                     .load(if (images != null && images.length > 5) images else R.drawable.ic_user)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .placeholder(R.drawable.ic_user).diskCacheStrategy(DiskCacheStrategy.ALL)
                     .error(R.drawable.ic_user).into(iv_logo)
 
                 "PLACE_HOLDER" -> Glide.with(iv_logo)
                     .load(if (images != null && images.length > 5) images else R.drawable.ph_small)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .placeholder(R.drawable.ph_loading_small).error(R.drawable.ph_small).into(iv_logo)
 
                 "PLACE_HOLDER_DB" -> Glide.with(iv_logo)
                     .load(if (images != null && images.length > 5) images else R.drawable.ph_small_)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .placeholder(R.drawable.ph_loading_small).error(R.drawable.ph_small_).into(iv_logo)
 
                 "PLACE_HOLDER_ANNOUNC" -> Glide.with(iv_logo)
                     .load(if (images != null && images.length > 5) images else R.drawable.ic_announce)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .placeholder(R.drawable.ic_announce).error(R.drawable.ic_announce).into(iv_logo)
 
                 "WITHOUT_PLACE_HOLDER" -> Glide.with(iv_logo).load(images).into(iv_logo)
@@ -57,19 +63,23 @@ class OnLoadImage : GlobalData {
             when (opt) {
                 "USER_IMAGE" -> Glide.with(iv_logo)
                     .load(if (images != null && images.length > 5) images else R.drawable.ic_user)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .placeholder(R.drawable.ic_user).diskCacheStrategy(DiskCacheStrategy.ALL)
                     .error(R.drawable.ic_user).into(iv_logo)
 
                 "PLACE_HOLDER" -> Glide.with(iv_logo)
                     .load(if (images != null && images.length > 5) images else R.drawable.ph_small)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .placeholder(R.drawable.ph_loading_small).error(R.drawable.ph_small).into(iv_logo)
 
                 "PLACE_HOLDER_DB" -> Glide.with(iv_logo)
                     .load(if (images != null && images.length > 5) images else R.drawable.ph_small_)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .placeholder(R.drawable.ph_loading_small).error(R.drawable.ph_small_).into(iv_logo)
 
                 "PLACE_HOLDER_ANNOUNC" -> Glide.with(iv_logo)
                     .load(if (images != null && images.length > 5) images else R.drawable.ic_announce)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .placeholder(R.drawable.ic_announce).error(R.drawable.ic_announce).into(iv_logo)
             }
         }
@@ -81,6 +91,7 @@ class OnLoadImage : GlobalData {
             if (placeholderImage!=null)
                 Glide.with(iv_logo)
                     .load(if (images != null && images.length > 5) images else placeholderImage)
+                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
                     .placeholder(placeholderImage).diskCacheStrategy(DiskCacheStrategy.ALL)
                     .error(placeholderImage).into(iv_logo)
         }
