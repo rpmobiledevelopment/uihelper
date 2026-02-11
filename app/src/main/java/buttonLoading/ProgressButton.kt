@@ -10,8 +10,7 @@ import com.google.android.material.progressindicator.IndeterminateDrawable
 class ProgressButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = R.attr.materialButtonStyle,
-) : MaterialButton(context, attrs, defStyleAttr) {
+    defStyleAttr: Int = R.attr.materialButtonStyle, ) : MaterialButton(context, attrs, defStyleAttr) {
 
     fun showProgress(params: ProgressParams.() -> Unit = {}) {
         val progressParams = ProgressParams(

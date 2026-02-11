@@ -146,33 +146,33 @@ class OnSnackBar {
 
                     when (showMsgLog) {
                         "WARNING" -> {
-                            OnDrawableXmlClrChg(mActivity,ll_custom,com.ui.helper.R.color.warning_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
-                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.ui.helper.R.color.warning_color,25,"CHG_XML_IMAGE_COLOR")
-                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.ui.helper.R.color.warning_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(ll_custom,com.ui.helper.R.color.warning_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                            OnDrawableXmlClrChg(iv_msg_icon,com.ui.helper.R.color.warning_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(iv_close_icon,com.ui.helper.R.color.warning_color,25,"CHG_XML_IMAGE_COLOR")
                             tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.warning_color))
                         }
                         "INFO" -> {
-                            OnDrawableXmlClrChg(mActivity,ll_custom,com.ui.helper.R.color.info_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
-                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
-                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(ll_custom,com.ui.helper.R.color.info_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                            OnDrawableXmlClrChg(iv_msg_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(iv_close_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
                             tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.info_color))
                         }
                         "ERROR" -> {
-                            OnDrawableXmlClrChg(mActivity,ll_custom,com.ui.helper.R.color.error_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
-                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.ui.helper.R.color.error_color,25,"CHG_XML_IMAGE_COLOR")
-                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.ui.helper.R.color.error_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(ll_custom,com.ui.helper.R.color.error_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                            OnDrawableXmlClrChg(iv_msg_icon,com.ui.helper.R.color.error_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(iv_close_icon,com.ui.helper.R.color.error_color,25,"CHG_XML_IMAGE_COLOR")
                             tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.error_color))
                         }
                         "SUCCESS" -> {
-                            OnDrawableXmlClrChg(mActivity,ll_custom,com.ui.helper.R.color.success_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
-                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.ui.helper.R.color.success_color,25,"CHG_XML_IMAGE_COLOR")
-                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.ui.helper.R.color.success_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(ll_custom,com.ui.helper.R.color.success_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                            OnDrawableXmlClrChg(iv_msg_icon,com.ui.helper.R.color.success_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(iv_close_icon,com.ui.helper.R.color.success_color,25,"CHG_XML_IMAGE_COLOR")
                             tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.success_color))
                         }
                         else -> {
-                            OnDrawableXmlClrChg(mActivity,ll_custom,com.ui.helper.R.color.info_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
-                            OnDrawableXmlClrChg(mActivity,iv_msg_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
-                            OnDrawableXmlClrChg(mActivity,iv_close_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(ll_custom,com.ui.helper.R.color.info_color,25,"BACKGROUND_XML_FULL_COLOR_ALPHA")
+                            OnDrawableXmlClrChg(iv_msg_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
+                            OnDrawableXmlClrChg(iv_close_icon,com.ui.helper.R.color.info_color,25,"CHG_XML_IMAGE_COLOR")
                             tvMessage.setTextColor(ContextCompat.getColor(mActivity, com.ui.helper.R.color.info_color))
                         }
                     }

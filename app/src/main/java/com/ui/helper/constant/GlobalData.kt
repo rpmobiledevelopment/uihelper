@@ -18,5 +18,6 @@ interface GlobalData {
         var TAG_API_PIN_SHA_256: String = "TAG_API_PIN_SHA_256"
         var isDebugging: Boolean = false
         var isApiPopup: Boolean = false
+        var isSelectedProject: String = ""
     }
 }

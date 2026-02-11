@@ -14,4 +14,8 @@ class OnInterface {
     interface OnLoc {
         fun onViewLatLng(sltOpt: String?, lat: Double, lng: Double)
     }
+
+    interface OnText {
+        fun onAction(option: String?, pageRef: String?)
+    }
 }
