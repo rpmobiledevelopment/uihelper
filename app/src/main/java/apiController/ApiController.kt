@@ -31,19 +31,22 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
                 mActivity?.runOnUiThread {
                     try {
+
+                        val responseData = response.body() ?: response.errorBody()?.string()
+
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                             }
                         } else {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
-                                listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                                listener.onFetchProgress(800,responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
                             }
                         }
@@ -84,19 +87,21 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                         if (mActivity != null && !mActivity.isFinishing && GlobalData.isApiPopup) {
                             ErrorPopupDialog(mActivity, response.body().toString(), dbResCall.request().url.toString(), "")
                         }
+                        val responseData = response.body() ?: response.errorBody()?.string()
+
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                             }
                         } else {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
-                                listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                                listener.onFetchProgress(800,responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
                             }
                         }
@@ -135,19 +140,21 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                         if (mActivity != null && !mActivity.isFinishing && GlobalData.isApiPopup) {
                             ErrorPopupDialog(mActivity, response.body().toString(), dbResCall.request().url.toString(), "")
                         }
+                        val responseData = response.body() ?: response.errorBody()?.string()
+
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                             }
                         } else {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
-                                listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                                listener.onFetchProgress(800,responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
                             }
                         }
@@ -299,19 +306,21 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                 IsLog(TAG,"response========body=========${response.body()}")
                 mActivity?.runOnUiThread {
                     try {
+                        val responseData = response.body() ?: response.errorBody()?.string()
+
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                             }
                         } else {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
-                                listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                                listener.onFetchProgress(800,responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
                             }
                         }
@@ -362,19 +371,21 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
 //                IsLog(TAG,"response========body=========${response.body()}")
                 mActivity?.runOnUiThread {
                     try {
+                        val responseData = response.body() ?: response.errorBody()?.string()
+
                         if (response.isSuccessful) {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                             }
                         } else {
                             if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
-                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchProgress(response.code(),responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
                             } else {
-                                listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                                listener.onFetchProgress(800,responseData, apiNamePageRef)
                                 listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
                             }
                         }
