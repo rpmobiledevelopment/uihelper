@@ -153,6 +153,16 @@ class OnDrawableXmlClrChg {
 
     }
 
+    fun View.setBgDrawableColorCorner(@ColorRes colorRes: Int?, cornerRadius: Float?) {
+        val drawable = background.mutate() as GradientDrawable
+        drawable.setColor(ContextCompat.getColor(context, colorRes ?: 0))
+        val radiusInDp = cornerRadius
+        val radiusInPx = radiusInDp?.times(context.resources.displayMetrics.density)
+        if (radiusInPx != null) {
+            drawable.cornerRadius = radiusInPx
+        }
+    }
+
     private fun onImageTint(imageView: ImageView?, color: Int? = null) {
         imageView?.let {
             it.setColorFilter(
@@ -245,5 +255,6 @@ class OnDrawableXmlClrChg {
         }
 
     }
+
 }
 

@@ -39,8 +39,13 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                             }
                         } else {
-                            listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
-                            listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
+                            if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                            } else {
+                                listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
+                            }
                         }
                     } catch (e : SocketTimeoutException) {
                         listener.onFetchComplete(700,"ERROR", apiNamePageRef)
@@ -87,8 +92,13 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                             }
                         } else {
-                            listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
-                            listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
+                            if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                            } else {
+                                listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
+                            }
                         }
                     } catch (e : SocketTimeoutException) {
                         listener.onFetchComplete(700,"ERROR", apiNamePageRef)
@@ -133,8 +143,13 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                             }
                         } else {
-                            listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
-                            listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
+                            if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                            } else {
+                                listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
+                            }
                         }
                     } catch (e : SocketTimeoutException) {
                         listener.onFetchComplete(700,"ERROR", apiNamePageRef)
@@ -292,8 +307,13 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                             }
                         } else {
-                            listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
-                            listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
+                            if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                            } else {
+                                listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
+                            }
                         }
                     } catch (e : SocketTimeoutException) {
                         listener.onFetchComplete(700,"ERROR", apiNamePageRef)
@@ -350,8 +370,13 @@ class ApiController(private val mActivity: Activity?) : GlobalData {
                                 listener.onFetchComplete(response.code(),"SERVER_ERROR", apiNamePageRef)
                             }
                         } else {
-                            listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
-                            listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
+                            if (response.code() == 200 || response.code() == 401 || response.code() == 422) {
+                                listener.onFetchProgress(response.code(),response.body(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_RESPONSE", apiNamePageRef)
+                            } else {
+                                listener.onFetchProgress(800,response.errorBody()?.toString(), apiNamePageRef)
+                                listener.onFetchComplete(response.code(),"API_FAILURE_RESPONSE", apiNamePageRef)
+                            }
                         }
                     } catch (e : SocketTimeoutException) {
                         listener.onFetchComplete(700,"ERROR", apiNamePageRef)
