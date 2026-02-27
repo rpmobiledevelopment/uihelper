@@ -308,13 +308,13 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
 
         audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
 
-        if (SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH) != "") {
-            title?.text = SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH)
+        if (SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH_NAME) != "") {
+            title?.text = SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH_NAME)
         } else {
             title?.text = "Video Player"
         }
 
-        if (SharedPre.getDef(this, GlobalData.TAG_SELECTED_LANGUAGE) == "AR") {
+        if (GlobalData.isSelectedLanguage == "AR") {
             videoBack?.rotation = 180f
         }
 

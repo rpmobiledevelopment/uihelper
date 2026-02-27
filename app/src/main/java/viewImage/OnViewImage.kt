@@ -43,7 +43,7 @@ class OnViewImage(mActivity: Activity?, listing: String?) {
         vp_img = view.findViewById<ViewPager>(R.id.vp_img)
 
         if (imgArray != null) {
-            vp_img.setAdapter(ImageSliderAdapter1(mActivity, imgArray, 1))
+            vp_img.setAdapter(ImageSliderAdapter1(imgArray, 1))
         }
 
         doShow(view)
@@ -64,7 +64,7 @@ class OnViewImage(mActivity: Activity?, listing: String?) {
         vp_img = view.findViewById(R.id.vp_img)
 
         if (imgArray != null) {
-            vp_img.setAdapter(ImageSliderAdapter1(mActivity, imgArray, 1))
+            vp_img.setAdapter(ImageSliderAdapter1(imgArray, 1))
         }
 
         doShow(view)
@@ -92,9 +92,8 @@ class OnViewImage(mActivity: Activity?, listing: String?) {
     }
 
 
-    internal inner class ImageSliderAdapter1(var mContext: Context?, private val images: ArrayList<String?>?,
+    internal inner class ImageSliderAdapter1(private val images: ArrayList<String?>?,
                                              var selectPos: Int) : PagerAdapter() {
-        private val inflater: LayoutInflater = LayoutInflater.from(mContext)
 
         override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
             container.removeView(`object` as View)
@@ -105,6 +104,7 @@ class OnViewImage(mActivity: Activity?, listing: String?) {
         }
 
         override fun instantiateItem(view: ViewGroup, position: Int): Any {
+            val inflater: LayoutInflater = LayoutInflater.from(view.context)
             val myImageLayout = inflater.inflate(R.layout.item_slide, view, false)
 
             val photo_view = myImageLayout.findViewById<PhotoView?>(R.id.photo_view)

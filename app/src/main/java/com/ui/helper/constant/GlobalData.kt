@@ -8,6 +8,7 @@ interface GlobalData {
         const val TAG_BEAR_TOKEN: String = "TAG_BEAR_TOKEN"
         const val TAG_SELECT_LANGUAGE: String = "TAG_SELECT_LANGUAGE"
         const val TAG_VIDEO_PATH: String = "TAG_VIDEO_PATH"
+        const val TAG_VIDEO_PATH_NAME: String = "TAG_VIDEO_PATH_NAME"
         const val SHARED_PREF: String = "SHARED_PREF"
         const val TAG_FCM_KEY: String = "TAG_FCM_KEY"
         const val TAG_CURR_LAT: String = "TAG_CURR_LAT"
@@ -19,5 +20,6 @@ interface GlobalData {
         var isDebugging: Boolean = false
         var isApiPopup: Boolean = false
         var isSelectedProject: String = ""
+        var isSelectedLanguage: String = "EN"
     }
 }
