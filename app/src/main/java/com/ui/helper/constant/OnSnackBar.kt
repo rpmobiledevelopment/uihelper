@@ -1,6 +1,5 @@
 package com.ui.helper.constant
 
-import android.app.Activity
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -16,17 +15,6 @@ import com.ui.helper.log.IsLog
 class OnSnackBar {
 
     private val TAG: String = OnSnackBar::class.java.simpleName
-
-    constructor(view: View?, msg: String?) {
-        view?.let {
-            val snackBar = Snackbar.make(it, "" + msg, Snackbar.LENGTH_LONG)
-                .setAction("") { view1: View? -> }
-            snackBar.setActionTextColor(Color.WHITE)
-            snackBar.getView()
-            snackBar.show()
-        }
-
-    }
 
     constructor(view: View?, displayString: String?, action: String?, duration: Int) {
         view?.let {
@@ -69,6 +57,7 @@ class OnSnackBar {
             IsLog(TAG, "Exception " + e.message)
         }
     }
+
     constructor(view: View?, msg: String?, mColour: Int) {
         try {
             view?.let {
