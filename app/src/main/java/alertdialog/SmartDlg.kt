@@ -18,8 +18,8 @@ import androidx.core.content.ContextCompat
 import com.ui.helper.R
 import java.util.Objects
 
-class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(
-    mContext, R.style.progressalert_dialog) {
+class SmartDlg(private var mContext: Context?, alertType: Int) : Dialog(
+    mContext!!, R.style.progressalert_dialog) {
 
     private var mDialogView: View? = null
     private val mModalInAnim: AnimationSet?
@@ -89,12 +89,10 @@ class SmartDlg(private var mContext: Context, alertType: Int) : Dialog(
         graduallyTextView = findViewById(R.id.tv_title)
         iv_logo = findViewById(R.id.iv_logo)
 
-        iv_logo?.setColorFilter(
-            ContextCompat.getColor(
-                mContext,
-                R.color.snack_bar_color
-            ), PorterDuff.Mode.SRC_IN
-        )
+        mContext?.let {
+            iv_logo?.setColorFilter(ContextCompat.getColor(it, R.color.snack_bar_color), PorterDuff.Mode.SRC_IN)
+        }
+
 
         setTitleText(mTitleText)
         setContentText(mContentText)

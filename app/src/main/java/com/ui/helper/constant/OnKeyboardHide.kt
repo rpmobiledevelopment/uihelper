@@ -14,16 +14,15 @@ class OnKeyboardHide {
     }
 
     constructor(view: View?) {
-        val imm =
-            checkNotNull(view?.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+        val imm = checkNotNull(view?.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     constructor(view: View?, rv: View?) {
         rv?.visibility = View.GONE
         val imm =
             checkNotNull(view?.context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
-        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     constructor(view: View?, visible: String?) {

@@ -9,10 +9,10 @@ class OnDeviceInfo {
         get() {
             val manufacturer = Build.MANUFACTURER
             val model = Build.MODEL
-            if (model.startsWith(manufacturer)) {
-                return capitalize(model)
+            return if (model.startsWith(manufacturer)) {
+                capitalize(model)
             } else {
-                return capitalize(manufacturer) + "-" + model
+                capitalize(manufacturer) + "-" + model
             }
         }
 
@@ -28,7 +28,7 @@ class OnDeviceInfo {
         }
     }
 
-    fun getDeviceId(context: Context): String? {
-        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID)
+    fun getDeviceId(context: Context?): String? {
+        return Settings.Secure.getString(context?.getContentResolver(), Settings.Secure.ANDROID_ID)
     }
 }

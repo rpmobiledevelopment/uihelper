@@ -21,5 +21,11 @@ interface GlobalData {
         var isApiPopup: Boolean = false
         var isSelectedProject: String = ""
         var isSelectedLanguage: String = "EN"
+
+
+
+        var ALGORITHM = "AES/CBC/PKCS5Padding"
+        var SECRET_KEY = "7r7gQf25gDkDwPawFqA4EM+uU7AcVN77agrLRftErLA=" // 256-bit key (Base64-encoded)
+        var IV = "wqgipUY5t+vqJnTjdNu0NQ==" // Initialization vector (Base64-encoded)
     }
 }

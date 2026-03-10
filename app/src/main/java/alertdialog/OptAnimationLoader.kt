@@ -18,10 +18,10 @@ import java.io.IOException
 object OptAnimationLoader {
     @JvmStatic
     @Throws(Resources.NotFoundException::class)
-    fun loadAnimation(context: Context, id: Int): Animation? {
+    fun loadAnimation(context: Context?, id: Int): Animation? {
         var parser: XmlResourceParser? = null
         try {
-            parser = context.resources.getAnimation(id)
+            parser = context?.resources?.getAnimation(id)
             return createAnimationFromXml(context, parser)
         } catch (ex: XmlPullParserException) {
             val rnf = Resources.NotFoundException(
@@ -43,32 +43,33 @@ object OptAnimationLoader {
     }
 
     @Throws(XmlPullParserException::class, IOException::class)
-    private fun createAnimationFromXml(c: Context?, parser: XmlPullParser): Animation? {
+    private fun createAnimationFromXml(c: Context?, parser: XmlPullParser?): Animation? {
         return createAnimationFromXml(c, parser, null, Xml.asAttributeSet(parser))
     }
 
     @Throws(XmlPullParserException::class, IOException::class)
     private fun createAnimationFromXml(
         c: Context?,
-        parser: XmlPullParser,
+        parser: XmlPullParser?,
         parent: AnimationSet?,
         attrs: AttributeSet?
     ): Animation? {
+
         var anim: Animation? = null
 
         // Make sure we are on a start tag.
         var type: Int
-        val depth = parser.depth
+        val depth = parser?.depth
 
-        while (((parser.next()
-                .also { type = it }) != XmlPullParser.END_TAG || parser.depth > depth)
+        while (((parser?.next().also { type = it!! }) != XmlPullParser.END_TAG || parser?.depth!! > depth!!)
             && type != XmlPullParser.END_DOCUMENT
         ) {
+
             if (type != XmlPullParser.START_TAG) {
                 continue
             }
 
-            val name = parser.name
+            val name = parser?.name
 
             when (name) {
                 "set" -> {
@@ -85,7 +86,7 @@ object OptAnimationLoader {
                         .getConstructor(Context::class.java, AttributeSet::class.java)
                         .newInstance(c, attrs) as Animation
                 } catch (te: Exception) {
-                    throw RuntimeException("Unknown animation name: " + parser.name + " error:" + te.message)
+                    throw RuntimeException("Unknown animation name: " + parser?.name + " error:" + te.message)
                 }
             }
 
