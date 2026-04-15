@@ -1,6 +1,7 @@
 package onPermission
 
 import android.Manifest.permission
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
@@ -12,7 +13,7 @@ class AppPermission {
 
     constructor()
 
-    constructor(mActivity: Context?, supportFragmentManager: FragmentManager?, permission: String) {
+    constructor(mActivity: Activity?, supportFragmentManager: FragmentManager?, permission: String) {
         // Add PermissionsFragment dynamically if it's not already added
         if (supportFragmentManager?.findFragmentByTag("PermissionsFragment") == null) {
             supportFragmentManager?.beginTransaction()
@@ -21,21 +22,9 @@ class AppPermission {
         }
 
         // Request permissions using the fragment
-        val fragment = supportFragmentManager?.findFragmentByTag("PermissionsFragment") as PermissionsFragment?
-        fragment?.requestPermissions(permission)
-    }
-    // LOCATION
-    constructor(mActivity: Context?, supportFragmentManager: FragmentManager?, permission: String? = "LOCATION") {
-        // Add PermissionsFragment dynamically if it's not already added
-        if (supportFragmentManager?.findFragmentByTag("PermissionsFragment") == null) {
-            supportFragmentManager?.beginTransaction()
-                ?.add(PermissionsFragment(), "PermissionsFragment")
-                ?.commitNow()
-        }
-
-        // Request permissions using the fragment
-        val fragment = supportFragmentManager?.findFragmentByTag("PermissionsFragment") as PermissionsFragment?
-        fragment?.requestPermissions(mActivity,"LOCATION")
+        val fragment =
+            supportFragmentManager?.findFragmentByTag("PermissionsFragment") as PermissionsFragment?
+        fragment?.requestPermissions(mActivity, permission)
     }
 
     constructor(supportFragmentManager: FragmentManager?, permission: String?) {
