@@ -1,6 +1,6 @@
 package firebaseKey
 
-import android.app.Activity
+import android.content.Context
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ui.helper.constant.GlobalData
@@ -11,7 +11,7 @@ class OnFcmKey : GlobalData {
     private val TAG: String = OnFcmKey::class.java.simpleName
     private var firebaseToken: String? = "Nextpeak"
 
-    fun getKey(mActivity: Activity?): String? {
+    fun getKey(mActivity: Context?): String? {
         val token = arrayOf<String?>("")
 
         FirebaseMessaging.getInstance().getToken()

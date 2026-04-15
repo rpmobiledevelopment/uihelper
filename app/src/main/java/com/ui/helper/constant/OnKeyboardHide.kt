@@ -43,13 +43,19 @@ class OnKeyboardHide {
         imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
 
-    constructor(activity: Activity?) {
-        activity?.let {
-            val imm = it.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-            var view = it.currentFocus
+    fun hideKeyboard(context: Context?) {
+
+        context?.let {
+
+            val imm = it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+            val activity = it as? Activity
+            var view = activity?.currentFocus
+
             if (view == null) {
                 view = View(it)
             }
+
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }

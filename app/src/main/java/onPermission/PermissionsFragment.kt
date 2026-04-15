@@ -1,7 +1,6 @@
 package onPermission
 
 import android.Manifest.permission
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -34,7 +33,31 @@ class PermissionsFragment : Fragment() {
         }
     }
 
-    fun requestPermissions(activity: Activity?, opt: String) {
+
+
+    fun requestPermissions(opt: String?) {
+        when (opt) {
+            "DOWNLOAD_ACCESS_", "DOWNLOAD_ACCESS" -> {
+                multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
+            }
+
+            "NOTIFICATION" -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    multiplePermissionLauncher.launch(arrayOf(permission.POST_NOTIFICATIONS))
+                }
+            }
+
+            "RECORD_AUDIO" -> {
+                multiplePermissionLauncher.launch(arrayOf(permission.RECORD_AUDIO))
+            }
+
+            else -> {
+                multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
+            }
+        }
+    }
+
+    fun requestPermissions(activity: Context?, opt: String) {
         when (opt) {
             "DOWNLOAD_ACCESS_", "DOWNLOAD_ACCESS" -> {
                 multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
@@ -64,29 +87,7 @@ class PermissionsFragment : Fragment() {
         }
     }
 
-    fun requestPermissions(opt: String?) {
-        when (opt) {
-            "DOWNLOAD_ACCESS_", "DOWNLOAD_ACCESS" -> {
-                multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
-            }
-
-            "NOTIFICATION" -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    multiplePermissionLauncher.launch(arrayOf(permission.POST_NOTIFICATIONS))
-                }
-            }
-
-            "RECORD_AUDIO" -> {
-                multiplePermissionLauncher.launch(arrayOf(permission.RECORD_AUDIO))
-            }
-
-            else -> {
-                multiplePermissionLauncher.launch(arrayOf(permission.CAMERA))
-            }
-        }
-    }
-
-    private fun buildAlertMessageNoGps(activity: Activity?) {
+    private fun buildAlertMessageNoGps(activity: Context?) {
         AlertDialog.Builder(activity)
             .setMessage("Your GPS seems to be disabled, do you want to enable it?")
             .setCancelable(false)

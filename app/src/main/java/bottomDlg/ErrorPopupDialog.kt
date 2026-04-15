@@ -1,13 +1,14 @@
 package bottomDlg
 
-import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.view.HapticFeedbackConstants
+import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -20,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.ui.helper.R
 import net.cachapa.expandablelayout.ExpandableLayout
 
-class ErrorPopupDialog(private val mActivity: Activity?,var showMsg : String?,
+class ErrorPopupDialog(private val mActivity: Context?,var showMsg : String?,
                        var requestUrl : String?,var requestValues : String?) : View.OnClickListener {
 
     private var TAG: String? = ErrorPopupDialog::class.simpleName
@@ -46,7 +47,7 @@ class ErrorPopupDialog(private val mActivity: Activity?,var showMsg : String?,
             dialog = BottomSheetDialog(it)
             dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-            val convertView = it.layoutInflater.inflate(R.layout.dlg_on_api_error, null)
+            val convertView = LayoutInflater.from(it).inflate(R.layout.dlg_on_api_error, null)
 
             ll_api_response = convertView?.findViewById(R.id.ll_api_response)
             tv_api_response = convertView?.findViewById(R.id.tv_api_response)
@@ -93,7 +94,7 @@ class ErrorPopupDialog(private val mActivity: Activity?,var showMsg : String?,
 
             dialog?.setContentView(convertView)
 
-            onShowDlg()
+            onShowDlg(it)
         }
 
     }
@@ -130,30 +131,46 @@ class ErrorPopupDialog(private val mActivity: Activity?,var showMsg : String?,
         }
     }
 
-    private fun onShowDlg() {
+    private fun onShowDlg(context: Context) {
+
         if (dialog?.window != null) {
+
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-            val bottomSheet = dialog?.findViewById<View?>(com.google.android.material.R.id.design_bottom_sheet)
+            val bottomSheet =
+                dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+
             bottomSheet?.setBackgroundColor(Color.TRANSPARENT)
 
             val lp = WindowManager.LayoutParams()
             val window = dialog?.window
             lp.copyFrom(window?.attributes)
 
+            val windowManager =
+                context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
             val size = Point()
-            mActivity?.windowManager?.defaultDisplay?.getSize(size)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val bounds = windowManager.currentWindowMetrics.bounds
+                size.x = bounds.width()
+                size.y = bounds.height()
+            } else {
+                windowManager.defaultDisplay.getSize(size)
+            }
+
             lp.width = size.x
             lp.height = size.y
+
             window?.attributes = lp
 
-            // Set animation if needed
-            dialog?.window?.attributes?.windowAnimations = R.style.BottomDialogsAnimation
+            dialog?.window?.attributes?.windowAnimations =
+                R.style.BottomDialogsAnimation
         }
+
         dialog?.behavior?.isDraggable = true
         dialog?.behavior?.state = BottomSheetBehavior.STATE_EXPANDED
         dialog?.setCancelable(true)
         dialog?.show()
     }
-
 }

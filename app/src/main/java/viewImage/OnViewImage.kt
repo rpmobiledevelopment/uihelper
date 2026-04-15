@@ -1,6 +1,5 @@
 package viewImage
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -18,17 +17,15 @@ import com.ui.helper.R
 import loadImage.OnLoadImage
 
 @RequiresApi(Build.VERSION_CODES.M)
-class OnViewImage(mActivity: Activity?, listing: String?) {
+class OnViewImage(mActivity: Context?, listing: String?) {
 
     private val TAG: String = OnViewImage::class.java.simpleName
     private var eventGallery: AlertDialog? = null
     private var imgArray: ArrayList<String?>? = ArrayList()
     private var vp_img: ViewPager
-    private var mActivity: Activity?
     private var alertDialogBuilder: AlertDialog.Builder? = null
 
     init {
-        this.mActivity = mActivity
         imgArray = ArrayList<String?>()
 
         imgArray?.add(listing)
@@ -49,8 +46,7 @@ class OnViewImage(mActivity: Activity?, listing: String?) {
         doShow(view)
     }
 
-    private fun OnView(mActivity: Activity, imgArrayMultiple: ArrayList<String?>?, selectPos: Int) {
-        this.mActivity = mActivity
+    private fun OnView(mActivity: Context, imgArrayMultiple: ArrayList<String?>?, selectPos: Int) {
         imgArray = ArrayList()
 
         imgArray = imgArrayMultiple

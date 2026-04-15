@@ -1,6 +1,5 @@
 package com.ui.helper.localStorage
 
-import android.app.Activity
 import android.content.Context
 import android.widget.TextView
 
@@ -9,7 +8,7 @@ class SharedPre {
     constructor()
 
     // Set TextView
-    constructor(mActivity: Activity?, TAG_VALUE: String?, textView: TextView) {
+    constructor(mActivity: Context?, TAG_VALUE: String?, textView: TextView) {
         if ((getDef(mActivity, TAG_VALUE) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()) {
             textView.text = getDef(mActivity, TAG_VALUE)
         } else {
@@ -18,7 +17,7 @@ class SharedPre {
     }
 
     // return Without Empty Text
-    fun onReturnImg(mActivity: Activity?, TAG_VALUE: String?): String? {
+    fun onReturnImg(mActivity: Context?, TAG_VALUE: String?): String? {
         return if (getDef(mActivity, TAG_VALUE).length > 5) {
             getDef(mActivity, TAG_VALUE)
         } else {
@@ -27,16 +26,6 @@ class SharedPre {
     }
 
     companion object {
-        // return Text
-        fun onReturnText(mActivity: Activity?, TAG_VALUE: String?): String? {
-            return if ((getDef(mActivity, TAG_VALUE) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()
-            ) {
-                getDef(mActivity, TAG_VALUE)
-            } else {
-                ""
-            }
-        }
-
         // return Text
         fun onReturnText(mActivity: Context?, TAG_VALUE: String?): String? {
             return if ((getDef(mActivity, TAG_VALUE) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()) {
@@ -47,7 +36,7 @@ class SharedPre {
         }
 
         // return Int
-        fun onReturnInt(mActivity: Activity?, TAG_VALUE: String?): Int {
+        fun onReturnInt(mActivity: Context?, TAG_VALUE: String?): Int {
             return if ((getDef(mActivity, TAG_VALUE) != "") && !getDef(mActivity, TAG_VALUE).isEmpty()) {
                 getDef(mActivity, TAG_VALUE).toInt()
             } else {

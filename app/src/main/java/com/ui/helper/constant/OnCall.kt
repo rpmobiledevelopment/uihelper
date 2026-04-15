@@ -1,12 +1,11 @@
 package com.ui.helper.constant
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import com.ui.helper.log.IsLog
 import androidx.core.net.toUri
+import com.ui.helper.log.IsLog
 
-class OnCall(mActivity: Activity?, phoneNumber: String?) {
+class OnCall(mActivity: Context?, phoneNumber: String?) {
     private val TAG: String = OnCall::class.java.simpleName
 
     init {

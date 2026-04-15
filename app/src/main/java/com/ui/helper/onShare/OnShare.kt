@@ -1,6 +1,5 @@
 package com.ui.helper.onShare
 
-import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -22,7 +21,7 @@ class OnShare {
 
     var TAG: String = OnShare::class.java.simpleName
 
-    constructor(mActivity: Activity, bitmap: Bitmap?, onShare: OnInterface.OnShared) {
+    constructor(mActivity: Context, bitmap: Bitmap?, onShare: OnInterface.OnShared) {
         val saveFile = ScreenshotUtils.getMainDirectoryName(mActivity)
         val file = ScreenshotUtils.store(bitmap, "screenshot.jpg", saveFile)
 
@@ -31,7 +30,7 @@ class OnShare {
         onShare.details("ON_SHARED")
     }
 
-    fun doShareOption(mActivity: Activity, file: File, shareOption: String, shareTitle: String?) {
+    fun doShareOption(mActivity: Context, file: File, shareOption: String, shareTitle: String?) {
         val outputFileUri: Uri?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             outputFileUri = FileProvider.getUriForFile(
@@ -91,7 +90,7 @@ class OnShare {
     }
 
     fun doShareOptionContent(
-        mActivity: Activity,
+        mActivity: Context,
         shareContent: String?,
         shareAppContent: String?,
         shareOption: String,
@@ -147,7 +146,7 @@ class OnShare {
 
     // Social Media Image Share
     constructor(
-        mActivity: Activity,
+        mActivity: Context,
         shareBitmap: Bitmap?,
         packageName: String,
         socialMedia: String?,
@@ -239,7 +238,7 @@ class OnShare {
 
     // Social Media Video Share
     constructor(
-        mActivity: Activity,
+        mActivity: Context,
         shareBitmap: File,
         packageName: String,
         socialMedia: String?,
@@ -322,7 +321,7 @@ class OnShare {
         mActivity.startActivity(intent)
     }
 
-    constructor(mActivity: Activity, packageName1: String?) {
+    constructor(mActivity: Context, packageName1: String?) {
         val targetedIntents: MutableList<Intent?> = ArrayList<Intent?>()
 
         val shareIntent = Intent(Intent.ACTION_SEND)
@@ -332,7 +331,7 @@ class OnShare {
             "Check out my app: https://play.google.com/store/apps/details?id=" + mActivity.getPackageName()
         )
 
-        val pm = mActivity.getPackageManager()
+        val pm = mActivity.packageManager
         val apps = pm.queryIntentActivities(shareIntent, 0)
 
         for (info in apps) {
@@ -366,7 +365,7 @@ class OnShare {
     }
 
     companion object {
-        fun onReturnFile(mActivity: Activity, bitmap: Bitmap?): Uri? {
+        fun onReturnFile(mActivity: Context, bitmap: Bitmap?): Uri? {
             val saveFile =
                 ScreenshotUtils.getMainDirectoryName(mActivity) // get the path to save screenshot
             val file = ScreenshotUtils.store(
@@ -379,7 +378,7 @@ class OnShare {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 outputFileUri = FileProvider.getUriForFile(
                     mActivity,
-                    mActivity.getApplicationContext().getPackageName() + ".app_file_provider", file
+                    mActivity.applicationContext.packageName + ".app_file_provider", file
                 )
             } else {
                 outputFileUri = Uri.fromFile(file)
@@ -389,7 +388,7 @@ class OnShare {
         }
 
         private fun getIntents(
-            mActivity: Activity,
+            mActivity: Context,
             apps: MutableList<ResolveInfo>
         ): MutableList<Intent?> {
             val targetedIntents: MutableList<Intent?> = ArrayList<Intent?>()
