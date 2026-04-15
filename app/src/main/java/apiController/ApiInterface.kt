@@ -43,6 +43,22 @@ interface ApiInterface {
         @Header("Authorization") headers: String?,@Header("Accept-Language") language: String?,
         @Body body: RequestBody?, @Path("ATNDB", encoded = true) apiName: String?): Call<String?>?
 
+    @Headers("Accept: application/json", "Content-Type: application/json")
+    @POST("{ATNDB}")
+    suspend fun doPostApi(
+        @Header("Authorization") headers: String,@Header("Accept-Language") language: String?,
+        @Body body: RequestBody,
+        @Path("ATNDB", encoded = true) apiName: String): retrofit2.Response<ResponseBody>
+
+    @Headers("Accept: application/json", "Content-Type: application/json")
+    @POST("{ATNDB}")
+    suspend fun doPostApi(
+        @Header("Authorization") headers: String,@Header("Accept-Language") language: String?,
+        @Body body: RequestBody,
+        @Path("ATNDB", encoded = true) apiName: String,
+        paiRefName: String): retrofit2.Response<String>
+
+
     @Multipart
     @POST
     fun doPostMultipartMultiple(
