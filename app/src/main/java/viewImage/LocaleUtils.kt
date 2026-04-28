@@ -7,7 +7,6 @@ import myApp.LocaleHelper
 
 object LocaleUtils {
     fun getLocalizedContext(context: Context?): Context {
-        val lang = SharedPre.getDef(context, GlobalData.TAG_SELECT_LANGUAGE)
-        return LocaleHelper.onAttach(context!!, lang)!!
+        return LocaleHelper.onAttach(context!!, GlobalData.isSelectedLanguage)!!
     }
 }

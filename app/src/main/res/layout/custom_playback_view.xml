@@ -25,7 +25,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:padding="10dp"
-                android:src="@drawable/quantum_ic_arrow_back_grey600_24" />
+                android:src="@drawable/ic_back_options" />
 
             <TextView
                 android:id="@+id/video_title"

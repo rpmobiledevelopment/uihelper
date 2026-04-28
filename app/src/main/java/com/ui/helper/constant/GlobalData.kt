@@ -2,8 +2,6 @@ package com.ui.helper.constant
 
 interface GlobalData {
     companion object {
-        const val TAG_SELECT_PROJ_NAME: String = "TAG_SELECT_PROJ_NAME"
-        const val TAG_SELECTED_LANGUAGE: String = "TAG_SELECTED_LANGUAGE"
         const val TAG_VIDEO_PATH: String = "TAG_VIDEO_PATH"
         const val TAG_VIDEO_PATH_NAME: String = "TAG_VIDEO_PATH_NAME"
         const val SHARED_PREF: String = "SHARED_PREF"
@@ -13,7 +11,6 @@ interface GlobalData {
 
         var TAG_BASE_URL: String = "TAG_BASE_URL"
         var TAG_BEAR_TOKEN: String = "TAG_BEAR_TOKEN"
-        var TAG_SELECT_LANGUAGE: String = "TAG_SELECT_LANGUAGE"
 
         var TAG_API_PIN: Boolean = false
         var TAG_API_PIN_BASE_URL: String = "TAG_API_PIN_BASE_URL"

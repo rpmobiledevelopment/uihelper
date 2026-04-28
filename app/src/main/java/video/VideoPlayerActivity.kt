@@ -37,7 +37,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import com.ui.helper.R
 import com.ui.helper.constant.GlobalData
-import com.ui.helper.localStorage.SharedPre
+import com.ui.helper.log.IsLog
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.max
@@ -98,9 +98,11 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
     var double_tap: Boolean = false
     var double_tap_playpause: RelativeLayout? = null
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setFullScreen()
+        ThemeClr(this)
         setContentView(R.layout.act_video_player)
 
         playerView = findViewById(R.id.exoplayer_view)
@@ -308,13 +310,15 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
 
         audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
 
-        if (SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH_NAME) != "") {
-            title?.text = SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH_NAME)
+        if (GlobalData.TAG_VIDEO_PATH_NAME != "") {
+            title?.text = GlobalData.TAG_VIDEO_PATH_NAME
         } else {
             title?.text = "Video Player"
         }
 
-        if (GlobalData.isSelectedLanguage == "AR") {
+        IsLog(TAG,"GlobalData.isSelectedLanguage========${GlobalData.isSelectedLanguage}")
+
+        if (GlobalData.isSelectedLanguage == "AR" || GlobalData.isSelectedLanguage == "ar") {
             videoBack?.rotation = 180f
         }
 
@@ -335,7 +339,7 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener, GlobalDat
 
         val dataSourceFactory = DefaultDataSource.Factory(this, httpDataSourceFactory)
 
-        val videoUri = SharedPre.getDef(this, GlobalData.TAG_VIDEO_PATH).toUri()
+        val videoUri = GlobalData.TAG_VIDEO_PATH.toUri()
 
         val mediaItem = MediaItem.fromUri(videoUri)
 

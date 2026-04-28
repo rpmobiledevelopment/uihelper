@@ -1,5 +1,6 @@
 package apiController
 
+import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
@@ -27,7 +28,7 @@ class ApiController : GlobalData {
     fun doGet(apiName: String?, listener: OnInterface.CallbackListener, apiNamePageRef: String?) {
 
         val dbResCall = returnApiCommon().doGetApi(
-            "Bearer " + GlobalData.TAG_BEAR_TOKEN, GlobalData.TAG_SELECT_LANGUAGE, apiName)
+            "Bearer " + GlobalData.TAG_BEAR_TOKEN, GlobalData.isSelectedLanguage, apiName)
 
         dbResCall?.enqueue(object : Callback<String?> {
             override fun onResponse(call: Call<String?>, response: Response<String?>) {
@@ -77,7 +78,7 @@ class ApiController : GlobalData {
 
         val dbResCall = returnApiCommon().doPostApi(
             "Bearer " + GlobalData.TAG_BEAR_TOKEN,
-            GlobalData.TAG_SELECT_LANGUAGE,passParaMap, apiName)
+            GlobalData.isSelectedLanguage,passParaMap, apiName)
 
         IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
 
@@ -127,7 +128,7 @@ class ApiController : GlobalData {
 
         val dbResCall = returnApiCommon().doPostApi(
             "Bearer " + GlobalData.TAG_BEAR_TOKEN,
-            GlobalData.TAG_SELECT_LANGUAGE,passParaMap, apiName)
+            GlobalData.isSelectedLanguage,passParaMap, apiName)
 
         IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
 
@@ -185,7 +186,7 @@ class ApiController : GlobalData {
             .toRequestBody("application/json; charset=utf-8".toMediaType())
 
         val dbResCall = returnApiCommon().doPostApi(
-            "Bearer " + GlobalData.TAG_BEAR_TOKEN,GlobalData.TAG_SELECT_LANGUAGE, requestBody, apiName)
+            "Bearer " + GlobalData.TAG_BEAR_TOKEN,GlobalData.isSelectedLanguage, requestBody, apiName)
 
         IsLog(TAG,"dbResCall=================${dbResCall?.request()?.url}")
 
@@ -249,7 +250,7 @@ class ApiController : GlobalData {
         }
 
         currentCall = returnApiCommon().doPostApi(
-            "Bearer " + GlobalData.TAG_BEAR_TOKEN,GlobalData.TAG_SELECT_LANGUAGE, requestBody, apiName)
+            "Bearer " + GlobalData.TAG_BEAR_TOKEN,GlobalData.isSelectedLanguage, requestBody, apiName)
 
         IsLog(TAG,"dbResCall=================${currentCall?.request()?.url}")
 
@@ -335,7 +336,7 @@ class ApiController : GlobalData {
 
         val dbResCall = returnApiCommon().doPostMultipartMultiple(
             "Bearer " + GlobalData.TAG_BEAR_TOKEN,
-            GlobalData.TAG_SELECT_LANGUAGE, requestMap, fileParts, apiName)
+            GlobalData.isSelectedLanguage, requestMap, fileParts, apiName)
 
         dbResCall.enqueue(object : Callback<String?> {
 
