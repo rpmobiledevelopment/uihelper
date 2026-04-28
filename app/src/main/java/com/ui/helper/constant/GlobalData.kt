@@ -2,8 +2,8 @@ package com.ui.helper.constant
 
 interface GlobalData {
     companion object {
-        const val TAG_VIDEO_PATH: String = "TAG_VIDEO_PATH"
-        const val TAG_VIDEO_PATH_NAME: String = "TAG_VIDEO_PATH_NAME"
+        var TAG_VIDEO_PATH: String = "TAG_VIDEO_PATH"
+        var TAG_VIDEO_PATH_NAME: String = "TAG_VIDEO_PATH_NAME"
         const val SHARED_PREF: String = "SHARED_PREF"
         const val TAG_FCM_KEY: String = "TAG_FCM_KEY"
         const val TAG_CURR_LAT: String = "TAG_CURR_LAT"
