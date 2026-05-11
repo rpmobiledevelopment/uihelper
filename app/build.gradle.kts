@@ -37,6 +37,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.paperdb)
     implementation(libs.coil.android)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.converter.gson)
     implementation(libs.exoplayer)
     implementation(libs.firebase.messaging)

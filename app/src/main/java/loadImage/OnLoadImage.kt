@@ -12,42 +12,24 @@ class OnLoadImage : GlobalData {
 
     private val TAG: String = OnLoadImage::class.java.simpleName
 
-    // Place holder
     constructor(ivLogo: ImageView?, images: String?, opt: String) {
-        ivLogo?.let { imageView ->
-            when (opt) {
-                "USER_IMAGE" -> imageView.load(
-                    if (!images.isNullOrEmpty() && images.length > 5)
-                        images else R.drawable.ic_user) {
-                    crossfade(true)
-                    placeholder(R.drawable.ic_user)
-                    error(R.drawable.ic_user)
-                }
 
-                "PLACE_HOLDER" -> imageView.load(
-                    if (!images.isNullOrEmpty() && images.length > 5)
-                        images else R.drawable.ph_small) {
-                    crossfade(true)
-                    placeholder(R.drawable.ph_small)
-                    error(R.drawable.ph_small)
-                }
+        if (ivLogo == null) return
 
-                "PLACE_HOLDER_DB" -> imageView.load(
-                    if (!images.isNullOrEmpty() && images.length > 5)
-                        images else R.drawable.ph_small_) {
-                    crossfade(true)
-                    placeholder(R.drawable.ph_small_)
-                    error(R.drawable.ph_small_)
-                }
+        val placeholder = when (opt) {
+            "USER_IMAGE" -> R.drawable.ic_user
+            "PLACE_HOLDER" -> R.drawable.ph_small
+            "PLACE_HOLDER_DB" -> R.drawable.ph_small_
+            "PLACE_HOLDER_ANNOUNC" -> R.drawable.ic_announce
+            else -> R.drawable.ph_small
+        }
 
-                "PLACE_HOLDER_ANNOUNC" -> imageView.load(
-                    if (!images.isNullOrEmpty() && images.length > 5)
-                        images else R.drawable.ic_announce) {
-                    crossfade(true)
-                    placeholder(R.drawable.ic_announce)
-                    error(R.drawable.ic_announce)
-                }
-            }
+        ivLogo.load(
+            if (!images.isNullOrEmpty() && images.startsWith("http"))
+                images else placeholder) {
+            crossfade(true)
+            placeholder(placeholder)
+            error(placeholder)
         }
     }
 
