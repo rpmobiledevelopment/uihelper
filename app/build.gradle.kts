@@ -36,7 +36,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.paperdb)
-    implementation(libs.glide)
+    implementation(libs.coil.android)
     implementation(libs.converter.gson)
     implementation(libs.exoplayer)
     implementation(libs.firebase.messaging)

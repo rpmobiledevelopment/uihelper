@@ -1,8 +1,10 @@
 package loadImage
 
 import android.widget.ImageView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import coil3.load
+import coil3.request.crossfade
+import coil3.request.placeholder
+import coil3.request.error
 import com.ui.helper.R
 import com.ui.helper.constant.GlobalData
 
@@ -11,56 +13,73 @@ class OnLoadImage : GlobalData {
     private val TAG: String = OnLoadImage::class.java.simpleName
 
     // Place holder
-    constructor(iv_logo: ImageView?, images: String?, opt: String) {
-        iv_logo?.let { iv_logo ->
+    constructor(ivLogo: ImageView?, images: String?, opt: String) {
+        ivLogo?.let { imageView ->
             when (opt) {
-                "USER_IMAGE" -> Glide.with(iv_logo)
-                    .load(if (images != null && images.length > 5) images else R.drawable.ic_user)
-                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
-                    .placeholder(R.drawable.ic_user).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .error(R.drawable.ic_user).into(iv_logo)
+                "USER_IMAGE" -> imageView.load(
+                    if (!images.isNullOrEmpty() && images.length > 5)
+                        images else R.drawable.ic_user) {
+                    crossfade(true)
+                    placeholder(R.drawable.ic_user)
+                    error(R.drawable.ic_user)
+                }
 
-                "PLACE_HOLDER" -> Glide.with(iv_logo)
-                    .load(if (images != null && images.length > 5) images else R.drawable.ph_small)
-                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
-                    .placeholder(R.drawable.ph_loading_small).error(R.drawable.ph_small).into(iv_logo)
+                "PLACE_HOLDER" -> imageView.load(
+                    if (!images.isNullOrEmpty() && images.length > 5)
+                        images else R.drawable.ph_small) {
+                    crossfade(true)
+                    placeholder(R.drawable.ph_small)
+                    error(R.drawable.ph_small)
+                }
 
-                "PLACE_HOLDER_DB" -> Glide.with(iv_logo)
-                    .load(if (images != null && images.length > 5) images else R.drawable.ph_small_)
-                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
-                    .placeholder(R.drawable.ph_loading_small).error(R.drawable.ph_small_).into(iv_logo)
+                "PLACE_HOLDER_DB" -> imageView.load(
+                    if (!images.isNullOrEmpty() && images.length > 5)
+                        images else R.drawable.ph_small_) {
+                    crossfade(true)
+                    placeholder(R.drawable.ph_small_)
+                    error(R.drawable.ph_small_)
+                }
 
-                "PLACE_HOLDER_ANNOUNC" -> Glide.with(iv_logo)
-                    .load(if (images != null && images.length > 5) images else R.drawable.ic_announce)
-                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
-                    .placeholder(R.drawable.ic_announce).error(R.drawable.ic_announce).into(iv_logo)
+                "PLACE_HOLDER_ANNOUNC" -> imageView.load(
+                    if (!images.isNullOrEmpty() && images.length > 5)
+                        images else R.drawable.ic_announce) {
+                    crossfade(true)
+                    placeholder(R.drawable.ic_announce)
+                    error(R.drawable.ic_announce)
+                }
             }
         }
     }
 
     // Place holder
-    constructor(iv_logo: ImageView?, images: String?, placeholderImage: Int?) {
-        iv_logo?.let { iv_logo->
-            if (placeholderImage!=null)
-                Glide.with(iv_logo)
-                    .load(if (images != null && images.length > 5) images else placeholderImage)
-                    .thumbnail(0.1f)   // 👈 FAST PREVIEW
-                    .placeholder(placeholderImage).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .error(placeholderImage).into(iv_logo)
+    constructor(ivLogo: ImageView?, images: String?, placeholderImage: Int?) {
+
+        ivLogo?.let { imageView ->
+
+            placeholderImage?.let { placeholder ->
+
+                imageView.load(
+                    if (!images.isNullOrEmpty() && images.length > 5)
+                        images else placeholder) {
+                    crossfade(true)
+                    placeholder(placeholder)
+                    error(placeholder)
+                }
+            }
         }
     }
 
     // Place holder
-    constructor(iv_logo: ImageView?, images: Int?, opt: String?) {
-        iv_logo?.let { iv_logo ->
-            Glide.with(iv_logo).load(images).into(iv_logo)
+    constructor(ivLogo: ImageView?, images: Int?, opt: String?) {
+        ivLogo?.load(images) {
+            crossfade(true)
         }
     }
 
     // Place holder
     constructor(iv_logo: ImageView?, images: Int?) {
-        iv_logo?.let { iv_logo ->
-            Glide.with(iv_logo).load(images).into(iv_logo)
+        iv_logo?.load(images) {
+            crossfade(true)
         }
     }
 }
