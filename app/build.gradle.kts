@@ -36,8 +36,6 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.paperdb)
-    implementation(libs.coil.android)
-    implementation(libs.coil.network.okhttp)
     implementation(libs.converter.gson)
     implementation(libs.exoplayer)
     implementation(libs.firebase.messaging)
@@ -50,4 +48,10 @@ dependencies {
     implementation(libs.moshi.kotlin)
     implementation(libs.converter.moshi)
     implementation(libs.converter.scalars)
+
+    implementation(libs.coil.android)
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.coil.gif)
+    implementation(libs.coil.video)
+
 }
