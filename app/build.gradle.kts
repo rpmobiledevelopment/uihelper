@@ -42,7 +42,7 @@ dependencies {
     implementation(libs.firebase.messaging)
     // Location
     implementation(libs.places)
-    implementation(libs.photoview)
+    implementation(libs.getstream.photoview)
     implementation(libs.expandablelayout)
     // api call
     implementation(libs.retrofit)

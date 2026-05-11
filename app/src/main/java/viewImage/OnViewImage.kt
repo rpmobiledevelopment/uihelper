@@ -12,8 +12,8 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.github.chrisbanes.photoview.PhotoView
 import com.ui.helper.R
+import io.getstream.photoview.PhotoView
 import loadImage.OnLoadImage
 
 @RequiresApi(Build.VERSION_CODES.M)

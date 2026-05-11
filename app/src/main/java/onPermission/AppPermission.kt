@@ -18,7 +18,7 @@ class AppPermission {
         if (supportFragmentManager?.findFragmentByTag("PermissionsFragment") == null) {
             supportFragmentManager?.beginTransaction()
                 ?.add(PermissionsFragment(), "PermissionsFragment")
-                ?.commitNow()
+                ?.commitAllowingStateLoss()
         }
 
         // Request permissions using the fragment
@@ -32,7 +32,7 @@ class AppPermission {
         if (supportFragmentManager?.findFragmentByTag("PermissionsFragment") == null) {
             supportFragmentManager?.beginTransaction()
                 ?.add(PermissionsFragment(), "PermissionsFragment")
-                ?.commitNow()
+                ?.commitAllowingStateLoss()
         }
 
         // Request permissions using the fragment
