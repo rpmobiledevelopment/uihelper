@@ -1,10 +1,7 @@
 package loadImage
 
 import android.widget.ImageView
-import coil3.load
-import coil3.request.crossfade
-import coil3.request.placeholder
-import coil3.request.error
+import com.bumptech.glide.Glide
 import com.ui.helper.R
 import com.ui.helper.constant.GlobalData
 
@@ -23,45 +20,33 @@ class OnLoadImage : GlobalData {
             "PLACE_HOLDER_ANNOUNC" -> R.drawable.ic_announce
             else -> R.drawable.ph_small
         }
-
-        ivLogo.load(
-            if (!images.isNullOrEmpty() && images.startsWith("http"))
-                images else placeholder) {
-            crossfade(true)
-            placeholder(placeholder)
-            error(placeholder)
-        }
+        Glide.with(ivLogo).load(if (!images.isNullOrEmpty() && images.startsWith("http"))
+            images else placeholder).placeholder(placeholder).error(placeholder).into(ivLogo)
     }
 
     // Place holder
     constructor(ivLogo: ImageView?, images: String?, placeholderImage: Int?) {
 
         ivLogo?.let { imageView ->
-
             placeholderImage?.let { placeholder ->
-
-                imageView.load(
-                    if (!images.isNullOrEmpty() && images.length > 5)
-                        images else placeholder) {
-                    crossfade(true)
-                    placeholder(placeholder)
-                    error(placeholder)
-                }
+                Glide.with(imageView).load(if (!images.isNullOrEmpty() && images.startsWith("http"))
+                    images else placeholder).placeholder(placeholder).error(placeholder).into(imageView)
             }
         }
     }
 
     // Place holder
     constructor(ivLogo: ImageView?, images: Int?, opt: String?) {
-        ivLogo?.load(images) {
-            crossfade(true)
+        ivLogo?.let { imageView ->
+            Glide.with(imageView).load(images).into(imageView)
         }
+
     }
 
     // Place holder
     constructor(iv_logo: ImageView?, images: Int?) {
-        iv_logo?.load(images) {
-            crossfade(true)
+        iv_logo?.let { imageView ->
+            Glide.with(imageView).load(images).into(imageView)
         }
     }
 }

@@ -49,9 +49,4 @@ dependencies {
     implementation(libs.converter.moshi)
     implementation(libs.converter.scalars)
 
-    implementation(libs.coil.android)
-    implementation(libs.coil.network.okhttp)
-    implementation(libs.coil.gif)
-    implementation(libs.coil.video)
-
 }

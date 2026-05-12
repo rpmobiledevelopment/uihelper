@@ -26,7 +26,7 @@ class OnViewImage(mActivity: Context?, listing: String?) {
     private var alertDialogBuilder: AlertDialog.Builder? = null
 
     init {
-        imgArray = ArrayList<String?>()
+        imgArray = ArrayList()
 
         imgArray?.add(listing)
 
@@ -37,7 +37,7 @@ class OnViewImage(mActivity: Context?, listing: String?) {
 
         val view = inflater.inflate(R.layout.dlg_slideshow, null)
 
-        vp_img = view.findViewById<ViewPager>(R.id.vp_img)
+        vp_img = view.findViewById(R.id.vp_img)
 
         if (imgArray != null) {
             vp_img.setAdapter(ImageSliderAdapter1(imgArray, 1))
