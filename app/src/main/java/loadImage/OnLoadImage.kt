@@ -20,7 +20,7 @@ class OnLoadImage : GlobalData {
             "PLACE_HOLDER_ANNOUNC" -> R.drawable.ic_announce
             else -> R.drawable.ph_small
         }
-        Glide.with(ivLogo).load(if (!images.isNullOrEmpty() && images.startsWith("http"))
+        Glide.with(ivLogo).load(if (!images.isNullOrEmpty() && images.length>5)
             images else placeholder).placeholder(placeholder).error(placeholder).into(ivLogo)
     }
 
@@ -29,7 +29,7 @@ class OnLoadImage : GlobalData {
 
         ivLogo?.let { imageView ->
             placeholderImage?.let { placeholder ->
-                Glide.with(imageView).load(if (!images.isNullOrEmpty() && images.startsWith("http"))
+                Glide.with(imageView).load(if (!images.isNullOrEmpty() && images.length>5)
                     images else placeholder).placeholder(placeholder).error(placeholder).into(imageView)
             }
         }
